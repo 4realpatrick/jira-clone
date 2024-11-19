@@ -5,19 +5,10 @@ import DictionaryProvider from "@/components/locale/dictionary-provider";
 // import { Footer } from "@/components/exclusive/footer";
 // Types
 import { Locale } from "@/i18n.config";
-import { NextFont } from "next/dist/compiled/@next/font";
 // Utils
 import { getDictionary } from "@/lib/dictionary";
-import { cn } from "@/lib/utils";
 // Font
-import { chineseFont, englishFont } from "@/lib/font";
-
-const font: {
-  [key in Locale]: NextFont;
-} = {
-  zh: chineseFont,
-  en: englishFont,
-};
+import { uiFont } from "@/lib/font";
 
 const LangLayout = async ({
   params,
@@ -31,7 +22,7 @@ const LangLayout = async ({
   return (
     <DictionaryProvider lang={lang} dictionary={dictionary}>
       {/* <Navbar /> */}
-      <div className={cn(font[lang].className)}>{children}</div>
+      <div className={uiFont.className}>{children}</div>
       {/* <Footer
         dictionary={dictionary.components.footer}
         locale={lang}
