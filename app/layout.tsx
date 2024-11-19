@@ -13,11 +13,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <ViewTransitions>
-      <html lang="en">
-        <body className="antialiased min-h-screen">{children}</body>
-      </html>
-    </ViewTransitions>
-  );
+  return <ViewTransitions>{children}</ViewTransitions>;
 }

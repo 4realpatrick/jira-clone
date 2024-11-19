@@ -1,14 +1,7 @@
-// Cmp
-import DictionaryProvider from "@/components/locale/dictionary-provider";
-// import Navbar from "@/components/exclusive/navbar";
-// import { Tools } from "./_components/tools";
-// import { Footer } from "@/components/exclusive/footer";
-// Types
-import { Locale } from "@/i18n.config";
-// Utils
-import { getDictionary } from "@/lib/dictionary";
+import { NextIntlClientProvider } from "next-intl";
+import { Locale } from "@/i18n/interface";
 // Font
-import { uiFont } from "@/lib/font";
+import { getMessages, setRequestLocale } from "next-intl/server";
 
 const LangLayout = async ({
   params,
@@ -18,18 +11,26 @@ const LangLayout = async ({
   children: React.ReactNode;
 }) => {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang);
+  const messages = await getMessages();
+  setRequestLocale(lang);
   return (
-    <DictionaryProvider lang={lang} dictionary={dictionary}>
-      {/* <Navbar /> */}
-      <div className={uiFont.className}>{children}</div>
-      {/* <Footer
-        dictionary={dictionary.components.footer}
-        locale={lang}
-        routes={dictionary.components.navbar.routes}
-      /> */}
-      {/* <Tools /> */}
-    </DictionaryProvider>
+    <html lang={lang}>
+      <body className="antialiased min-h-screen">
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
+    // <DictionaryProvider lang={lang} dictionary={dictionary}>
+    //   {/* <Navbar /> */}
+    //   <div className={uiFont.className}>{children}</div>
+    //   {/* <Footer
+    //     dictionary={dictionary.components.footer}
+    //     locale={lang}
+    //     routes={dictionary.components.navbar.routes}
+    //   /> */}
+    //   {/* <Tools /> */}
+    // </DictionaryProvider>
   );
 };
 

@@ -10,19 +10,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 // Constant
-import { i18n } from "@/i18n.config";
+import { i18n } from "@/i18n/config";
 // Hooks
-import { useDictionary } from "@/hooks/use-dictionary";
-import { useLocale } from "@/hooks/use-locale";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { Locale } from "@/i18n/interface";
 
 const LanguageController = () => {
-  const {
-    components: { language_controller },
-  } = useDictionary();
-  const locale = useLocale();
+  const t = useTranslations("components.language_controller");
+  const locale = useLocale() as Locale;
   const pathname = usePathname();
   const router = useRouter();
+
   const handleLanguageChange = (value: string) => {
     if (!pathname) return "/";
     const segments = pathname.split("/");
@@ -32,16 +31,14 @@ const LanguageController = () => {
   return (
     <Select value={locale} onValueChange={handleLanguageChange}>
       <SelectTrigger className="max-w-[200px]">
-        <SelectValue placeholder={language_controller.language_placeholder} />
+        <SelectValue placeholder={t("language_placeholder")} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel className="text-primary">
-            {language_controller.language}
-          </SelectLabel>
+          <SelectLabel className="text-primary">{t("language")}</SelectLabel>
           {i18n.locales.map((lang) => (
             <SelectItem value={lang} key={lang}>
-              {language_controller.languages[lang]}
+              {t(`languages.${lang}`)}
             </SelectItem>
           ))}
         </SelectGroup>

@@ -1,23 +1,25 @@
 "use client";
 import Image from "next/image";
-import { headers } from "next/headers";
 import { buttonVariants } from "@/components/ui/button";
-import { Locale } from "@/i18n.config";
-import { getDictionary } from "@/lib/dictionary";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
-import { useLocale } from "@/hooks/use-locale";
-import { useDictionary } from "@/hooks/use-dictionary";
+import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useMemo } from "react";
+import { Locale } from "@/i18n/interface";
 
 interface IAuthLayoutProps {
   children: React.ReactNode;
 }
 
 const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
-  const lang = useLocale();
-  const { common } = useDictionary();
+  const lang = useLocale() as Locale;
+  const t = useTranslations("common");
   const pathname = usePathname();
-  const isSignUp = pathname?.split("/")[2] === "sign-up";
+  const isSignUp = useMemo(
+    () => pathname?.split("/")[2] === "sign-up",
+    [pathname]
+  );
 
   return (
     <main className="bg-neutral-100 min-h-screen">
@@ -30,7 +32,7 @@ const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
               className={buttonVariants({})}
               replace
             >
-              {isSignUp ? common.login : common.sign_up}
+              {isSignUp ? t("login") : t("sign_up")}
             </Link>
           </div>
         </nav>
