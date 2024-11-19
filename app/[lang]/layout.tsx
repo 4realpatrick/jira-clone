@@ -31,7 +31,7 @@ const LangLayout = async ({
   return (
     <DictionaryProvider lang={lang} dictionary={dictionary}>
       {/* <Navbar /> */}
-      <main className={cn(font[lang].className)}>{children}</main>
+      <div className={cn(font[lang].className)}>{children}</div>
       {/* <Footer
         dictionary={dictionary.components.footer}
         locale={lang}
