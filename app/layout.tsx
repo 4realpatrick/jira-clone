@@ -1,5 +1,6 @@
 import { ViewTransitions } from "next-view-transitions";
 import type { Metadata } from "next";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        <body className="antialiased">{children}</body>
+        <body className="antialiased min-h-screen">{children}</body>
       </html>
     </ViewTransitions>
   );

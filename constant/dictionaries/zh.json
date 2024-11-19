@@ -1,5 +1,24 @@
 {
-  "pages": {},
+  "pages": {
+    "sign_in": {
+      "title": "欢迎回来",
+      "description": "点击登录代表您同意我们的",
+      "got_account": "还没有账号？",
+      "providers": {
+        "google": "使用Google登录",
+        "github": "使用GitHub登录"
+      }
+    },
+    "sign_up": {
+      "title": "注册",
+      "description": "点击注册代表您同意我们的",
+      "got_account": "已经有账号了？",
+      "providers": {
+        "google": "使用Google注册",
+        "github": "使用GitHub注册"
+      }
+    }
+  },
   "components": {
     "language_controller": {
       "language": "语言",
@@ -11,6 +30,14 @@
     }
   },
   "common": {
+    "email_placeholder": "请输入邮箱",
+    "password_placeholder": "请输入密码",
+    "username_placeholder": "请输入用户名",
+    "login": "登录",
+    "sign_up": "注册",
+    "privacy_policy": "隐私协议",
+    "terms": "服务条款",
+    "and": "以及",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
