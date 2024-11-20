@@ -24,25 +24,21 @@ import { ShineButton } from "@/components/syntax/button/shine";
 import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
 import { Locale } from "@/i18n/interface";
-
-const formSchema = z.object({
-  email: z.string().trim().email(),
-  password: z.string().min(8),
-});
+import { getSignInFormSchema, TSignInForm } from "@/lib/schema";
 
 export const SignInCard = () => {
   const t = useTranslations("pages.sign_in");
   const ct = useTranslations("common");
-
+  const validT = useTranslations("validation");
   const locale = useLocale() as Locale;
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<TSignInForm>({
     defaultValues: {
       email: "",
       password: "",
     },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(getSignInFormSchema(validT)),
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {};
+  const onSubmit = (values: TSignInForm) => {};
   return (
     <Card className="w-full h-full md:w-[550px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">

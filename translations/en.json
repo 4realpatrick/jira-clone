@@ -52,5 +52,15 @@
       "light": "Light mode",
       "dark": "Dark mode"
     }
+  },
+  "validation": {
+    "email_required": "Please enter your email",
+    "email_invalid": "Please enter a valid email address",
+    "password_required": "Password is required",
+    "password_min": "Password must be at least 8 characters long",
+    "password_max": "Password must be at most 16 characters long",
+    "username_required": "Username is required",
+    "username_min": "Username must be at least 3 characters long",
+    "username_max": "Username must be at most 16 characters long"
   }
 }

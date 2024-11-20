@@ -1,7 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
-import { Locale } from "@/i18n/interface";
-// Font
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { Locale } from "@/i18n/interface";
 
 const LangLayout = async ({
   params,
@@ -21,16 +20,6 @@ const LangLayout = async ({
         </NextIntlClientProvider>
       </body>
     </html>
-    // <DictionaryProvider lang={lang} dictionary={dictionary}>
-    //   {/* <Navbar /> */}
-    //   <div className={uiFont.className}>{children}</div>
-    //   {/* <Footer
-    //     dictionary={dictionary.components.footer}
-    //     locale={lang}
-    //     routes={dictionary.components.navbar.routes}
-    //   /> */}
-    //   {/* <Tools /> */}
-    // </DictionaryProvider>
   );
 };
 

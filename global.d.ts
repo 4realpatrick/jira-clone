@@ -1,6 +1,6 @@
 import zh from "./translations/zh.json";
 
-type Messages = typeof zh;
+export type Messages = typeof zh;
 
 declare global {
   // Use type safe message keys with `next-intl`
