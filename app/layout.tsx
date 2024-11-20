@@ -2,6 +2,7 @@ import { ViewTransitions } from "next-view-transitions";
 import type { Metadata } from "next";
 
 import "./globals.css";
+import { QueryProvider } from "@/components/query-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,5 +14,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <ViewTransitions>{children}</ViewTransitions>;
+  return (
+    <ViewTransitions>
+      <QueryProvider>{children}</QueryProvider>
+    </ViewTransitions>
+  );
 }

@@ -25,20 +25,25 @@ import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
 import { Locale } from "@/i18n/interface";
 import { getSignUpFormSchema, TSignUpForm } from "@/lib/schema";
+import { useRegister } from "@/features/auth/api/use-register";
 
 export const SignUpCard = () => {
   const t = useTranslations("pages.sign_up");
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
   const locale = useLocale() as Locale;
+  const { mutate } = useRegister();
   const form = useForm<TSignUpForm>({
     defaultValues: {
       email: "",
       password: "",
+      username: "",
     },
     resolver: zodResolver(getSignUpFormSchema(validT)),
   });
-  const onSubmit = (values: TSignUpForm) => {};
+  const onSubmit = (values: TSignUpForm) => {
+    mutate({ json: values });
+  };
   return (
     <Card className="w-full h-full md:w-[550px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">

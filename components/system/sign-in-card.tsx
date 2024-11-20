@@ -25,12 +25,14 @@ import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
 import { Locale } from "@/i18n/interface";
 import { getSignInFormSchema, TSignInForm } from "@/lib/schema";
+import { useLogin } from "@/features/auth/api/use-login";
 
 export const SignInCard = () => {
   const t = useTranslations("pages.sign_in");
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
   const locale = useLocale() as Locale;
+  const { mutate } = useLogin();
   const form = useForm<TSignInForm>({
     defaultValues: {
       email: "",
@@ -38,7 +40,9 @@ export const SignInCard = () => {
     },
     resolver: zodResolver(getSignInFormSchema(validT)),
   });
-  const onSubmit = (values: TSignInForm) => {};
+  const onSubmit = (values: TSignInForm) => {
+    mutate({ json: values });
+  };
   return (
     <Card className="w-full h-full md:w-[550px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
@@ -98,7 +102,7 @@ export const SignInCard = () => {
                 </FormItem>
               )}
             />
-            <Button size="lg" className="w-full">
+            <Button size="lg" className="w-full" type="submit">
               {ct("login")}
             </Button>
           </form>
