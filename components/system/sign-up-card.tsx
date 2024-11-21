@@ -1,8 +1,7 @@
 "use client";
-
-import { TransitionLink } from "@/components/common/link";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
+import { FiLoader } from "react-icons/fi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Card,
@@ -26,12 +25,13 @@ import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
 import { getSignUpFormSchema, TSignUpForm } from "@/lib/schema";
 import { useRegister } from "@/features/auth/api/use-register";
+import { TransitionLink } from "@/components/common/link";
 
 export const SignUpCard = () => {
   const t = useTranslations("pages.sign_up");
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
-  const { mutate } = useRegister();
+  const { mutate: register, isPending } = useRegister();
   const form = useForm<TSignUpForm>({
     defaultValues: {
       email: "",
@@ -41,7 +41,7 @@ export const SignUpCard = () => {
     resolver: zodResolver(getSignUpFormSchema(validT)),
   });
   const onSubmit = (values: TSignUpForm) => {
-    mutate({ json: values });
+    register({ json: values });
   };
   return (
     <Card className="w-full h-full md:w-[550px] border-none shadow-none">
@@ -118,7 +118,13 @@ export const SignUpCard = () => {
                 </FormItem>
               )}
             />
-            <Button size="lg" className="w-full" type="submit">
+            <Button
+              size="lg"
+              className="w-full"
+              type="submit"
+              disabled={isPending}
+            >
+              {isPending && <FiLoader className="size-4 mr-2 animate-spin" />}
               {ct("sign_up")}
             </Button>
           </form>

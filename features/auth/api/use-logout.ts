@@ -17,6 +17,7 @@ export const useLogout = () => {
       return await response.json();
     },
     onSuccess: () => {
+      window.location.reload();
       queryClient.invalidateQueries({ queryKey: ["current"] });
     },
   });

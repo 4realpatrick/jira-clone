@@ -7,7 +7,7 @@ export const ShineButton = (
   return (
     <button
       className={cn(
-        "group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-primary px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:shadow-lg hover:primary/30",
+        "group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-primary px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:shadow-lg hover:primary/30 disabled:pointer-events-none disabled:opacity-50",
         className,
         "hover:bg-primary"
       )}

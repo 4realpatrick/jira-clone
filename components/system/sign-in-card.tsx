@@ -1,8 +1,8 @@
 "use client";
 
-import { TransitionLink } from "@/components/common/link";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
+import { FiLoader } from "react-icons/fi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Card,
@@ -26,12 +26,13 @@ import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
 import { getSignInFormSchema, TSignInForm } from "@/lib/schema";
 import { useLogin } from "@/features/auth/api/use-login";
+import { TransitionLink } from "@/components/common/link";
 
 export const SignInCard = () => {
   const t = useTranslations("pages.sign_in");
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
-  const { mutate } = useLogin();
+  const { mutate: login, isPending } = useLogin();
   const form = useForm<TSignInForm>({
     defaultValues: {
       email: "",
@@ -40,7 +41,7 @@ export const SignInCard = () => {
     resolver: zodResolver(getSignInFormSchema(validT)),
   });
   const onSubmit = (values: TSignInForm) => {
-    mutate({ json: values });
+    login({ json: values });
   };
   return (
     <Card className="w-full h-full md:w-[550px] border-none shadow-none">
@@ -101,7 +102,13 @@ export const SignInCard = () => {
                 </FormItem>
               )}
             />
-            <Button size="lg" className="w-full" type="submit">
+            <Button
+              size="lg"
+              className="w-full"
+              type="submit"
+              disabled={isPending}
+            >
+              {isPending && <FiLoader className="size-4 mr-2 animate-spin" />}
               {ct("login")}
             </Button>
           </form>
@@ -112,7 +119,11 @@ export const SignInCard = () => {
         <CardContent className="p-7 flex flex-col gap-y-4">
           {AUTH_PROVIDERS.map(({ id, icon }) => {
             return (
-              <ShineButton className={buttonVariants({ size: "lg" })} key={id}>
+              <ShineButton
+                className={buttonVariants({ size: "lg" })}
+                key={id}
+                disabled={isPending}
+              >
                 {icon({ className: "mr-2 size-5" })}
                 {t(`providers.${id}`)}
               </ShineButton>
