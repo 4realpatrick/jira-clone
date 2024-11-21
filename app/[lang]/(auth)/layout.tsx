@@ -1,25 +1,20 @@
 "use client";
 import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
-import { Link } from "next-view-transitions";
-import { usePathname } from "next/navigation";
-import { useLocale } from "next-intl";
+import { TransitionLink } from "@/components/common/link";
+import { usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
-import { Locale } from "@/i18n/interface";
 
 interface IAuthLayoutProps {
   children: React.ReactNode;
 }
 
 const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
-  const lang = useLocale() as Locale;
   const t = useTranslations("common");
   const pathname = usePathname();
-  const isSignUp = useMemo(
-    () => pathname?.split("/")[2] === "sign-up",
-    [pathname]
-  );
+
+  const isSignUp = useMemo(() => pathname.includes("sign-up"), [pathname]);
 
   return (
     <main className="bg-neutral-100 min-h-screen">
@@ -27,13 +22,13 @@ const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
         <nav className="flex justify-between items-center">
           <Image src="/logo.svg" width={152} height={56} alt="Logo" />
           <div className="flex items-center gap-2">
-            <Link
-              href={`/${lang}/${isSignUp ? "sign-in" : "sign-up"}`}
+            <TransitionLink
+              href={`/${isSignUp ? "sign-in" : "sign-up"}`}
               className={buttonVariants({})}
               replace
             >
               {isSignUp ? t("login") : t("sign_up")}
-            </Link>
+            </TransitionLink>
           </div>
         </nav>
         <div className="flex flex-col items-center justify-center pt-4 md:pt-14">

@@ -12,7 +12,7 @@ import {
 // Constant
 import { i18n } from "@/i18n/config";
 // Hooks
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { Locale } from "@/i18n/interface";
 

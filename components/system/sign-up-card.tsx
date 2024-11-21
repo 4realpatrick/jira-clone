@@ -1,7 +1,8 @@
-import { Link } from "next-view-transitions";
+"use client";
+
+import { TransitionLink } from "@/components/common/link";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Card,
@@ -23,7 +24,6 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { ShineButton } from "@/components/syntax/button/shine";
 import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
-import { Locale } from "@/i18n/interface";
 import { getSignUpFormSchema, TSignUpForm } from "@/lib/schema";
 import { useRegister } from "@/features/auth/api/use-register";
 
@@ -31,7 +31,6 @@ export const SignUpCard = () => {
   const t = useTranslations("pages.sign_up");
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
-  const locale = useLocale() as Locale;
   const { mutate } = useRegister();
   const form = useForm<TSignUpForm>({
     defaultValues: {
@@ -50,19 +49,19 @@ export const SignUpCard = () => {
         <CardTitle className="text-2xl">{t("title")}</CardTitle>
         <CardDescription>
           {t("description")}{" "}
-          <Link
+          <TransitionLink
             href="/privacy"
             className={cn(buttonVariants({ variant: "link" }), "px-0")}
           >
             <span>{ct("privacy_policy")}</span>
-          </Link>{" "}
+          </TransitionLink>{" "}
           {ct("and")}{" "}
-          <Link
+          <TransitionLink
             href="/terms"
             className={cn(buttonVariants({ variant: "link" }), "px-0")}
           >
             <span>{ct("terms")}</span>
-          </Link>
+          </TransitionLink>
         </CardDescription>
       </CardHeader>
       <div className="px-7">
@@ -143,12 +142,13 @@ export const SignUpCard = () => {
       </div>
       <CardContent className="p-7 flex items-center justify-center text-sm">
         <p>{t("got_account")}</p>
-        <Link
-          href={`/${locale}/sign-in`}
+        <TransitionLink
+          href="/sign-in"
           className={cn(buttonVariants({ variant: "link" }), "px-0")}
+          replace
         >
           {ct("login")}
-        </Link>
+        </TransitionLink>
       </CardContent>
     </Card>
   );
