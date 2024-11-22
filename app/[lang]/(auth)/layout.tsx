@@ -17,7 +17,7 @@ const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
   const isSignUp = useMemo(() => pathname.includes("sign-up"), [pathname]);
 
   return (
-    <main className="bg-background min-h-screen">
+    <main className="bg-background min-h-screen w-full">
       <div className="mx-auto max-w-screen-2xl">
         <nav className="flex justify-between items-center shadow-sm py-2 px-4">
           <Image src="/logo.svg" width={152} height={56} alt="Logo" />
