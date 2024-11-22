@@ -18,8 +18,8 @@ const AuthLayout = ({ children }: Readonly<IAuthLayoutProps>) => {
 
   return (
     <main className="bg-background min-h-screen">
-      <div className="mx-auto max-w-screen-2xl p-4">
-        <nav className="flex justify-between items-center">
+      <div className="mx-auto max-w-screen-2xl">
+        <nav className="flex justify-between items-center shadow-sm py-2 px-4">
           <Image src="/logo.svg" width={152} height={56} alt="Logo" />
           <div className="flex items-center gap-2">
             <TransitionLink
