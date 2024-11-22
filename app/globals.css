@@ -60,6 +60,13 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+  @import "@/constant/theme/blue.css";
+  @import "@/constant/theme/green.css";
+  @import "@/constant/theme/red.css";
+  @import "@/constant/theme/violet.css";
+  @import "@/constant/theme/yellow.css";
+  @import "@/constant/theme/orange.css";
+  @import "@/constant/theme/zinc.css";
 }
 
 @layer base {
