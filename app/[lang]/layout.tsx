@@ -5,7 +5,7 @@ import { Locale } from "@/i18n/interface";
 import { ThemeProvider } from "@/components/system/theme/theme-provider";
 import { ThemeColorProvider } from "@/components/system/theme/theme-color-provider";
 import { SIDEBAR_COOKIE_NAME, SidebarProvider } from "@/components/ui/sidebar";
-
+import { Toaster } from "sonner";
 const LangLayout = async ({
   params,
   children,
@@ -27,6 +27,7 @@ const LangLayout = async ({
           <ThemeColorProvider />
           <NextIntlClientProvider messages={messages}>
             <SidebarProvider defaultOpen={defaultOpen}>
+              <Toaster richColors expand />
               {children}
             </SidebarProvider>
           </NextIntlClientProvider>
