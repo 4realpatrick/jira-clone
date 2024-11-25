@@ -17,10 +17,10 @@ export const useCreateWorkspace = () => {
   const queryClient = useQueryClient();
   let loadingId: string | number = "";
   const mutation = useMutation<ResponseType, Error, RequestType>({
-    mutationFn: async ({ json }) => {
+    mutationFn: async ({ form }) => {
       loadingId = toast.loading(tt("loading.creating_workspace"));
       const response = await client["api"]["workspaces"]["$post"]({
-        json,
+        form,
       });
       return await response.json();
     },

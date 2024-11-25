@@ -21,7 +21,10 @@
     "workspace": {
       "form": {
         "title": "Create a new workspace",
-        "label": "Workspace name"
+        "label": "Workspace name",
+        "image": "Workspace Icon",
+        "upload": "Upload image",
+        "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
       }
     }
   },

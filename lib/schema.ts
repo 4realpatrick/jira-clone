@@ -97,6 +97,12 @@ export const getCreateWorkspaceSchema = (
       .min(1, {
         message: getValidationMessage("workspace_required"),
       }),
+    image: z
+      .union([
+        z.instanceof(File),
+        z.string().transform((value) => (value === "" ? undefined : value)),
+      ])
+      .optional(),
   });
 };
 
