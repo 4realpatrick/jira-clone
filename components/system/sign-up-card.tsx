@@ -23,7 +23,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { ShineButton } from "@/components/syntax/button/shine";
 import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
-import { getSignUpFormSchema, TSignUpForm } from "@/lib/schema";
+import { getSignUpFormSchema, TSignUpFormSchema } from "@/lib/schema";
 import { useRegister } from "@/features/auth/api/use-register";
 import { TransitionLink } from "@/components/common/link";
 
@@ -32,7 +32,7 @@ export const SignUpCard = () => {
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
   const { mutate: register, isPending } = useRegister();
-  const form = useForm<TSignUpForm>({
+  const form = useForm<TSignUpFormSchema>({
     defaultValues: {
       email: "",
       password: "",
@@ -40,7 +40,7 @@ export const SignUpCard = () => {
     },
     resolver: zodResolver(getSignUpFormSchema(validT)),
   });
-  const onSubmit = (values: TSignUpForm) => {
+  const onSubmit = (values: TSignUpFormSchema) => {
     register({ json: values });
   };
   return (

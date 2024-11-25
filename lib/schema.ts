@@ -1,7 +1,17 @@
 import { z } from "zod";
 import { type TranslationValues } from "next-intl";
+import translations from "@/translations/en.json";
 
 type Messages = keyof IntlMessages["validation"];
+
+const { validation: detaultValidationMessages } = translations;
+
+const getValidationMessage = (
+  keyword: Messages,
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return t?.(keyword) ?? detaultValidationMessages[keyword];
+};
 
 // 登录表单schema
 export const getSignInFormSchema = (
@@ -10,19 +20,29 @@ export const getSignInFormSchema = (
   return z.object({
     email: z
       .string({
-        invalid_type_error: t?.("email_invalid"),
-        required_error: t?.("email_required"),
+        invalid_type_error: getValidationMessage("email_invalid"),
+        required_error: getValidationMessage("email_required"),
       })
-      .min(1, { message: t?.("email_required") })
-      .email({ message: t?.("email_required") }),
+      .min(1, {
+        message: getValidationMessage("email_required"),
+      })
+      .email({
+        message: getValidationMessage("email_required"),
+      }),
     password: z
-      .string({ required_error: t?.("password_required") })
-      .min(8, { message: t?.("password_min") })
-      .max(32, { message: t?.("password_max") }),
+      .string({
+        required_error: getValidationMessage("password_required"),
+      })
+      .min(8, {
+        message: getValidationMessage("password_min"),
+      })
+      .max(32, {
+        message: getValidationMessage("password_max"),
+      }),
   });
 };
 
-export type TSignInForm = z.infer<ReturnType<typeof getSignInFormSchema>>;
+export type TSignInFormSchema = z.infer<ReturnType<typeof getSignInFormSchema>>;
 
 // 注册表单schema
 export const getSignUpFormSchema = (
@@ -30,22 +50,56 @@ export const getSignUpFormSchema = (
 ) => {
   return z.object({
     username: z
-      .string({ required_error: t?.("username_required") })
+      .string({
+        required_error: getValidationMessage("username_required"),
+      })
       .trim()
-      .min(3, { message: t?.("username_min") })
-      .max(32, { message: t?.("username_max") }),
+      .min(3, {
+        message: getValidationMessage("username_min"),
+      })
+      .max(32, {
+        message: getValidationMessage("username_max"),
+      }),
     email: z
       .string({
-        invalid_type_error: t?.("email_invalid"),
-        required_error: t?.("email_required"),
+        invalid_type_error: getValidationMessage("email_invalid"),
+        required_error: getValidationMessage("email_required"),
       })
-      .min(1, { message: t?.("email_required") })
-      .email({ message: t?.("email_invalid") }),
+      .min(1, {
+        message: getValidationMessage("email_required"),
+      })
+      .email({
+        message: getValidationMessage("email_invalid"),
+      }),
     password: z
-      .string({ required_error: t?.("password_required") })
-      .min(8, { message: t?.("password_min") })
-      .max(32, { message: t?.("password_max") }),
+      .string({
+        required_error: getValidationMessage("password_required"),
+      })
+      .min(8, {
+        message: getValidationMessage("password_min"),
+      })
+      .max(32, {
+        message: getValidationMessage("password_max"),
+      }),
   });
 };
 
-export type TSignUpForm = z.infer<ReturnType<typeof getSignUpFormSchema>>;
+export type TSignUpFormSchema = z.infer<ReturnType<typeof getSignUpFormSchema>>;
+
+// 创建工作区表单schema
+export const getCreateWorkspaceSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: getValidationMessage("workspace_required"),
+      }),
+  });
+};
+
+export type TCreateWorkspaceSchema = z.infer<
+  ReturnType<typeof getCreateWorkspaceSchema>
+>;

@@ -24,7 +24,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { ShineButton } from "@/components/syntax/button/shine";
 import { cn } from "@/lib/utils";
 import { AUTH_PROVIDERS } from "@/constant/auth-providers";
-import { getSignInFormSchema, TSignInForm } from "@/lib/schema";
+import { getSignInFormSchema, TSignInFormSchema } from "@/lib/schema";
 import { useLogin } from "@/features/auth/api/use-login";
 import { TransitionLink } from "@/components/common/link";
 
@@ -33,14 +33,14 @@ export const SignInCard = () => {
   const ct = useTranslations("common");
   const validT = useTranslations("validation");
   const { mutate: login, isPending } = useLogin();
-  const form = useForm<TSignInForm>({
+  const form = useForm<TSignInFormSchema>({
     defaultValues: {
       email: "",
       password: "",
     },
     resolver: zodResolver(getSignInFormSchema(validT)),
   });
-  const onSubmit = (values: TSignInForm) => {
+  const onSubmit = (values: TSignInFormSchema) => {
     login({ json: values });
   };
   return (
