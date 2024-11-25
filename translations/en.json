@@ -17,6 +17,12 @@
         "google": "Sign up with Google",
         "github": "Sign up with GitHub"
       }
+    },
+    "workspace": {
+      "form": {
+        "title": "Create a new workspace",
+        "label": "Workspace name"
+      }
     }
   },
   "components": {
@@ -30,14 +36,17 @@
     }
   },
   "common": {
-    "email_placeholder": "Please enter your email",
-    "password_placeholder": "Please enter your password",
-    "username_placeholder": "Please enter your username",
+    "email_placeholder": "Enter your email",
+    "password_placeholder": "Enter your password",
+    "username_placeholder": "Enter your username",
+    "workspace_placeholder": "Enter workspace name",
     "login": "Login",
     "sign_up": "Sign up",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms of Service",
     "and": "and",
+    "submit": "Submit",
+    "cancel": "Cancel",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -61,6 +70,27 @@
     "password_max": "Password must be at most 16 characters long",
     "username_required": "Username is required",
     "username_min": "Username must be at least 3 characters long",
-    "username_max": "Username must be at most 16 characters long"
+    "username_max": "Username must be at most 16 characters long",
+    "workspace_required": "Workspace name is required"
+  },
+  "toast": {
+    "loading": {
+      "login": "Logining...",
+      "register": "Registering...",
+      "logout": "Logging out...",
+      "creating_workspace": "Creating workspace..."
+    },
+    "success": {
+      "login": "Login success",
+      "register": "Register success",
+      "logout": "Logged out",
+      "workspace_created": "Workspace `{name}` created!"
+    },
+    "error": {
+      "login": "Login failed, please check your email and password",
+      "register": "Register failed",
+      "logout": "Logout failed",
+      "workspace_created": "Workspace created failed"
+    }
   }
 }

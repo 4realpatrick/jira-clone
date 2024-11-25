@@ -17,6 +17,12 @@
         "google": "使用Google注册",
         "github": "使用GitHub注册"
       }
+    },
+    "workspace": {
+      "form": {
+        "title": "创建新的工作区",
+        "label": "工作区"
+      }
     }
   },
   "components": {
@@ -33,11 +39,14 @@
     "email_placeholder": "请输入邮箱",
     "password_placeholder": "请输入密码",
     "username_placeholder": "请输入用户名",
+    "workspace_placeholder": "请输入工作区名称",
     "login": "登录",
     "sign_up": "注册",
     "privacy_policy": "隐私协议",
     "terms": "服务条款",
     "and": "以及",
+    "submit": "提交",
+    "cancel": "取消",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -61,6 +70,27 @@
     "password_max": "密码最多16个字符",
     "username_required": "用户名为必填",
     "username_min": "用户名至少要3个字符",
-    "username_max": "用户名最多32个字符"
+    "username_max": "用户名最多32个字符",
+    "workspace_required": "工作区名称必填"
+  },
+  "toast": {
+    "loading": {
+      "login": "登录中...",
+      "register": "注册中...",
+      "logout": "正在退出当前账户...",
+      "creating_workspace": "工作区创建中..."
+    },
+    "success": {
+      "login": "登录成功",
+      "register": "注册成功",
+      "logout": "用户退出成功",
+      "workspace_created": "工作区 `{name}` 创建成功"
+    },
+    "error": {
+      "login": "登录失败, 请检查您的邮箱和密码",
+      "register": "注册失败",
+      "logout": "用户退出失败",
+      "workspace_created": "创建工作区失败"
+    }
   }
 }
