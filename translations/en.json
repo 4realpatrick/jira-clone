@@ -75,7 +75,7 @@
   },
   "toast": {
     "loading": {
-      "login": "Logining...",
+      "login": "Logging in...",
       "register": "Registering...",
       "logout": "Logging out...",
       "creating_workspace": "Creating workspace..."
