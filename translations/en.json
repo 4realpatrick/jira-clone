@@ -22,6 +22,7 @@
       "form": {
         "title": "Create a new workspace",
         "label": "Workspace name",
+        "description": "Description(optional)",
         "image": "Workspace Icon",
         "upload": "Upload image",
         "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
@@ -51,6 +52,7 @@
     "password_placeholder": "Enter your password",
     "username_placeholder": "Enter your username",
     "workspace_placeholder": "Enter workspace name",
+    "workspace_description_placeholder": "Simply describe your workspace",
     "login": "Login",
     "sign_up": "Sign up",
     "privacy_policy": "Privacy Policy",

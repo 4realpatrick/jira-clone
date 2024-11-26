@@ -77,6 +77,9 @@ export function WorkspaceSwitcher() {
                       <span className="truncate font-semibold">
                         {currentWorkspace?.name}
                       </span>
+                      <span className="truncate text-xs">
+                        {currentWorkspace?.description}
+                      </span>
                     </div>
                     <ChevronsUpDown className="ml-auto" />
                   </>

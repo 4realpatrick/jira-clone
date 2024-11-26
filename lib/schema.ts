@@ -103,6 +103,7 @@ export const getCreateWorkspaceSchema = (
         z.string().transform((value) => (value === "" ? undefined : value)),
       ])
       .optional(),
+    description: z.string().optional(),
   });
 };
 

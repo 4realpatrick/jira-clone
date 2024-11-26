@@ -43,7 +43,7 @@ const app = new Hono()
       const user = c.get("user");
       const storage = c.get("storage");
 
-      const { name, image } = c.req.valid("form");
+      const { name, image, description = "" } = c.req.valid("form");
 
       let uploadImageUrl: string | undefined;
 
@@ -71,6 +71,7 @@ const app = new Hono()
         ID.unique(),
         {
           name,
+          description,
           userId: user.$id,
           imageUrl: uploadImageUrl,
           inviteCode: generateInviteCode(),

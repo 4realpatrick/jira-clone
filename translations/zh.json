@@ -22,6 +22,7 @@
       "form": {
         "title": "创建新的工作区",
         "label": "工作区",
+        "description": "工作区描述(非必填)",
         "image": "工作区图片",
         "upload": "上传图片",
         "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
@@ -51,6 +52,7 @@
     "password_placeholder": "请输入密码",
     "username_placeholder": "请输入用户名",
     "workspace_placeholder": "请输入工作区名称",
+    "workspace_description_placeholder": "简单描述一下工作区",
     "login": "登录",
     "sign_up": "注册",
     "privacy_policy": "隐私协议",

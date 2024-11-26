@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { NeubrutalismButton } from "@/components/syntax/button/neubrutalism";
 import { getCreateWorkspaceSchema, TCreateWorkspaceSchema } from "@/lib/schema";
@@ -42,6 +43,7 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
     resolver: zodResolver(getCreateWorkspaceSchema(validT)),
     defaultValues: {
       name: "",
+      description: "",
     },
   });
 
@@ -89,6 +91,23 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                       <Input
                         {...field}
                         placeholder={ct("workspace_placeholder")}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("form.description")}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        placeholder={ct("workspace_description_placeholder")}
+                        maxLength={50}
                       />
                     </FormControl>
                     <FormMessage />
