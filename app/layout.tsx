@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import { QueryProvider } from "@/components/query-provider";
 
@@ -13,5 +13,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <QueryProvider>{children}</QueryProvider>;
+  return (
+    <QueryProvider>
+      <NuqsAdapter>{children}</NuqsAdapter>
+    </QueryProvider>
+  );
 }
