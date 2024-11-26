@@ -29,7 +29,9 @@
       "sidebar": {
         "workspace_switcher": {
           "title": "Workspace",
-          "add": "New workspace"
+          "add": "New workspace",
+          "none_select": "Choose a workspace",
+          "empty": "No workspace yet, click the button below to create one"
         }
       }
     }

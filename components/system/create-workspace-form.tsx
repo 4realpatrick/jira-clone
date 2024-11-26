@@ -21,6 +21,7 @@ import { DottedSeparator } from "@/components/common/dotted-separator";
 import { NeubrutalismButton } from "@/components/syntax/button/neubrutalism";
 import { getCreateWorkspaceSchema, TCreateWorkspaceSchema } from "@/lib/schema";
 import { useCreateWorkspace } from "@/features/workspaces/api/use-create-workspace";
+import { useRouter } from "@/i18n/routing";
 
 interface ICreateWorkspaceFormProps {
   handleCancel?: () => void;
@@ -33,6 +34,8 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
   const t = useTranslations("pages.workspace");
   const ct = useTranslations("common");
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
   const { mutate: createWorkspace, isPending } = useCreateWorkspace();
 
   const form = useForm<TCreateWorkspaceSchema>({
@@ -57,15 +60,15 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
         },
       },
       {
-        onSuccess() {
-          // TODO Redirect to new workspace
+        onSuccess({ data }) {
           form.reset();
+          router.push(`/workspaces/${data.$id}`);
         },
       }
     );
   };
   return (
-    <Card className="w-full h-full">
+    <Card className="w-full h-full border-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">{t("form.title")}</CardTitle>
       </CardHeader>

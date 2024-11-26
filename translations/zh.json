@@ -29,7 +29,9 @@
       "sidebar": {
         "workspace_switcher": {
           "title": "工作区",
-          "add": "新工作区"
+          "add": "新工作区",
+          "none_select": "还未选择任何工作区",
+          "empty": "暂无工作区, 点击下方按钮创建"
         }
       }
     }
