@@ -20,39 +20,46 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Hint } from "@/components/common/hint";
+import { RippleWaveLoader } from "@/components/syntax/button/loader/ripple-wave";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspaces";
 
 export function WorkspaceSwitcher() {
   const t = useTranslations("pages.workspace.sidebar.workspace_switcher");
   const { isMobile } = useSidebar();
-  const { data } = useGetWorkspace();
-
+  const { data, isPending } = useGetWorkspace();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                {/* <activeTeam.logo className="size-4" /> */}
-                <ImageIcon className="size-full" />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
-                  placeholder
-                  {/* {activeTeam.name} */}
-                </span>
-                <span className="truncate text-xs">
-                  placeholder
-                  {/* {activeTeam.plan} */}
-                </span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
+          {isPending ? (
+            <div className="mt-3">
+              <RippleWaveLoader />
+            </div>
+          ) : (
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  {/* <activeTeam.logo className="size-4" /> */}
+                  <ImageIcon className="size-full" />
+                </div>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">
+                    placeholder
+                    {/* {activeTeam.name} */}
+                  </span>
+                  <span className="truncate text-xs">
+                    placeholder
+                    {/* {activeTeam.plan} */}
+                  </span>
+                </div>
+                <ChevronsUpDown className="ml-auto" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+          )}
+
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
             align="start"
