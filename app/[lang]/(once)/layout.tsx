@@ -1,9 +1,9 @@
-import { UserButton } from "@/components/system/user-button";
-import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import React from "react";
+import { Link } from "@/i18n/routing";
+import { UserButton } from "@/components/system/user-button";
 
-export default function OnceLayout({
+export default async function OnceLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (

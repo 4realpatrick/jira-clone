@@ -23,6 +23,7 @@ import { NeubrutalismButton } from "@/components/syntax/button/neubrutalism";
 import { getCreateWorkspaceSchema, TCreateWorkspaceSchema } from "@/lib/schema";
 import { useCreateWorkspace } from "@/features/workspaces/api/use-create-workspace";
 import { useRouter } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 
 interface ICreateWorkspaceFormProps {
   handleCancel?: () => void;
@@ -167,16 +168,23 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                 )}
               />
               <DottedSeparator />
-              <div className="flex items-center justify-between">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  onClick={handleCancel}
-                  disabled={isPending}
-                >
-                  {ct("cancel")}
-                </Button>
+              <div
+                className={cn(
+                  "flex items-center justify-between",
+                  !!!handleCancel && "justify-end"
+                )}
+              >
+                {!!handleCancel && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="lg"
+                    onClick={handleCancel}
+                    disabled={isPending}
+                  >
+                    {ct("cancel")}
+                  </Button>
+                )}
                 <Button size="lg" type="submit" disabled={isPending}>
                   {ct("submit")}
                 </Button>
