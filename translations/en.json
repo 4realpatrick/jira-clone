@@ -34,6 +34,10 @@
           "none_select": "Choose a workspace",
           "empty": "No workspace yet, click the button below to create one"
         }
+      },
+      "create": {
+        "alert_title": "Welcome!",
+        "alert_description": "You need to create your first workspace now"
       }
     }
   },
@@ -54,6 +58,7 @@
     "workspace_placeholder": "Enter workspace name",
     "workspace_description_placeholder": "Simply describe your workspace",
     "login": "Login",
+    "logout": "Logout",
     "sign_up": "Sign up",
     "privacy_policy": "Privacy Policy",
     "terms": "Terms of Service",

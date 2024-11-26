@@ -22,7 +22,7 @@
       "form": {
         "title": "创建新的工作区",
         "label": "工作区",
-        "description": "工作区描述(非必填)",
+        "description": "描述(非必填)",
         "image": "工作区图片",
         "upload": "上传图片",
         "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
@@ -34,6 +34,10 @@
           "none_select": "还未选择任何工作区",
           "empty": "暂无工作区, 点击下方按钮创建"
         }
+      },
+      "create": {
+        "alert_title": "欢迎回来!",
+        "alert_description": "您还没有工作区, 请先创建一个工作区"
       }
     }
   },
@@ -54,6 +58,7 @@
     "workspace_placeholder": "请输入工作区名称",
     "workspace_description_placeholder": "简单描述一下工作区",
     "login": "登录",
+    "logout": "登出",
     "sign_up": "注册",
     "privacy_policy": "隐私协议",
     "terms": "服务条款",

@@ -10,11 +10,12 @@ import { DottedSeparator } from "../common/dotted-separator";
 import { useLogout } from "@/features/auth/api/use-logout";
 import { useCurrent } from "@/features/auth/api/use-current";
 import { FiLoader, FiLogOut } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 export const UserButton = () => {
   const { mutate: logout } = useLogout();
   const { data: user, isLoading } = useCurrent();
-
+  const ct = useTranslations("common");
   if (isLoading) {
     return (
       <div className="size-10 rounded-full flex items-center justify-center bg-gray-200 border border-neutral-300">
@@ -42,7 +43,7 @@ export const UserButton = () => {
       <DropdownMenuContent
         align="end"
         side="bottom"
-        className="w-60 border"
+        className="w-60 border bg-background z-10"
         sideOffset={10}
       >
         <div className="flex flex-col items-center justify-center gap-2 px-2.5 py-4">
@@ -64,7 +65,7 @@ export const UserButton = () => {
           onClick={() => logout()}
         >
           <FiLogOut className="size-4 mr-2" />
-          Logout
+          {ct("logout")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
