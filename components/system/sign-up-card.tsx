@@ -135,7 +135,11 @@ export const SignUpCard = () => {
         <CardContent className="p-7 flex flex-col gap-y-4">
           {AUTH_PROVIDERS.map(({ id, icon }) => {
             return (
-              <ShineButton className={buttonVariants({ size: "lg" })} key={id}>
+              <ShineButton
+                className={buttonVariants({ size: "lg" })}
+                key={id}
+                disabled={isPending}
+              >
                 {icon({ className: "mr-2 size-5" })}
                 {t(`providers.${id}`)}
               </ShineButton>
