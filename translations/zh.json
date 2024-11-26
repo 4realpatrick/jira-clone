@@ -25,6 +25,12 @@
         "image": "工作区图片",
         "upload": "上传图片",
         "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
+      },
+      "sidebar": {
+        "workspace_switcher": {
+          "title": "工作区",
+          "add": "新工作区"
+        }
       }
     }
   },

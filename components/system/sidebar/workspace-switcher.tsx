@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { ChevronsUpDown, Plus } from "lucide-react";
-
+import { ChevronsUpDown, Plus, ImageIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,18 +19,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { Hint } from "@/components/common/hint";
+import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspaces";
 
-export function TeamSwitcher({
-  teams,
-}: {
-  teams: {
-    name: string;
-    logo: React.ElementType;
-    plan: string;
-  }[];
-}) {
+export function WorkspaceSwitcher() {
+  const t = useTranslations("pages.workspace.sidebar.workspace_switcher");
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+  const { data } = useGetWorkspace();
 
   return (
     <SidebarMenu>
@@ -41,13 +37,18 @@ export function TeamSwitcher({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <activeTeam.logo className="size-4" />
+                {/* <activeTeam.logo className="size-4" /> */}
+                <ImageIcon className="size-full" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {activeTeam.name}
+                  placeholder
+                  {/* {activeTeam.name} */}
                 </span>
-                <span className="truncate text-xs">{activeTeam.plan}</span>
+                <span className="truncate text-xs">
+                  placeholder
+                  {/* {activeTeam.plan} */}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -59,19 +60,20 @@ export function TeamSwitcher({
             sideOffset={4}
           >
             <DropdownMenuLabel className="text-xs text-muted-foreground">
-              Teams
+              {t("title")}
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
-              <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
-                className="gap-2 p-2"
-              >
-                <div className="flex size-6 items-center justify-center rounded-sm border">
-                  <team.logo className="size-4 shrink-0" />
+            {data?.documents.map((workspace) => (
+              <DropdownMenuItem key={workspace.$id} className="gap-2 p-2">
+                <div className="flex size-6 items-center justify-center rounded-md relative">
+                  {workspace.imageUrl ? (
+                    <Image fill src={workspace.imageUrl} alt="Workspace" />
+                  ) : (
+                    <ImageIcon className="size-6 rounded-sm" />
+                  )}
                 </div>
-                {team.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
+                <Hint descrption={workspace.name}>
+                  <p className="truncate max-w-28 text-sm">{workspace.name}</p>
+                </Hint>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
@@ -79,7 +81,9 @@ export function TeamSwitcher({
               <div className="flex size-6 items-center justify-center rounded-md border bg-background">
                 <Plus className="size-4" />
               </div>
-              <div className="font-medium text-muted-foreground">Add team</div>
+              <div className="font-medium text-muted-foreground">
+                {t("add")}
+              </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

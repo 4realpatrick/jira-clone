@@ -25,6 +25,12 @@
         "image": "Workspace Icon",
         "upload": "Upload image",
         "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
+      },
+      "sidebar": {
+        "workspace_switcher": {
+          "title": "Workspace",
+          "add": "New workspace"
+        }
       }
     }
   },
