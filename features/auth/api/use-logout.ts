@@ -29,6 +29,7 @@ export const useLogout = () => {
         onAutoClose() {
           window.location.reload();
           queryClient.invalidateQueries({ queryKey: ["current"] });
+          queryClient.invalidateQueries({ queryKey: ["workspaces"] });
         },
       });
     },
