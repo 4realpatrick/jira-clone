@@ -18,7 +18,7 @@ const LangLayout = async ({
   setRequestLocale(lang);
 
   const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get(SIDEBAR_COOKIE_NAME)?.value === "true";
+  const defaultOpen = cookieStore.get(SIDEBAR_COOKIE_NAME)?.value ?? "true";
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -26,7 +26,7 @@ const LangLayout = async ({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeColorProvider />
           <NextIntlClientProvider messages={messages}>
-            <SidebarProvider defaultOpen={defaultOpen}>
+            <SidebarProvider defaultOpen={defaultOpen === "true"}>
               <Toaster richColors expand />
               {children}
             </SidebarProvider>
