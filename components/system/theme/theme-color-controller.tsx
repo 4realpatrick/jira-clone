@@ -17,7 +17,7 @@ import { useThemeColorStore } from "@/hooks/use-theme-color-store";
 import { cn } from "@/lib/utils";
 // Constant
 import {
-  BLOG_THEME_KEY,
+  JIRA_THEME_COLOR_KEY,
   THEME_COLOR_ARRAY,
   TThemeColor,
 } from "@/constant/theme";
@@ -50,7 +50,7 @@ export function ThemeColorController({
   }, []);
   useEffect(() => {
     if (mounted) {
-      localStorage.setItem(BLOG_THEME_KEY, themeColor);
+      localStorage.setItem(JIRA_THEME_COLOR_KEY, themeColor);
       document.documentElement.setAttribute("data-theme", themeColor);
     }
   }, [themeColor, mounted]);

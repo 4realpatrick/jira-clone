@@ -1,5 +1,5 @@
 "use client";
-import { JIRA_THEME_KEY } from "@/constant/theme";
+import { JIRA_THEME_COLOR_KEY } from "@/constant/theme";
 import { useEffect, useState } from "react";
 
 export const ThemeColorProvider = () => {
@@ -9,7 +9,7 @@ export const ThemeColorProvider = () => {
   }, []);
   useEffect(() => {
     if (mounted) {
-      const theme = localStorage.getItem(JIRA_THEME_KEY);
+      const theme = localStorage.getItem(JIRA_THEME_COLOR_KEY);
       document.documentElement.setAttribute("data-theme", theme || "blue");
     }
   }, [mounted]);
