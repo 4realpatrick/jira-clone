@@ -1,11 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { UserButton } from "@/components/system/user-button";
-import { Terminal } from "lucide-react";
+import CompositeAlert from "@/components/common/composite-alert";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { getTranslations } from "next-intl/server";
 export default async function OnceLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -20,13 +19,10 @@ export default async function OnceLayout({
           <UserButton />
         </nav>
         <div className="flex flex-col items-center justify-center py-4 gap-4">
-          <Alert>
-            <Terminal className="h-4 w-4" />
-            <AlertTitle className="text-sm">{t("alert_title")}</AlertTitle>
-            <AlertDescription className="font-semibold">
-              {t("alert_description")}
-            </AlertDescription>
-          </Alert>
+          <CompositeAlert
+            title={t("alert_title")}
+            description={t("alert_description")}
+          />
           {children}
         </div>
       </div>
