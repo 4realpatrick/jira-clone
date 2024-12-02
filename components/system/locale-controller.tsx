@@ -24,9 +24,9 @@ export const LanguageController = () => {
 
   const handleLanguageChange = (value: string) => {
     if (!pathname) return "/";
-    const segments = pathname.split("/");
-    segments[1] = value;
-    router.replace(segments.join("/"));
+    router.replace(pathname, {
+      locale: value,
+    });
   };
   return (
     <Select value={locale} onValueChange={handleLanguageChange}>
