@@ -16,7 +16,7 @@ import { usePathname, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { Locale } from "@/i18n/interface";
 
-const LanguageController = () => {
+export const LanguageController = () => {
   const t = useTranslations("components.language_controller");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -46,5 +46,3 @@ const LanguageController = () => {
     </Select>
   );
 };
-
-export default LanguageController;

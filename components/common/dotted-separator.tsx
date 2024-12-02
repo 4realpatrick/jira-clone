@@ -7,6 +7,7 @@ interface IDottedSeparatorProps {
   dotSize?: string;
   gapSize?: string;
   direction?: "horizontal" | "vertical";
+  useTheme?: boolean;
 }
 
 export const DottedSeparator = (props: IDottedSeparatorProps) => {
@@ -17,6 +18,7 @@ export const DottedSeparator = (props: IDottedSeparatorProps) => {
     dotSize = "2px",
     gapSize = "6px",
     direction = "horizontal",
+    useTheme = false,
   } = props;
   const isHorizontal = direction === "horizontal";
   return (
@@ -33,7 +35,9 @@ export const DottedSeparator = (props: IDottedSeparatorProps) => {
         style={{
           width: isHorizontal ? "100%" : height,
           height: isHorizontal ? height : "100%",
-          backgroundImage: `radial-gradient(circle, ${color} 25%, transparent 25%)`,
+          backgroundImage: `radial-gradient(circle, ${
+            useTheme ? "hsl(var(--primary))" : color
+          } 25%, transparent 25%)`,
           backgroundSize: isHorizontal
             ? `${parseInt(dotSize) + parseInt(gapSize)}px ${height}`
             : `${height} ${parseInt(dotSize) + parseInt(gapSize)}px`,
