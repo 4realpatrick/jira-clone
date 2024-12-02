@@ -1,3 +1,4 @@
+"use client";
 import { Link, useRouter } from "@/i18n/routing";
 
 function isModifiedEvent(event: React.MouseEvent): boolean {
