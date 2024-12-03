@@ -110,3 +110,29 @@ export const getCreateWorkspaceSchema = (
 export type TCreateWorkspaceSchema = z.infer<
   ReturnType<typeof getCreateWorkspaceSchema>
 >;
+
+// 更新工作区表单schema
+export const getUpdateWorkspaceSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: getValidationMessage("workspace_required"),
+      })
+      .optional(),
+    image: z
+      .union([
+        z.instanceof(File),
+        z.string().transform((value) => (value === "" ? undefined : value)),
+      ])
+      .optional(),
+    description: z.string().optional(),
+  });
+};
+
+export type TUpdateWorkspaceSchema = z.infer<
+  ReturnType<typeof getUpdateWorkspaceSchema>
+>;

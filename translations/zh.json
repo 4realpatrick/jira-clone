@@ -25,6 +25,7 @@
         "description": "描述(非必填)",
         "image": "工作区图片",
         "upload": "上传图片",
+        "remove": "移除图片",
         "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
       },
       "sidebar": {
@@ -38,6 +39,26 @@
       "create": {
         "alert_title": "欢迎回来!",
         "alert_description": "您还没有工作区, 请先创建一个工作区"
+      }
+    },
+    "setting": {
+      "title": "设置",
+      "description": "管理您的工作区及偏好",
+      "preference": {
+        "title": "偏好设置",
+        "description": "自定义应用的外观, 包括主题、主题色以及语言",
+        "theme_color": "主题色",
+        "theme_color_description": "更改应用的主题色",
+        "theme": "模式",
+        "theme_description": "改变应用的模式",
+        "language": "语言",
+        "language_description": "更改应用的语言(目前仅支持中英文)",
+        "alert_title": "小贴士",
+        "alert_description": "在没有登录的情况下, 设置是保存在浏览器缓存的, 下一次进入网站时有可能有些设置会与上次退出时不同"
+      },
+      "general": {
+        "title": "通用",
+        "description": "管理您的工作区信息"
       }
     }
   },
@@ -96,19 +117,32 @@
       "login": "登录中...",
       "register": "注册中...",
       "logout": "正在退出当前账户...",
-      "creating_workspace": "工作区创建中..."
+      "creating_workspace": "工作区创建中...",
+      "updating_workspace": "正在更新工作区..."
     },
     "success": {
       "login": "登录成功",
       "register": "注册成功",
       "logout": "用户退出成功",
-      "workspace_created": "工作区 `{name}` 创建成功"
+      "workspace_created": "工作区 `{name}` 创建成功",
+      "workspace_updated": "工作区 `{name}` 更新成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
       "register": "注册失败",
       "logout": "用户退出失败",
-      "workspace_created": "创建工作区失败"
+      "workspace_created": "创建工作区失败",
+      "workspace_updated": "更新工作区失败"
     }
+  },
+  "url": {
+    "workspace": "工作区",
+    "setting": "设置"
+  },
+  "nav": {
+    "home": "工作区",
+    "setting": "设置",
+    "general": "通用",
+    "preference": "偏好"
   }
 }

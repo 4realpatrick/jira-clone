@@ -25,6 +25,7 @@
         "description": "Description(optional)",
         "image": "Workspace Icon",
         "upload": "Upload image",
+        "remove": "Remove image",
         "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
       },
       "sidebar": {
@@ -39,15 +40,35 @@
         "alert_title": "Welcome!",
         "alert_description": "You need to create your first workspace now"
       }
+    },
+    "setting": {
+      "title": "Settings",
+      "description": "Manage your workspaces and preferences.",
+      "preference": {
+        "title": "Preference settings",
+        "description": "Customize the appearance of the app, including Theme, Theme color and language.",
+        "theme": "Theme",
+        "theme_description": "Select the theme for the app.",
+        "theme_color": "Theme",
+        "theme_color_description": "Change the theme of the app",
+        "language": "Language",
+        "language_description": "Change the language of the app (currently only supports Chinese and English)",
+        "alert_title": "Tips",
+        "alert_description": "When a user is not logged in, the settings are saved in the browser cache. If the user returns to the website later, some settings may have changed since the last time the user exited."
+      },
+      "general": {
+        "title": "General",
+        "description": "Manage your workspace info"
+      }
     }
   },
   "components": {
     "language_controller": {
-      "language": "language",
-      "language_placeholder": "请选择一种语言",
+      "language": "Language",
+      "language_placeholder": "Select a language",
       "languages": {
-        "zh": "中文(zh)",
-        "en": "英文(en)"
+        "zh": "Simplified Chinese(zh)",
+        "en": "English(en)"
       }
     }
   },
@@ -96,19 +117,32 @@
       "login": "Logging in...",
       "register": "Registering...",
       "logout": "Logging out...",
-      "creating_workspace": "Creating workspace..."
+      "creating_workspace": "Creating workspace...",
+      "updating_workspace": "Updating workspace..."
     },
     "success": {
       "login": "Login success",
       "register": "Register success",
       "logout": "Logged out",
-      "workspace_created": "Workspace `{name}` created!"
+      "workspace_created": "Workspace `{name}` created!",
+      "workspace_updated": "Workspace `{name}` updated!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
       "register": "Register failed",
       "logout": "Logout failed",
-      "workspace_created": "Workspace created failed"
+      "workspace_created": "Workspace create failed",
+      "workspace_updated": "Workspace update failed!"
     }
+  },
+  "url": {
+    "workspace": "Workspace",
+    "setting": "Setting"
+  },
+  "nav": {
+    "home": "Workspace",
+    "setting": "Setting",
+    "general": "General",
+    "preference": "Preference"
   }
 }

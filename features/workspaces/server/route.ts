@@ -8,9 +8,13 @@ import {
   MEMBERS_ID,
   WORKSPACES_ID,
 } from "@/constant/config";
-import { getCreateWorkspaceSchema } from "@/lib/schema";
+import {
+  getCreateWorkspaceSchema,
+  getUpdateWorkspaceSchema,
+} from "@/lib/schema";
 import { ERole } from "@/interface/role";
 import { generateInviteCode } from "@/lib/utils";
+import { getMember } from "@/lib/get-member";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -53,7 +57,6 @@ const app = new Hono()
           ID.unique(),
           image
         );
-        console.log("file:", file);
 
         const arrayBuffer = await storage.getFilePreview(
           IMAGES_BUCKET_ID,
@@ -83,6 +86,63 @@ const app = new Hono()
         workspaceId: workspace.$id,
         role: ERole.ADMIN,
       });
+
+      return c.json({ data: workspace });
+    }
+  )
+  .patch(
+    "/:workspaceId",
+    sessionMiddleware,
+    zValidator("form", getUpdateWorkspaceSchema()),
+    async (c) => {
+      const databases = c.get("databases");
+      const user = c.get("user");
+      const storage = c.get("storage");
+
+      const { workspaceId } = c.req.param();
+      const { name, image, description } = c.req.valid("form");
+
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+
+      if (!member || member.role !== ERole.ADMIN) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      let uploadImageUrl: string | undefined;
+
+      if (image instanceof File) {
+        const file = await storage.createFile(
+          IMAGES_BUCKET_ID,
+          ID.unique(),
+          image
+        );
+
+        const arrayBuffer = await storage.getFilePreview(
+          IMAGES_BUCKET_ID,
+          file.$id
+        );
+
+        uploadImageUrl = `data:image/png;base64,${Buffer.from(
+          arrayBuffer
+        ).toString("base64")}`;
+      } else {
+        uploadImageUrl = image;
+      }
+
+      const workspace = await databases.updateDocument(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId,
+        {
+          name,
+          description,
+          imageUrl: uploadImageUrl,
+        }
+      );
 
       return c.json({ data: workspace });
     }
