@@ -64,8 +64,6 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
     }
   };
   const onSumbit = (values: TUpdateWorkspaceSchema) => {
-    console.log(22);
-
     updateWorkspace({
       form: {
         ...values,

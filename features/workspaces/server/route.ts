@@ -130,7 +130,7 @@ const app = new Hono()
           arrayBuffer
         ).toString("base64")}`;
       } else {
-        uploadImageUrl = image;
+        uploadImageUrl = image || "";
       }
 
       const workspace = await databases.updateDocument(
