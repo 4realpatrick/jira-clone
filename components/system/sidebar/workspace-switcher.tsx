@@ -62,7 +62,7 @@ export function WorkspaceSwitcher() {
               >
                 {currentWorkspace ? (
                   <>
-                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground relative">
+                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground relative">
                       {currentWorkspace?.imageUrl ? (
                         <Image
                           fill
@@ -75,11 +75,13 @@ export function WorkspaceSwitcher() {
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {currentWorkspace?.name}
+                        {currentWorkspace.name}
                       </span>
-                      <span className="truncate text-xs">
-                        {currentWorkspace?.description}
-                      </span>
+                      <Hint descrption={currentWorkspace.description} asChild>
+                        <span className="truncate text-xs">
+                          {currentWorkspace.description}
+                        </span>
+                      </Hint>
                     </div>
                     <ChevronsUpDown className="ml-auto" />
                   </>
