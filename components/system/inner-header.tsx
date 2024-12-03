@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { FaHome } from "react-icons/fa";
 import { TransitionLink } from "../common/link";
+import { Fragment } from "react";
 interface IBreadcrumb {
   breadcrumbs: {
     name: string;
@@ -32,7 +33,7 @@ export const InnerHeader: React.FC<IBreadcrumb> = ({
       )}
       <Breadcrumb>
         <BreadcrumbList className="transition-colors select-none">
-          <BreadcrumbItem className="hidden md:block">
+          <BreadcrumbItem>
             <TransitionLink href="/" className="hover:text-primary">
               <FaHome className="size-4" />
             </TransitionLink>
@@ -41,8 +42,8 @@ export const InnerHeader: React.FC<IBreadcrumb> = ({
           {breadcrumbs.map(({ name, href }, index) => {
             const isLast = index === breadcrumbs.length - 1;
             return (
-              <>
-                <BreadcrumbItem className="hidden md:block">
+              <Fragment key={name}>
+                <BreadcrumbItem>
                   {href ? (
                     <TransitionLink href={href} className="hover:text-primary">
                       {name}
@@ -52,7 +53,7 @@ export const InnerHeader: React.FC<IBreadcrumb> = ({
                   )}
                 </BreadcrumbItem>
                 {!isLast && <BreadcrumbSeparator />}
-              </>
+              </Fragment>
             );
           })}
         </BreadcrumbList>
