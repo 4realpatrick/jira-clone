@@ -91,6 +91,7 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                     <FormControl>
                       <Input
                         {...field}
+                        disabled={isPending}
                         placeholder={ct("workspace_placeholder")}
                       />
                     </FormControl>
@@ -107,6 +108,7 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                     <FormControl>
                       <Textarea
                         {...field}
+                        disabled={isPending}
                         placeholder={ct("workspace_description_placeholder")}
                         maxLength={50}
                       />
@@ -154,14 +156,31 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                           disabled={isPending}
                           onChange={handleImageChange}
                         />
-                        <NeubrutalismButton
-                          type="button"
-                          disabled={isPending}
-                          className="w-fit mt-2"
-                          onClick={() => inputRef.current?.click()}
-                        >
-                          {t("form.upload")}
-                        </NeubrutalismButton>
+                        {field.value ? (
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            disabled={isPending}
+                            className="w-fit mt-2"
+                            onClick={() => {
+                              field.onChange("");
+                              if (inputRef.current) {
+                                inputRef.current.value = "";
+                              }
+                            }}
+                          >
+                            {t("form.remove")}
+                          </Button>
+                        ) : (
+                          <NeubrutalismButton
+                            type="button"
+                            disabled={isPending}
+                            className="w-fit mt-2"
+                            onClick={() => inputRef.current?.click()}
+                          >
+                            {t("form.upload")}
+                          </NeubrutalismButton>
+                        )}
                       </div>
                     </div>
                   </div>
