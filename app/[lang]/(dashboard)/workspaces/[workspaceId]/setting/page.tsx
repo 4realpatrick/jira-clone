@@ -43,7 +43,7 @@ export default async function WorkspaceSettingPage({
   ];
 
   return (
-    <div>
+    <div className="pb-4">
       <InnerHeader breadcrumbs={breadcrumbs} />
       <div className="space-y-4 md:space-y-6">
         <EditWorkspaceForm initialValues={initialValues} />

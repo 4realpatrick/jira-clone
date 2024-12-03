@@ -75,7 +75,7 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
   return (
     <Card className="border-none">
       <CardHeader className="flex p-7">
-        <CardTitle className="text-xl">
+        <CardTitle className="text-xl text-primary">
           <Link href="#general" className="underline-link" id="general">
             {t("setting.general.title")}
           </Link>
@@ -118,6 +118,7 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                         disabled={isPending}
                         placeholder={ct("workspace_description_placeholder")}
                         maxLength={50}
+                        className="max-h-32"
                       />
                     </FormControl>
                     <FormMessage />

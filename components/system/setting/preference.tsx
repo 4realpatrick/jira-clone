@@ -51,7 +51,7 @@ export const PreferenceSetting = () => {
   return (
     <Card className="space-y-4">
       <CardHeader>
-        <CardTitle className="text-xl">
+        <CardTitle className="text-xl text-primary">
           <Link href="#preference" className="underline-link" id="preference">
             {t("preference.title")}
           </Link>
