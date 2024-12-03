@@ -1,5 +1,5 @@
 import { CreateWorkspaceForm } from "@/components/system/create-workspace-form";
-import { getCurrent } from "@/features/auth/action";
+import { getCurrent } from "@/features/auth/queries";
 import { Locale } from "@/i18n/interface";
 import { redirect } from "@/i18n/routing";
 import { getLocale } from "next-intl/server";

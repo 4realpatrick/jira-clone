@@ -1,4 +1,4 @@
-import { getCurrent } from "@/features/auth/action";
+import { getCurrent } from "@/features/auth/queries";
 import { Locale } from "@/i18n/interface";
 import { redirect } from "@/i18n/routing";
 import React from "react";
