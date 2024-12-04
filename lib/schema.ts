@@ -20,24 +20,24 @@ export const getSignInFormSchema = (
   return z.object({
     email: z
       .string({
-        invalid_type_error: getValidationMessage("email_invalid"),
-        required_error: getValidationMessage("email_required"),
+        invalid_type_error: getValidationMessage("email_invalid", t),
+        required_error: getValidationMessage("email_required", t),
       })
       .min(1, {
-        message: getValidationMessage("email_required"),
+        message: getValidationMessage("email_required", t),
       })
       .email({
-        message: getValidationMessage("email_required"),
+        message: getValidationMessage("email_required", t),
       }),
     password: z
       .string({
-        required_error: getValidationMessage("password_required"),
+        required_error: getValidationMessage("password_required", t),
       })
       .min(8, {
-        message: getValidationMessage("password_min"),
+        message: getValidationMessage("password_min", t),
       })
       .max(32, {
-        message: getValidationMessage("password_max"),
+        message: getValidationMessage("password_max", t),
       }),
   });
 };
@@ -51,35 +51,35 @@ export const getSignUpFormSchema = (
   return z.object({
     username: z
       .string({
-        required_error: getValidationMessage("username_required"),
+        required_error: getValidationMessage("username_required", t),
       })
       .trim()
       .min(3, {
-        message: getValidationMessage("username_min"),
+        message: getValidationMessage("username_min", t),
       })
       .max(32, {
-        message: getValidationMessage("username_max"),
+        message: getValidationMessage("username_max", t),
       }),
     email: z
       .string({
-        invalid_type_error: getValidationMessage("email_invalid"),
-        required_error: getValidationMessage("email_required"),
+        invalid_type_error: getValidationMessage("email_invalid", t),
+        required_error: getValidationMessage("email_required", t),
       })
       .min(1, {
-        message: getValidationMessage("email_required"),
+        message: getValidationMessage("email_required", t),
       })
       .email({
-        message: getValidationMessage("email_invalid"),
+        message: getValidationMessage("email_invalid", t),
       }),
     password: z
       .string({
-        required_error: getValidationMessage("password_required"),
+        required_error: getValidationMessage("password_required", t),
       })
       .min(8, {
-        message: getValidationMessage("password_min"),
+        message: getValidationMessage("password_min", t),
       })
       .max(32, {
-        message: getValidationMessage("password_max"),
+        message: getValidationMessage("password_max", t),
       }),
   });
 };
@@ -92,10 +92,12 @@ export const getCreateWorkspaceSchema = (
 ) => {
   return z.object({
     name: z
-      .string()
+      .string({
+        required_error: getValidationMessage("workspace_required", t),
+      })
       .trim()
       .min(1, {
-        message: getValidationMessage("workspace_required"),
+        message: getValidationMessage("workspace_required", t),
       }),
     image: z
       .union([
@@ -120,7 +122,7 @@ export const getUpdateWorkspaceSchema = (
       .string()
       .trim()
       .min(1, {
-        message: getValidationMessage("workspace_required"),
+        message: getValidationMessage("workspace_required", t),
       })
       .optional(),
     image: z
