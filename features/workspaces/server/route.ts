@@ -15,6 +15,7 @@ import {
 import { ERole } from "@/interface/role";
 import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/lib/get-member";
+import { TWorkspace } from "@/interface/workspaces";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -68,7 +69,7 @@ const app = new Hono()
         ).toString("base64")}`;
       }
 
-      const workspace = await databases.createDocument(
+      const workspace = await databases.createDocument<TWorkspace>(
         DATABASE_ID,
         WORKSPACES_ID,
         ID.unique(),
@@ -133,7 +134,7 @@ const app = new Hono()
         uploadImageUrl = image || "";
       }
 
-      const workspace = await databases.updateDocument(
+      const workspace = await databases.updateDocument<TWorkspace>(
         DATABASE_ID,
         WORKSPACES_ID,
         workspaceId,
@@ -166,6 +167,32 @@ const app = new Hono()
     await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
 
     return c.json({ data: { $id: workspaceId } });
+  })
+  .post("/:workspaceId/reset-invite-code", sessionMiddleware, async (c) => {
+    const databases = c.get("databases");
+    const user = c.get("user");
+    const { workspaceId } = c.req.param();
+
+    const member = await getMember({
+      databases,
+      workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member || member.role !== ERole.ADMIN) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    const workspace = await databases.updateDocument<TWorkspace>(
+      DATABASE_ID,
+      WORKSPACES_ID,
+      workspaceId,
+      {
+        inviteCode: generateInviteCode(),
+      }
+    );
+
+    return c.json({ data: workspace });
   });
 
 export default app;

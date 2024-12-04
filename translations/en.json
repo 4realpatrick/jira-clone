@@ -66,6 +66,15 @@
         "button": "Delete workspace",
         "alert_title": "Are you absolutely sure?",
         "alert_description": "This action cannot be undone. This will permanently delete current workspace and remove your data from our servers."
+      },
+      "invite_code": {
+        "title": "Invite Members",
+        "description": "Use the invite link to add members to your workspace",
+        "copy": "Copy",
+        "copy_success": "Copied to clipboard",
+        "copy_error": "Failed to copy to clipboard",
+        "reset": "Reset invite link",
+        "reset_tip": "Resetting the invite link will invalidate the current one and generate a new one"
       }
     }
   },
@@ -128,7 +137,8 @@
       "logout": "Logging out...",
       "creating_workspace": "Creating workspace...",
       "updating_workspace": "Updating workspace...",
-      "deleting_workspace": "Deleting workspace..."
+      "deleting_workspace": "Deleting workspace...",
+      "resetting_invite_code": "Resetting invite code..."
     },
     "success": {
       "login": "Login success",
@@ -136,7 +146,8 @@
       "logout": "Logged out",
       "workspace_created": "Workspace `{name}` created!",
       "workspace_updated": "Workspace `{name}` updated!",
-      "workspace_deleted": "Workspace deleted!"
+      "workspace_deleted": "Workspace deleted!",
+      "invite_code_reset": "Invite code reset!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -144,7 +155,8 @@
       "logout": "Logout failed",
       "workspace_created": "Workspace create failed",
       "workspace_updated": "Workspace update failed!",
-      "workspace_deleted": "Workspace delete failed!"
+      "workspace_deleted": "Workspace delete failed!",
+      "invite_code_reset": "Invite code reset failed!"
     }
   },
   "url": {
@@ -156,6 +168,7 @@
     "setting": "Setting",
     "general": "General",
     "preference": "Preference",
-    "danger": "Danger zone"
+    "danger": "Danger zone",
+    "invite": "Invite members"
   }
 }

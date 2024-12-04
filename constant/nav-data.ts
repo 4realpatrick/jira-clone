@@ -5,6 +5,7 @@ import {
   MonitorCog,
   CalendarClock,
   TriangleAlert,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -29,6 +30,11 @@ export const NAV_DATA: TNavItem[] = [
         key: "general",
         url: "/workspaces/{workspaceId}/setting/#general",
         icon: Workflow,
+      },
+      {
+        key: "invite",
+        url: "/workspaces/{workspaceId}/setting/#invite-member",
+        icon: Users,
       },
       {
         key: "preference",
