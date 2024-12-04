@@ -60,6 +60,16 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file?.size > 1024 * 1024) {
+        form.setError("image", {
+          type: "custom",
+          message: validT("image_size_exceeded", { max: 1 }),
+        });
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+        return;
+      }
       form.setValue("image", file);
     }
   };
@@ -129,69 +139,73 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                 control={form.control}
                 name="image"
                 render={({ field }) => (
-                  <div className="flex flex-col gap-y-2">
-                    <div className="flex items-center gap-x-5">
-                      {field.value ? (
-                        <div className="size-[72px] relative rounded-md">
-                          <Image
-                            alt="Workspace image"
-                            fill
-                            className="object-cover"
-                            src={
-                              field.value instanceof File
-                                ? URL.createObjectURL(field.value)
-                                : field.value
-                            }
-                          />
-                        </div>
-                      ) : (
-                        <Avatar className="size-[72px]">
-                          <AvatarFallback>
-                            <ImageIcon className="size-[36px]" />
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
-                      <div className="flex flex-col text-sm">
-                        <p>{t("workspace.form.image")}</p>
-                        <p className="text-muted-foreground text-xs">
-                          {t("workspace.form.image_tip", { max: "1" })}
-                        </p>
-                        <input
-                          className="hidden"
-                          type="file"
-                          accept=".jpg, .png, .jpeg, .svg"
-                          ref={inputRef}
-                          disabled={isPending}
-                          onChange={handleImageChange}
-                        />
+                  <FormItem>
+                    <FormLabel>{t("workspace.form.image")}</FormLabel>
+                    <div className="flex flex-col gap-y-2">
+                      <div className="flex items-center gap-x-5">
                         {field.value ? (
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            disabled={isPending}
-                            className="w-fit mt-2"
-                            onClick={() => {
-                              field.onChange("");
-                              if (inputRef.current) {
-                                inputRef.current.value = "";
+                          <div className="size-[72px] relative rounded-md">
+                            <Image
+                              alt="Workspace image"
+                              fill
+                              className="object-cover"
+                              src={
+                                field.value instanceof File
+                                  ? URL.createObjectURL(field.value)
+                                  : field.value
                               }
-                            }}
-                          >
-                            {t("workspace.form.remove")}
-                          </Button>
+                            />
+                          </div>
                         ) : (
-                          <NeubrutalismButton
-                            type="button"
-                            disabled={isPending}
-                            className="w-fit mt-2"
-                            onClick={() => inputRef.current?.click()}
-                          >
-                            {t("workspace.form.upload")}
-                          </NeubrutalismButton>
+                          <Avatar className="size-[72px]">
+                            <AvatarFallback>
+                              <ImageIcon className="size-[36px]" />
+                            </AvatarFallback>
+                          </Avatar>
                         )}
+                        <div className="flex flex-col text-sm">
+                          <p className="text-muted-foreground text-xs">
+                            {t("workspace.form.image_tip", { max: "1" })}
+                          </p>
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept=".jpg, .png, .jpeg, .svg"
+                            ref={inputRef}
+                            disabled={isPending}
+                            onChange={handleImageChange}
+                            max={1024 * 1024}
+                          />
+                          {field.value ? (
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              disabled={isPending}
+                              className="w-fit mt-2"
+                              onClick={() => {
+                                field.onChange("");
+                                if (inputRef.current) {
+                                  inputRef.current.value = "";
+                                }
+                              }}
+                            >
+                              {t("workspace.form.remove")}
+                            </Button>
+                          ) : (
+                            <NeubrutalismButton
+                              type="button"
+                              disabled={isPending}
+                              className="w-fit mt-2"
+                              onClick={() => inputRef.current?.click()}
+                            >
+                              {t("workspace.form.upload")}
+                            </NeubrutalismButton>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <FormMessage />
+                  </FormItem>
                 )}
               />
               <DottedSeparator />
