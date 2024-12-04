@@ -10,12 +10,14 @@ import {
 } from "@/constant/config";
 import {
   getCreateWorkspaceSchema,
+  getInviteMemberSchema,
   getUpdateWorkspaceSchema,
 } from "@/lib/schema";
 import { ERole } from "@/interface/role";
 import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/lib/get-member";
 import { TWorkspace } from "@/interface/workspaces";
+import { z } from "zod";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
@@ -193,6 +195,46 @@ const app = new Hono()
     );
 
     return c.json({ data: workspace });
-  });
+  })
+  .post(
+    "/:workspaceId/join",
+    zValidator("json", getInviteMemberSchema()),
+    sessionMiddleware,
+    async (c) => {
+      const { workspaceId } = c.req.param();
+      const { code } = c.req.valid("json");
+
+      const databases = c.get("databases");
+      const user = c.get("user");
+
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+
+      if (member) {
+        return c.json({ error: "already_member" }, 400);
+      }
+
+      const workspace = await databases.getDocument<TWorkspace>(
+        DATABASE_ID,
+        WORKSPACES_ID,
+        workspaceId
+      );
+
+      if (workspace.inviteCode !== code) {
+        return c.json({ error: "invalid_invite_code" }, 400);
+      }
+
+      await databases.createDocument(DATABASE_ID, MEMBERS_ID, ID.unique(), {
+        workspaceId,
+        userId: user.$id,
+        role: ERole.MEMBER,
+      });
+
+      return c.json({ data: workspace });
+    }
+  );
 
 export default app;

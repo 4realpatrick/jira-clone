@@ -138,3 +138,9 @@ export const getUpdateWorkspaceSchema = (
 export type TUpdateWorkspaceSchema = z.infer<
   ReturnType<typeof getUpdateWorkspaceSchema>
 >;
+
+export const getInviteMemberSchema = () => {
+  return z.object({
+    code: z.string(),
+  });
+};

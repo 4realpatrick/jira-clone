@@ -39,6 +39,10 @@
       "create": {
         "alert_title": "欢迎回来!",
         "alert_description": "您还没有工作区, 请先创建一个工作区"
+      },
+      "join": {
+        "title": "加入工作区",
+        "description": "您已被邀请加入 <strong>{name}</strong> 工作区, 请确认是否加入该工作区"
       }
     },
     "setting": {
@@ -103,6 +107,8 @@
     "submit": "提交",
     "cancel": "取消",
     "continue": "继续",
+    "refute": "拒绝",
+    "confirm": "确认",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -138,7 +144,8 @@
       "creating_workspace": "工作区创建中...",
       "updating_workspace": "正在更新工作区...",
       "deleting_workspace": "正在删除工作区...",
-      "resetting_invite_code": "正在重置邀请码..."
+      "resetting_invite_code": "正在重置邀请码...",
+      "joining_workspace": "正在加入工作区..."
     },
     "success": {
       "login": "登录成功",
@@ -147,7 +154,8 @@
       "workspace_created": "工作区 `{name}` 创建成功",
       "workspace_updated": "工作区 `{name}` 更新成功",
       "workspace_deleted": "工作区删除成功",
-      "invite_code_reset": "邀请码重置成功..."
+      "invite_code_reset": "邀请码重置成功...",
+      "join_workspace": "加入工作区 `{name}` 成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -156,7 +164,10 @@
       "workspace_created": "创建工作区失败",
       "workspace_updated": "更新工作区失败",
       "workspace_deleted": "删除工作区失败",
-      "invite_code_reset": "邀请码重置失败..."
+      "invite_code_reset": "邀请码重置失败...",
+      "join_workspace": "加入工作区失败",
+      "already_member": "您已经是该工作区的成员",
+      "invalid_invite_code": "无效的邀请码"
     }
   },
   "url": {

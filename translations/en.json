@@ -39,6 +39,10 @@
       "create": {
         "alert_title": "Welcome!",
         "alert_description": "You need to create your first workspace now"
+      },
+      "join": {
+        "title": "Join workspace",
+        "description": "You've been invited to join <strong>{name}</strong>, please confirm"
       }
     },
     "setting": {
@@ -103,6 +107,8 @@
     "submit": "Submit",
     "cancel": "Cancel",
     "continue": "Continue",
+    "refute": "Refute",
+    "confirm": "Confirm",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -138,7 +144,8 @@
       "creating_workspace": "Creating workspace...",
       "updating_workspace": "Updating workspace...",
       "deleting_workspace": "Deleting workspace...",
-      "resetting_invite_code": "Resetting invite code..."
+      "resetting_invite_code": "Resetting invite code...",
+      "joining_workspace": "Joining workspace..."
     },
     "success": {
       "login": "Login success",
@@ -147,7 +154,8 @@
       "workspace_created": "Workspace `{name}` created!",
       "workspace_updated": "Workspace `{name}` updated!",
       "workspace_deleted": "Workspace deleted!",
-      "invite_code_reset": "Invite code reset!"
+      "invite_code_reset": "Invite code reset!",
+      "join_workspace": "Joined workspace `{name}`!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -156,7 +164,10 @@
       "workspace_created": "Workspace create failed",
       "workspace_updated": "Workspace update failed!",
       "workspace_deleted": "Workspace delete failed!",
-      "invite_code_reset": "Invite code reset failed!"
+      "invite_code_reset": "Invite code reset failed!",
+      "join_workspace": "Join workspace failed!",
+      "already_member": "You are already a member of this workspace",
+      "invalid_invite_code": "Invalid invite code"
     }
   },
   "url": {
