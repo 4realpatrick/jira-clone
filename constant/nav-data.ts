@@ -4,6 +4,7 @@ import {
   Workflow,
   MonitorCog,
   CalendarClock,
+  TriangleAlert,
   type LucideIcon,
 } from "lucide-react";
 
@@ -33,6 +34,11 @@ export const NAV_DATA: TNavItem[] = [
         key: "preference",
         url: "/workspaces/{workspaceId}/setting/#preference",
         icon: MonitorCog,
+      },
+      {
+        key: "danger",
+        url: "/workspaces/{workspaceId}/setting/#danger-zone",
+        icon: TriangleAlert,
       },
     ],
   },

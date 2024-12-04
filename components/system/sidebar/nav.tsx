@@ -65,7 +65,7 @@ export function NavMain() {
       }
       return newItem;
     });
-  }, []);
+  }, [params]);
 
   return (
     <SidebarGroup>

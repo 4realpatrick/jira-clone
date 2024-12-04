@@ -59,6 +59,13 @@
       "general": {
         "title": "通用",
         "description": "管理您的工作区信息"
+      },
+      "danger": {
+        "title": "危险区域",
+        "description": "删除这个工作区以及其中的所有数据",
+        "button": "删除工作区",
+        "alert_title": "你确定吗?",
+        "alert_description": "这个操作无法撤回, 这将会永久从我们的服务器上删除该工作区以及工作区中的数据"
       }
     }
   },
@@ -86,6 +93,7 @@
     "and": "以及",
     "submit": "提交",
     "cancel": "取消",
+    "continue": "继续",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -110,7 +118,8 @@
     "username_required": "用户名为必填",
     "username_min": "用户名至少要3个字符",
     "username_max": "用户名最多32个字符",
-    "workspace_required": "工作区名称必填"
+    "workspace_required": "工作区名称必填",
+    "image_size_exceeded": "图片最大不超过 {max}MB"
   },
   "toast": {
     "loading": {
@@ -118,21 +127,24 @@
       "register": "注册中...",
       "logout": "正在退出当前账户...",
       "creating_workspace": "工作区创建中...",
-      "updating_workspace": "正在更新工作区..."
+      "updating_workspace": "正在更新工作区...",
+      "deleting_workspace": "正在删除工作区..."
     },
     "success": {
       "login": "登录成功",
       "register": "注册成功",
       "logout": "用户退出成功",
       "workspace_created": "工作区 `{name}` 创建成功",
-      "workspace_updated": "工作区 `{name}` 更新成功"
+      "workspace_updated": "工作区 `{name}` 更新成功",
+      "workspace_deleted": "工作区删除成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
       "register": "注册失败",
       "logout": "用户退出失败",
       "workspace_created": "创建工作区失败",
-      "workspace_updated": "更新工作区失败"
+      "workspace_updated": "更新工作区失败",
+      "workspace_deleted": "删除工作区失败"
     }
   },
   "url": {
@@ -143,6 +155,7 @@
     "home": "工作区",
     "setting": "设置",
     "general": "通用",
-    "preference": "偏好"
+    "preference": "偏好",
+    "danger": "危险区域"
   }
 }

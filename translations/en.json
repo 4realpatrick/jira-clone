@@ -59,6 +59,13 @@
       "general": {
         "title": "General",
         "description": "Manage your workspace info"
+      },
+      "danger": {
+        "title": "Danger zone",
+        "description": "Delete your workspace and all data in it",
+        "button": "Delete workspace",
+        "alert_title": "Are you absolutely sure?",
+        "alert_description": "This action cannot be undone. This will permanently delete current workspace and remove your data from our servers."
       }
     }
   },
@@ -86,6 +93,7 @@
     "and": "and",
     "submit": "Submit",
     "cancel": "Cancel",
+    "continue": "Continue",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -110,7 +118,8 @@
     "username_required": "Username is required",
     "username_min": "Username must be at least 3 characters long",
     "username_max": "Username must be at most 16 characters long",
-    "workspace_required": "Workspace name is required"
+    "workspace_required": "Workspace name is required",
+    "image_size_exceeded": "Maximum size not exceeding {max}MB"
   },
   "toast": {
     "loading": {
@@ -118,21 +127,24 @@
       "register": "Registering...",
       "logout": "Logging out...",
       "creating_workspace": "Creating workspace...",
-      "updating_workspace": "Updating workspace..."
+      "updating_workspace": "Updating workspace...",
+      "deleting_workspace": "Deleting workspace..."
     },
     "success": {
       "login": "Login success",
       "register": "Register success",
       "logout": "Logged out",
       "workspace_created": "Workspace `{name}` created!",
-      "workspace_updated": "Workspace `{name}` updated!"
+      "workspace_updated": "Workspace `{name}` updated!",
+      "workspace_deleted": "Workspace deleted!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
       "register": "Register failed",
       "logout": "Logout failed",
       "workspace_created": "Workspace create failed",
-      "workspace_updated": "Workspace update failed!"
+      "workspace_updated": "Workspace update failed!",
+      "workspace_deleted": "Workspace delete failed!"
     }
   },
   "url": {
@@ -143,6 +155,7 @@
     "home": "Workspace",
     "setting": "Setting",
     "general": "General",
-    "preference": "Preference"
+    "preference": "Preference",
+    "danger": "Danger zone"
   }
 }
