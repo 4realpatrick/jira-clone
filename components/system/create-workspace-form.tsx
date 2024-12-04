@@ -170,7 +170,7 @@ export const CreateWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                           {field.value ? (
                             <Button
                               type="button"
-                              variant="destructive"
+                              variant="outline"
                               disabled={isPending}
                               className="w-fit mt-2"
                               onClick={() => {

@@ -27,7 +27,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { NeubrutalismButton } from "@/components/syntax/button/neubrutalism";
 import { getUpdateWorkspaceSchema, TUpdateWorkspaceSchema } from "@/lib/schema";
-import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { TWorkspace } from "@/interface/workspaces";
 import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspace";
@@ -179,7 +178,7 @@ export const EditWorkspaceForm: React.FC<ICreateWorkspaceFormProps> = ({
                           {field.value ? (
                             <Button
                               type="button"
-                              variant="destructive"
+                              variant="outline"
                               disabled={isPending}
                               className="w-fit mt-2"
                               onClick={() => {
