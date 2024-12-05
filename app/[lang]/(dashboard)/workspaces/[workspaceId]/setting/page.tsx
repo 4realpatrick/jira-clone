@@ -18,7 +18,7 @@ export default async function WorkspaceSettingPage({
 }) {
   const user = await getCurrent();
   const lang = (await getLocale()) as Locale;
-  const t = await getTranslations("url");
+  const t = await getTranslations("nav");
   const { workspaceId } = await params;
 
   if (!user) {
@@ -36,7 +36,7 @@ export default async function WorkspaceSettingPage({
 
   const breadcrumbs: TBreadcrumbItem[] = [
     {
-      name: t("workspace"),
+      name: t("home"),
     },
     {
       name: initialValues.name,
