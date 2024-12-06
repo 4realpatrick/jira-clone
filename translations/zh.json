@@ -80,6 +80,22 @@
         "reset": "重置邀请链接",
         "reset_tip": "重置邀请链接将会使当前邀请链接失效, 并生成新的邀请链接"
       }
+    },
+    "members": {
+      "title": "成员列表",
+      "member_description": "查看工作区的所有成员",
+      "admin_description": "管理工作区成员",
+      "role": {
+        "ADMIN": "管理员",
+        "MEMBER": "成员"
+      },
+      "action": {
+        "admin": "设为管理员",
+        "member": "设为成员",
+        "remove": "移出工作区",
+        "remove_tip_title": "你确定吗?",
+        "remove_tip_description": "这个操作无法撤回, 这将会永久从工作区中移除该成员"
+      }
     }
   },
   "components": {
@@ -145,7 +161,9 @@
       "updating_workspace": "正在更新工作区...",
       "deleting_workspace": "正在删除工作区...",
       "resetting_invite_code": "正在重置邀请码...",
-      "joining_workspace": "正在加入工作区..."
+      "joining_workspace": "正在加入工作区...",
+      "deleting_member": "正在移除成员...",
+      "updating_member": "正在更新成员..."
     },
     "success": {
       "login": "登录成功",
@@ -155,7 +173,9 @@
       "workspace_updated": "工作区 `{name}` 更新成功",
       "workspace_deleted": "工作区删除成功",
       "invite_code_reset": "邀请码重置成功...",
-      "join_workspace": "加入工作区 `{name}` 成功"
+      "join_workspace": "加入工作区 `{name}` 成功",
+      "member_deleted": "成员删除成功",
+      "member_updated": "成员更新成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -167,12 +187,14 @@
       "invite_code_reset": "邀请码重置失败...",
       "join_workspace": "加入工作区失败",
       "already_member": "您已经是该工作区的成员",
-      "invalid_invite_code": "无效的邀请码"
+      "invalid_invite_code": "无效的邀请码",
+      "not_admin": "您不是该工作区的管理员",
+      "not_member": "您不是该工作区的成员",
+      "update_self": "当工作区只有自己时无法改变自己的权限",
+      "remove_self": "当工作区只有自己时无法移除自己",
+      "member_deleted": "成员删除失败",
+      "member_updated": "成员更新失败"
     }
-  },
-  "url": {
-    "workspace": "工作区",
-    "setting": "设置"
   },
   "nav": {
     "home": "工作区",
@@ -180,6 +202,7 @@
     "general": "通用",
     "preference": "偏好",
     "danger": "危险区域",
-    "invite": "邀请成员"
+    "invite": "邀请成员",
+    "member": "成员"
   }
 }

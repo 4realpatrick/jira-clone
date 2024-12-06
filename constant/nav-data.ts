@@ -6,6 +6,7 @@ import {
   CalendarClock,
   TriangleAlert,
   Users,
+  User,
   type LucideIcon,
 } from "lucide-react";
 
@@ -23,6 +24,11 @@ export const NAV_DATA: TNavItem[] = [
     url: "/workspaces/{workspaceId}/",
   },
   {
+    key: "member",
+    icon: Users,
+    url: "/workspaces/{workspaceId}/members",
+  },
+  {
     key: "setting",
     icon: Settings2,
     items: [
@@ -34,7 +40,7 @@ export const NAV_DATA: TNavItem[] = [
       {
         key: "invite",
         url: "/workspaces/{workspaceId}/setting/#invite-member",
-        icon: Users,
+        icon: User,
       },
       {
         key: "preference",

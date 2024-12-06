@@ -80,6 +80,22 @@
         "reset": "Reset invite link",
         "reset_tip": "Resetting the invite link will invalidate the current one and generate a new one"
       }
+    },
+    "members": {
+      "title": "Members list",
+      "member_description": "View workspace members",
+      "admin_description": "Manage workspace members",
+      "role": {
+        "ADMIN": "Admin",
+        "MEMBER": "Member"
+      },
+      "action": {
+        "admin": "Make admin",
+        "member": "Make member",
+        "remove": "Remove from workspace",
+        "remove_tip_title": "Are you sure?",
+        "remove_tip_description": "This action cannot be undone. This will permanently remove the member from your workspace and remove their data from our servers."
+      }
     }
   },
   "components": {
@@ -145,7 +161,9 @@
       "updating_workspace": "Updating workspace...",
       "deleting_workspace": "Deleting workspace...",
       "resetting_invite_code": "Resetting invite code...",
-      "joining_workspace": "Joining workspace..."
+      "joining_workspace": "Joining workspace...",
+      "deleting_member": "Deleting member...",
+      "updating_member": "Updating member..."
     },
     "success": {
       "login": "Login success",
@@ -155,7 +173,9 @@
       "workspace_updated": "Workspace `{name}` updated!",
       "workspace_deleted": "Workspace deleted!",
       "invite_code_reset": "Invite code reset!",
-      "join_workspace": "Joined workspace `{name}`!"
+      "join_workspace": "Joined workspace `{name}`!",
+      "member_deleted": "Member deleted!",
+      "member_updated": "Member updated!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -167,12 +187,14 @@
       "invite_code_reset": "Invite code reset failed!",
       "join_workspace": "Join workspace failed!",
       "already_member": "You are already a member of this workspace",
-      "invalid_invite_code": "Invalid invite code"
+      "invalid_invite_code": "Invalid invite code",
+      "not_admin": "You are not an admin of this workspace",
+      "not_member": "You are not a member of this workspace",
+      "update_self": "You can't update yourself while only you in this workspace",
+      "remove_self": "You can't remove yourself while only you in this workspace",
+      "member_deleted": "Member delete failed!",
+      "member_updated": "Member update failed!"
     }
-  },
-  "url": {
-    "workspace": "Workspace",
-    "setting": "Setting"
   },
   "nav": {
     "home": "Workspace",
@@ -180,6 +202,7 @@
     "general": "General",
     "preference": "Preference",
     "danger": "Danger zone",
-    "invite": "Invite members"
+    "invite": "Invite members",
+    "member": "Members"
   }
 }
