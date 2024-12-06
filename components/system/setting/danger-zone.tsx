@@ -15,7 +15,6 @@ import { DottedSeparator } from "@/components/common/dotted-separator";
 import { Button } from "@/components/ui/button";
 import { useDeleteWorkspace } from "@/features/workspaces/api/use-delete-workspace";
 import { ResponsiveModal } from "@/components/common/responsive-modal";
-import { AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export const DangerZone = ({ workspaceId }: { workspaceId: string }) => {
   const [open, setOpen] = useState(false);

@@ -17,7 +17,6 @@ import { ERole } from "@/interface/role";
 import { generateInviteCode } from "@/lib/utils";
 import { getMember } from "@/lib/get-member";
 import { TWorkspace } from "@/interface/workspaces";
-import { z } from "zod";
 
 const app = new Hono()
   .get("/", sessionMiddleware, async (c) => {
