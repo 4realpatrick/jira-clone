@@ -144,3 +144,29 @@ export const getInviteMemberSchema = () => {
     code: z.string(),
   });
 };
+
+export const getCreateProjectSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return z.object({
+    name: z
+      .string({
+        required_error: getValidationMessage("project_required", t),
+      })
+      .trim()
+      .min(1, {
+        message: getValidationMessage("project_required", t),
+      }),
+    image: z
+      .union([
+        z.instanceof(File),
+        z.string().transform((value) => (value === "" ? undefined : value)),
+      ])
+      .optional(),
+    workspaceId: z.string(),
+  });
+};
+
+export type TCreateProjectSchema = z.infer<
+  ReturnType<typeof getCreateProjectSchema>
+>;

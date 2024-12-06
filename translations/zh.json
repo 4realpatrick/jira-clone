@@ -96,6 +96,16 @@
         "remove_tip_title": "你确定吗?",
         "remove_tip_description": "这个操作无法撤回, 这将会永久从工作区中移除该成员"
       }
+    },
+    "projects": {
+      "form": {
+        "title": "创建新项目",
+        "label": "项目名称",
+        "image": "项目图片",
+        "upload": "上传图片",
+        "remove": "移除图片",
+        "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
+      }
     }
   },
   "components": {
@@ -114,6 +124,7 @@
     "username_placeholder": "请输入用户名",
     "workspace_placeholder": "请输入工作区名称",
     "workspace_description_placeholder": "简单描述一下工作区",
+    "project_placeholder": "请输入项目名称",
     "login": "登录",
     "logout": "登出",
     "sign_up": "注册",
@@ -150,7 +161,8 @@
     "username_min": "用户名至少要3个字符",
     "username_max": "用户名最多32个字符",
     "workspace_required": "工作区名称必填",
-    "image_size_exceeded": "图片最大不超过 {max}MB"
+    "image_size_exceeded": "图片最大不超过 {max}MB",
+    "project_required": "项目名称必填"
   },
   "toast": {
     "loading": {
@@ -163,7 +175,8 @@
       "resetting_invite_code": "正在重置邀请码...",
       "joining_workspace": "正在加入工作区...",
       "deleting_member": "正在移除成员...",
-      "updating_member": "正在更新成员..."
+      "updating_member": "正在更新成员...",
+      "creating_project": "项目创建中..."
     },
     "success": {
       "login": "登录成功",
@@ -175,7 +188,8 @@
       "invite_code_reset": "邀请码重置成功...",
       "join_workspace": "加入工作区 `{name}` 成功",
       "member_deleted": "成员删除成功",
-      "member_updated": "成员更新成功"
+      "member_updated": "成员更新成功",
+      "project_created": "项目 `{name}` 创建成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -193,7 +207,8 @@
       "update_self": "当工作区只有自己时无法改变自己的权限",
       "remove_self": "当工作区只有自己时无法移除自己",
       "member_deleted": "成员删除失败",
-      "member_updated": "成员更新失败"
+      "member_updated": "成员更新失败",
+      "project_created": "创建项目失败"
     }
   },
   "nav": {
@@ -203,6 +218,8 @@
     "preference": "偏好",
     "danger": "危险区域",
     "invite": "邀请成员",
-    "member": "成员"
+    "member": "成员",
+    "projects": "项目",
+    "new_project": "新建项目"
   }
 }

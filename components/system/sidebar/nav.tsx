@@ -101,12 +101,12 @@ export function NavMain() {
                   </CollapsibleContent>
                 </>
               ) : (
-                <SidebarMenuButton tooltip={t(`${item.key}`)}>
-                  {item.icon && <item.icon />}
-                  <Link href={item.url!}>
+                <Link href={item.url!}>
+                  <SidebarMenuButton tooltip={t(`${item.key}`)}>
+                    {item.icon && <item.icon />}
                     <span>{t(`${item.key}`)}</span>
-                  </Link>
-                </SidebarMenuButton>
+                  </SidebarMenuButton>
+                </Link>
               )}
             </SidebarMenuItem>
           </Collapsible>

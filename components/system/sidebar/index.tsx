@@ -4,7 +4,7 @@ import * as React from "react";
 import { Frame, Map, PieChart } from "lucide-react";
 
 import { NavMain } from "./nav";
-import { NavProjects } from "./project";
+import { NavProjects } from "./projects";
 import { NavUser } from "./user";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 import {
@@ -14,6 +14,7 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
 
 const projects = [
   {
@@ -41,6 +42,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain />
+        <Separator className="px-4" />
         <NavProjects projects={projects} />
       </SidebarContent>
       <SidebarFooter>

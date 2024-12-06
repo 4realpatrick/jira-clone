@@ -96,6 +96,16 @@
         "remove_tip_title": "Are you sure?",
         "remove_tip_description": "This action cannot be undone. This will permanently remove the member from your workspace and remove their data from our servers."
       }
+    },
+    "projects": {
+      "form": {
+        "title": "Create a new project",
+        "label": "Project name",
+        "image": "Project image",
+        "upload": "Upload image",
+        "remove": "Remove image",
+        "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
+      }
     }
   },
   "components": {
@@ -150,7 +160,8 @@
     "username_min": "Username must be at least 3 characters long",
     "username_max": "Username must be at most 16 characters long",
     "workspace_required": "Workspace name is required",
-    "image_size_exceeded": "Maximum size not exceeding {max}MB"
+    "image_size_exceeded": "Maximum size not exceeding {max}MB",
+    "project_required": "Project name is required"
   },
   "toast": {
     "loading": {
@@ -163,7 +174,8 @@
       "resetting_invite_code": "Resetting invite code...",
       "joining_workspace": "Joining workspace...",
       "deleting_member": "Deleting member...",
-      "updating_member": "Updating member..."
+      "updating_member": "Updating member...",
+      "creating_project": "Creating project..."
     },
     "success": {
       "login": "Login success",
@@ -175,7 +187,8 @@
       "invite_code_reset": "Invite code reset!",
       "join_workspace": "Joined workspace `{name}`!",
       "member_deleted": "Member deleted!",
-      "member_updated": "Member updated!"
+      "member_updated": "Member updated!",
+      "project_created": "Project `{name}` created!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -193,7 +206,8 @@
       "update_self": "You can't update yourself while only you in this workspace",
       "remove_self": "You can't remove yourself while only you in this workspace",
       "member_deleted": "Member delete failed!",
-      "member_updated": "Member update failed!"
+      "member_updated": "Member update failed!",
+      "project_created": "Project create failed!"
     }
   },
   "nav": {
@@ -203,6 +217,8 @@
     "preference": "Preference",
     "danger": "Danger zone",
     "invite": "Invite members",
-    "member": "Members"
+    "member": "Members",
+    "projects": "Projects",
+    "new_project": "New project"
   }
 }
