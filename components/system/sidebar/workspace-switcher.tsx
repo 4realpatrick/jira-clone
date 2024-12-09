@@ -70,7 +70,7 @@ export function WorkspaceSwitcher() {
                           alt="Workspace Icon"
                         />
                       ) : (
-                        <ImageIcon className="size-full rounded-sm" />
+                        <ImageIcon className="size-full rounded-sm text-primary" />
                       )}
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
