@@ -45,14 +45,7 @@ export const InviteMember = ({
       });
   };
   const handleResetInviteLink = () => {
-    resetInviteLink(
-      { param: { workspaceId } },
-      {
-        onSuccess() {
-          router.refresh();
-        },
-      }
-    );
+    resetInviteLink({ param: { workspaceId } });
   };
   useEffect(() => {
     setMounted(true);
