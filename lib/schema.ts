@@ -145,6 +145,7 @@ export const getInviteMemberSchema = () => {
   });
 };
 
+// 创建项目表单schema
 export const getCreateProjectSchema = (
   t?: (key: Messages, object?: TranslationValues | undefined) => string
 ) => {
@@ -169,4 +170,30 @@ export const getCreateProjectSchema = (
 
 export type TCreateProjectSchema = z.infer<
   ReturnType<typeof getCreateProjectSchema>
+>;
+
+// 更新项目表单schema
+export const getUpdateProjectSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return z.object({
+    name: z
+      .string({
+        required_error: getValidationMessage("project_required", t),
+      })
+      .trim()
+      .min(1, {
+        message: getValidationMessage("project_required", t),
+      }),
+    image: z
+      .union([
+        z.instanceof(File),
+        z.string().transform((value) => (value === "" ? undefined : value)),
+      ])
+      .optional(),
+  });
+};
+
+export type TUpdateProjectSchema = z.infer<
+  ReturnType<typeof getUpdateProjectSchema>
 >;

@@ -5,7 +5,13 @@ import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -19,35 +25,32 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { NeubrutalismButton } from "@/components/syntax/button/neubrutalism";
-import { getCreateProjectSchema, TCreateProjectSchema } from "@/lib/schema";
-import { useRouter } from "@/i18n/routing";
+import { getUpdateProjectSchema, TUpdateProjectSchema } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-import { useCreateProject } from "@/features/projects/api/use-create-project";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { Link } from "@/i18n/routing";
+import { TProject } from "@/interface/project";
+import { useUpdateProject } from "@/features/projects/api/use-update-project";
 
-interface ICreateProjectFormProps {
+interface IUpdateProjectFormProps {
   handleCancel?: () => void;
+  initialValues: TProject;
 }
 
-export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
+export const EditProjectForm: React.FC<IUpdateProjectFormProps> = ({
+  initialValues,
   handleCancel,
 }) => {
   const validT = useTranslations("validation");
-  const t = useTranslations("pages.projects");
-  const ct = useTranslations("common");
+  const t = useTranslations();
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const workspaceId = useWorkspaceId();
 
-  const { mutate: createProject, isPending } = useCreateProject();
+  const { mutate: updateProject, isPending } = useUpdateProject();
 
-  const form = useForm<TCreateProjectSchema>({
-    resolver: zodResolver(
-      getCreateProjectSchema(validT).omit({ workspaceId: true })
-    ),
+  const form = useForm<TUpdateProjectSchema>({
+    resolver: zodResolver(getUpdateProjectSchema(validT)),
     defaultValues: {
-      name: "",
-      image: "",
+      ...initialValues,
+      image: initialValues.imageUrl ?? "",
     },
   });
 
@@ -67,26 +70,26 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
       form.setValue("image", file);
     }
   };
-  const onSumbit = (values: TCreateProjectSchema) => {
-    createProject(
-      {
-        form: {
-          ...values,
-          workspaceId,
-          image: values.image instanceof File ? values.image : "",
-        },
+  const onSumbit = (values: TUpdateProjectSchema) => {
+    updateProject({
+      form: {
+        ...values,
+        image: values.image instanceof File ? values.image : "",
       },
-      {
-        onSuccess({ data }) {
-          router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);
-        },
-      }
-    );
+      param: { projectId: initialValues.$id },
+    });
   };
   return (
-    <Card className="w-full h-full border-none">
+    <Card className="border-none">
       <CardHeader className="flex p-7">
-        <CardTitle className="text-xl font-bold">{t("form.title")}</CardTitle>
+        <CardTitle className="text-xl text-primary">
+          <Link href="#general" className="underline-link" id="general">
+            {t("pages.projects.setting.title")}
+          </Link>
+        </CardTitle>
+        <CardDescription>
+          {t("pages.projects.setting.description")}
+        </CardDescription>
       </CardHeader>
       <div className="px-7">
         <DottedSeparator />
@@ -100,12 +103,12 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("form.label")}</FormLabel>
+                    <FormLabel>{t("pages.projects.form.label")}</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         disabled={isPending}
-                        placeholder={ct("workspace_placeholder")}
+                        placeholder={t("common.project_placeholder")}
                       />
                     </FormControl>
                     <FormMessage />
@@ -117,7 +120,7 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                 name="image"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t("form.image")}</FormLabel>
+                    <FormLabel>{t("pages.projects.form.image")}</FormLabel>
                     <div className="flex flex-col gap-y-2">
                       <div className="flex items-center gap-x-5">
                         {field.value ? (
@@ -142,7 +145,7 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                         )}
                         <div className="flex flex-col text-sm">
                           <p className="text-muted-foreground text-xs">
-                            {t("form.image_tip", { max: "1" })}
+                            {t("pages.projects.form.image_tip", { max: "1" })}
                           </p>
                           <input
                             className="hidden"
@@ -151,6 +154,7 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                             ref={inputRef}
                             disabled={isPending}
                             onChange={handleImageChange}
+                            max={1024 * 1024}
                           />
                           {field.value ? (
                             <Button
@@ -165,7 +169,7 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                                 }
                               }}
                             >
-                              {t("form.remove")}
+                              {t("pages.projects.form.remove")}
                             </Button>
                           ) : (
                             <NeubrutalismButton
@@ -174,7 +178,7 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                               className="w-fit mt-2"
                               onClick={() => inputRef.current?.click()}
                             >
-                              {t("form.upload")}
+                              {t("pages.projects.form.upload")}
                             </NeubrutalismButton>
                           )}
                         </div>
@@ -199,11 +203,11 @@ export const CreateProjectForm: React.FC<ICreateProjectFormProps> = ({
                     onClick={handleCancel}
                     disabled={isPending}
                   >
-                    {ct("cancel")}
+                    {t("common.cancel")}
                   </Button>
                 )}
                 <Button size="lg" type="submit" disabled={isPending}>
-                  {ct("submit")}
+                  {t("common.submit")}
                 </Button>
               </div>
             </div>

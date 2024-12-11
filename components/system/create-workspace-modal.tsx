@@ -6,7 +6,11 @@ import { CreateWorkspaceForm } from "@/components/system/create-workspace-form";
 export const CreateWorkspaceModal = () => {
   const { isOpen, setIsOpen, close } = useCreateWorkspaceModal();
   return (
-    <ResponsiveModal open={isOpen} onOpenChange={setIsOpen}>
+    <ResponsiveModal
+      open={isOpen}
+      onOpenChange={setIsOpen}
+      onlyCancelToExit={false}
+    >
       <CreateWorkspaceForm handleCancel={close} />
     </ResponsiveModal>
   );

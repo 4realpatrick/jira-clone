@@ -105,6 +105,15 @@
         "upload": "上传图片",
         "remove": "移除图片",
         "image_tip": "JPG, PNG SVG 或者 JPEG, 最大 {max}MB"
+      },
+      "setting": {
+        "title": "项目设置",
+        "description": "查看和管理项目信息",
+        "danger_title": "危险区域",
+        "danger_description": "删除项目及项目下所有数据",
+        "button": "删除项目",
+        "alert_title": "你确定吗?",
+        "alert_description": "该操作无法撤回, 这将会永久删除该项目以及项目下所有数据"
       }
     }
   },
@@ -136,6 +145,7 @@
     "continue": "继续",
     "refute": "拒绝",
     "confirm": "确认",
+    "edit": "编辑",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -176,7 +186,9 @@
       "joining_workspace": "正在加入工作区...",
       "deleting_member": "正在移除成员...",
       "updating_member": "正在更新成员...",
-      "creating_project": "项目创建中..."
+      "creating_project": "项目创建中...",
+      "updating_project": "项目更新中...",
+      "deleting_project": "项目删除中..."
     },
     "success": {
       "login": "登录成功",
@@ -189,7 +201,9 @@
       "join_workspace": "加入工作区 `{name}` 成功",
       "member_deleted": "成员删除成功",
       "member_updated": "成员更新成功",
-      "project_created": "项目 `{name}` 创建成功"
+      "project_created": "项目 `{name}` 创建成功",
+      "project_updated": "项目 `{name}` 更新成功",
+      "project_deleted": "项目删除成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -208,7 +222,9 @@
       "remove_self": "当工作区只有自己时无法移除自己",
       "member_deleted": "成员删除失败",
       "member_updated": "成员更新失败",
-      "project_created": "创建项目失败"
+      "project_created": "创建项目失败",
+      "project_updated": "更新项目失败",
+      "project_deleted": "项目删除失败"
     }
   },
   "nav": {

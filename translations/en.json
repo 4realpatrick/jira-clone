@@ -105,6 +105,15 @@
         "upload": "Upload image",
         "remove": "Remove image",
         "image_tip": "JPG, PNG SVG or JPEG, max {max}MB"
+      },
+      "setting": {
+        "title": "Project settings",
+        "description": "Manage project info",
+        "danger_title": "Danger zone",
+        "danger_description": "Delete project and all its data",
+        "button": "Delete project",
+        "alert_title": "Are you absolutely sure?",
+        "alert_description": "This action cannot be undone. This will permanently delete the project and all its data from our servers."
       }
     }
   },
@@ -135,6 +144,7 @@
     "continue": "Continue",
     "refute": "Refute",
     "confirm": "Confirm",
+    "edit": "Edit",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -175,7 +185,9 @@
       "joining_workspace": "Joining workspace...",
       "deleting_member": "Deleting member...",
       "updating_member": "Updating member...",
-      "creating_project": "Creating project..."
+      "creating_project": "Creating project...",
+      "updating_project": "Updating project...",
+      "deleting_project": "Deleting project..."
     },
     "success": {
       "login": "Login success",
@@ -188,7 +200,9 @@
       "join_workspace": "Joined workspace `{name}`!",
       "member_deleted": "Member deleted!",
       "member_updated": "Member updated!",
-      "project_created": "Project `{name}` created!"
+      "project_created": "Project `{name}` created!",
+      "project_updated": "Project `{name}` updated!",
+      "project_deleted": "Project deleted!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -207,7 +221,9 @@
       "remove_self": "You can't remove yourself while only you in this workspace",
       "member_deleted": "Member delete failed!",
       "member_updated": "Member update failed!",
-      "project_created": "Project create failed!"
+      "project_created": "Project create failed!",
+      "project_updated": "Project update failed!",
+      "project_deleted": "Project delete failed!"
     }
   },
   "nav": {

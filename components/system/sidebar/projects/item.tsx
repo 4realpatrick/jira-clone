@@ -1,5 +1,4 @@
 import { Folder, Forward, MoreHorizontal, Trash2 } from "lucide-react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,23 +12,29 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Link } from "@/i18n/routing";
-import { ProjectAvatar } from "./avatar";
 import { TProject } from "@/interface/project";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { TransitionLink } from "@/components/common/link";
+import { ProjectAvatar } from "./avatar";
 
 export const ProjectItem = ({ project }: { project: TProject }) => {
   const { isMobile } = useSidebar();
+  const workspaceId = useWorkspaceId();
+
   return (
     <SidebarMenuItem>
       <SidebarMenuButton asChild>
-        <Link href={""}>
+        <TransitionLink
+          href={`/workspaces/${workspaceId}/projects/${project.$id}`}
+          className="!h-10"
+        >
           <ProjectAvatar name={project.name} imageUrl={project.imageUrl} />
           <span>{project.name}</span>
-        </Link>
+        </TransitionLink>
       </SidebarMenuButton>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <SidebarMenuAction showOnHover>
+          <SidebarMenuAction showOnHover className="!top-2.5">
             <MoreHorizontal />
             <span className="sr-only">More</span>
           </SidebarMenuAction>
