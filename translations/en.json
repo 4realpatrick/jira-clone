@@ -114,6 +114,12 @@
         "button": "Delete project",
         "alert_title": "Are you absolutely sure?",
         "alert_description": "This action cannot be undone. This will permanently delete the project and all its data from our servers."
+      },
+      "detail": {
+        "table": "Table",
+        "kanban": "Kanban",
+        "calendar": "Calendar",
+        "new": "New task"
       }
     }
   },

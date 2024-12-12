@@ -114,6 +114,12 @@
         "button": "删除项目",
         "alert_title": "你确定吗?",
         "alert_description": "该操作无法撤回, 这将会永久删除该项目以及项目下所有数据"
+      },
+      "detail": {
+        "table": "表格",
+        "kanban": "看板",
+        "calendar": "日历",
+        "new": "新建任务"
       }
     }
   },

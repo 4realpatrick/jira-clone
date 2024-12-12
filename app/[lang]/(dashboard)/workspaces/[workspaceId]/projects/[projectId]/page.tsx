@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { TransitionLink } from "@/components/common/link";
+import { TaskTabSwitcher } from "@/components/system/task-tab-switcher";
 
 export default async function ProjectPage({
   params,
@@ -70,7 +71,8 @@ export default async function ProjectPage({
           </Button>
         </div>
       </div>
-      <DottedSeparator className="mt-4" />
+      <DottedSeparator className="my-4" />
+      <TaskTabSwitcher />
     </div>
   );
 }
