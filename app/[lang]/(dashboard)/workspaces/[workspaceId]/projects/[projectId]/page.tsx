@@ -1,16 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import { Pencil } from "lucide-react";
-import { InnerHeader, TBreadcrumbItem } from "@/components/system/inner-header";
-import { getCurrent } from "@/features/auth/queries";
-import { Locale } from "@/i18n/interface";
-import { redirect } from "@/i18n/routing";
-import { getProjectById } from "@/features/projects/queries";
-import { ProjectAvatar } from "@/components/system/sidebar/projects/avatar";
 import { notFound } from "next/navigation";
+import { InnerHeader, TBreadcrumbItem } from "@/components/system/inner-header";
+import { ProjectAvatar } from "@/components/system/sidebar/projects/avatar";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { TransitionLink } from "@/components/common/link";
-import { TaskTabSwitcher } from "@/components/system/task-view-switcher";
+import { TaskTabSwitcher } from "@/components/system/task-view/task-view-switcher";
+import { getCurrent } from "@/features/auth/queries";
+import { getProjectById } from "@/features/projects/queries";
+import { Locale } from "@/i18n/interface";
+import { redirect } from "@/i18n/routing";
 
 export default async function ProjectPage({
   params,
