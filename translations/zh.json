@@ -121,6 +121,35 @@
         "calendar": "日历",
         "new": "新建任务"
       }
+    },
+    "tasks": {
+      "form": {
+        "title": "创建新任务",
+        "labels": {
+          "task": "任务名",
+          "description": "任务描述",
+          "due_date": "截止日期",
+          "assignee": "负责人",
+          "status": "任务状态",
+          "project": "任务归属项目",
+          "tags": "标签"
+        },
+        "date": {
+          "zero": "今天",
+          "one": "明天",
+          "three": "三天",
+          "seven": "一周",
+          "thirty": "一个月",
+          "preset": "预设"
+        },
+        "status": {
+          "BACKLOG": "积压",
+          "TODO": "待办",
+          "IN_PROGRESS": "进行中",
+          "IN_REVIEW": "审查中",
+          "DONE": "已完成"
+        }
+      }
     }
   },
   "components": {
@@ -140,6 +169,13 @@
     "workspace_placeholder": "请输入工作区名称",
     "workspace_description_placeholder": "简单描述一下工作区",
     "project_placeholder": "请输入项目名称",
+    "task_placeholder": "请输入任务名称",
+    "task_description_placeholder": "简单描述一下任务",
+    "task_due_date_placeholder": "请选择截止日期",
+    "task_assignee_placeholder": "请选择负责人",
+    "task_status_placeholder": "请选择任务状态",
+    "task_project_placeholder": "请选择项目",
+    "task_tags_placeholder": "请输入标签, 按回车键分隔",
     "login": "登录",
     "logout": "登出",
     "sign_up": "注册",
@@ -178,7 +214,11 @@
     "username_max": "用户名最多32个字符",
     "workspace_required": "工作区名称必填",
     "image_size_exceeded": "图片最大不超过 {max}MB",
-    "project_required": "项目名称必填"
+    "project_required": "项目名称必填",
+    "task_name_required": "任务名称必填",
+    "task_status_required": "任务状态必填",
+    "task_dueDate_required": "任务截止日期必填",
+    "task_assignee_required": "任务负责人必填"
   },
   "toast": {
     "loading": {
@@ -194,7 +234,8 @@
       "updating_member": "正在更新成员...",
       "creating_project": "项目创建中...",
       "updating_project": "项目更新中...",
-      "deleting_project": "项目删除中..."
+      "deleting_project": "项目删除中...",
+      "creating_task": "任务创建中..."
     },
     "success": {
       "login": "登录成功",
@@ -209,7 +250,8 @@
       "member_updated": "成员更新成功",
       "project_created": "项目 `{name}` 创建成功",
       "project_updated": "项目 `{name}` 更新成功",
-      "project_deleted": "项目删除成功"
+      "project_deleted": "项目删除成功",
+      "task_created": "任务 `{name}` 创建成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -230,7 +272,8 @@
       "member_updated": "成员更新失败",
       "project_created": "创建项目失败",
       "project_updated": "更新项目失败",
-      "project_deleted": "项目删除失败"
+      "project_deleted": "项目删除失败",
+      "task_created": "创建任务失败"
     }
   },
   "nav": {

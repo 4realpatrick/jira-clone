@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { type TranslationValues } from "next-intl";
 import translations from "@/translations/en.json";
+import { ETaskStatus } from "@/interface/status";
 
 type Messages = keyof IntlMessages["validation"];
 
@@ -197,3 +198,35 @@ export const getUpdateProjectSchema = (
 export type TUpdateProjectSchema = z.infer<
   ReturnType<typeof getUpdateProjectSchema>
 >;
+
+// 创建任务表单schema
+export const getCreateTaskSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => {
+  return z.object({
+    name: z
+      .string()
+      .trim()
+      .min(1, { message: getValidationMessage("task_name_required", t) }),
+    status: z.nativeEnum(ETaskStatus, {
+      message: getValidationMessage("task_status_required", t),
+    }),
+    workspaceId: z.string().trim().min(1),
+    projectId: z.string().trim().min(1),
+    dueDate: z.coerce.date({
+      required_error: getValidationMessage("task_dueDate_required", t),
+      invalid_type_error: "not a date",
+      message: getValidationMessage("task_dueDate_required", t),
+    }),
+    assigneeId: z
+      .string({
+        required_error: getValidationMessage("task_assignee_required", t),
+      })
+      .trim()
+      .min(1, { message: getValidationMessage("task_assignee_required", t) }),
+    description: z.string().trim().optional(),
+    tags: z.string().array().optional(),
+  });
+};
+
+export type TCreateTaskSchema = z.infer<ReturnType<typeof getCreateTaskSchema>>;

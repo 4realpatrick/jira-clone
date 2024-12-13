@@ -1,4 +1,5 @@
 "use client";
+
 import {
   EProjectTab,
   useSwitchProjectTab,
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { TextRevealButton } from "@/components/syntax/button/text-reveal";
 import { DottedSeparator } from "../common/dotted-separator";
+import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
 
 const TaskViews = [
   {
@@ -34,6 +36,7 @@ export function TaskTabSwitcher() {
   const t = useTranslations();
   const isMobile = useIsMobile();
   const { currentTab, setTab } = useSwitchProjectTab();
+  const { open } = useCreateTaskModal();
 
   const translatedTaskViews = useMemo(
     () =>
@@ -58,19 +61,18 @@ export function TaskTabSwitcher() {
         />
         {isMobile ? (
           <>
-            <Button size="sm" className="h-7 w-full">
+            <Button size="sm" className="h-7 w-full" onClick={open}>
               <Plus />
               {t("pages.projects.detail.new")}
             </Button>
             <DottedSeparator />
           </>
         ) : (
-          <TextRevealButton icon={<Plus className="size-4" />}>
+          <TextRevealButton icon={<Plus className="size-4" />} onClick={open}>
             {t("pages.projects.detail.new")}
           </TextRevealButton>
         )}
       </div>
-      <DottedSeparator className="mt-2 md:mt-4" />
       filter
       <DottedSeparator className="mt-2 md:mt-4" />
       content

@@ -13,6 +13,7 @@ interface IResponsiveModalProps {
   children: React.ReactNode;
   open: boolean;
   onlyCancelToExit: boolean;
+  showCloseButton?: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
@@ -20,9 +21,10 @@ export const ResponsiveModal: React.FC<IResponsiveModalProps> = ({
   children,
   open,
   onlyCancelToExit,
+  showCloseButton = true,
   onOpenChange,
 }) => {
-  const isPC = useMedia("(min-width: 1024px)", true);
+  const isPC = useMedia("(min-width: 768px)", true);
   if (isPC) {
     return onlyCancelToExit ? (
       <AlertDialog open={open} onOpenChange={onOpenChange}>
@@ -38,7 +40,10 @@ export const ResponsiveModal: React.FC<IResponsiveModalProps> = ({
       </AlertDialog>
     ) : (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]">
+        <DialogContent
+          className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]"
+          showCloseButton={showCloseButton}
+        >
           <DialogTitle className="hidden"></DialogTitle>
           {children}
         </DialogContent>

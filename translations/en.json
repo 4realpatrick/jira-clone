@@ -121,6 +121,35 @@
         "calendar": "Calendar",
         "new": "New task"
       }
+    },
+    "tasks": {
+      "form": {
+        "title": "Create a new task",
+        "labels": {
+          "task": "Task name",
+          "description": "Description",
+          "due_date": "Due date",
+          "assignee": "Assignee",
+          "status": "Status",
+          "project": "Project",
+          "tags": "Tags"
+        },
+        "date": {
+          "zero": "Today",
+          "one": "Tomorrow",
+          "three": "In 3 days",
+          "seven": "In a week",
+          "thirty": "In a month",
+          "preset": "Preset"
+        },
+        "stutus": {
+          "BACKLOG": "Backlog",
+          "TODO": "To do",
+          "IN_PROGRESS": "In progress",
+          "IN_REVIEW": "In review",
+          "DONE": "Done"
+        }
+      }
     }
   },
   "components": {
@@ -139,6 +168,13 @@
     "username_placeholder": "Enter your username",
     "workspace_placeholder": "Enter workspace name",
     "workspace_description_placeholder": "Simply describe your workspace",
+    "task_placeholder": "Enter task name",
+    "task_description_placeholder": "Simply describe your task",
+    "task_due_date_placeholder": "Pick a due date",
+    "task_assignee_placeholder": "Pick an assignee",
+    "task_status_placeholder": "Pick a status for current task",
+    "task_project_placeholder": "Pick a project for current task",
+    "task_tags_placeholder": "Enter tags for current task(Press Enter to add)",
     "login": "Login",
     "logout": "Logout",
     "sign_up": "Sign up",
@@ -177,7 +213,11 @@
     "username_max": "Username must be at most 16 characters long",
     "workspace_required": "Workspace name is required",
     "image_size_exceeded": "Maximum size not exceeding {max}MB",
-    "project_required": "Project name is required"
+    "project_required": "Project name is required",
+    "task_name_required": "Task name is required",
+    "task_status_required": "Task status is required",
+    "task_dueDate_required": "Task due date is required",
+    "task_assignee_required": "Task assignee is required"
   },
   "toast": {
     "loading": {
@@ -193,7 +233,8 @@
       "updating_member": "Updating member...",
       "creating_project": "Creating project...",
       "updating_project": "Updating project...",
-      "deleting_project": "Deleting project..."
+      "deleting_project": "Deleting project...",
+      "creating_task": "Creating task..."
     },
     "success": {
       "login": "Login success",
@@ -208,7 +249,8 @@
       "member_updated": "Member updated!",
       "project_created": "Project `{name}` created!",
       "project_updated": "Project `{name}` updated!",
-      "project_deleted": "Project deleted!"
+      "project_deleted": "Project deleted!",
+      "task_created": "Task `{name}` created!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -229,7 +271,8 @@
       "member_updated": "Member update failed!",
       "project_created": "Project create failed!",
       "project_updated": "Project update failed!",
-      "project_deleted": "Project delete failed!"
+      "project_deleted": "Project delete failed!",
+      "task_created": "Task create failed!"
     }
   },
   "nav": {
