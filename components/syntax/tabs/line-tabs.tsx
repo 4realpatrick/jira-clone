@@ -57,7 +57,7 @@ interface LineTabProps<T> {
   selectedTab: T;
   customID?: string;
   fullWidth?: boolean;
-  onSelect: (tab: T) => void;
+  onTabChange: (tab: T) => void;
 }
 
 export const LineTabs = <T,>({
@@ -65,7 +65,7 @@ export const LineTabs = <T,>({
   selectedTab,
   fullWidth = false,
   customID = "",
-  onSelect,
+  onTabChange,
 }: LineTabProps<T>) => {
   return (
     <div
@@ -81,7 +81,7 @@ export const LineTabs = <T,>({
           selected={selectedTab === tab.value}
           key={tab.value as string}
           customID={customID}
-          setSelected={onSelect}
+          setSelected={onTabChange}
         />
       ))}
     </div>

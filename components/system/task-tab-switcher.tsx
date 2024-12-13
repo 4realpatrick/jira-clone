@@ -1,17 +1,18 @@
 "use client";
 
-import {
-  EProjectTab,
-  useSwitchProjectTab,
-} from "@/hooks/use-switch-project-tab";
-import { LineTabs } from "@/components/syntax/tabs/line-tabs";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+
+import { LineTabs } from "@/components/syntax/tabs/line-tabs";
+import { Button } from "@/components/ui/button";
 import { TextRevealButton } from "@/components/syntax/button/text-reveal";
-import { DottedSeparator } from "../common/dotted-separator";
+import { DottedSeparator } from "@/components/common/dotted-separator";
+import {
+  EProjectTab,
+  useSwitchProjectTaskview,
+} from "@/hooks/use-switch-project-task-view";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
 
 const TaskViews = [
@@ -35,7 +36,7 @@ const TaskViews = [
 export function TaskTabSwitcher() {
   const t = useTranslations();
   const isMobile = useIsMobile();
-  const { currentTab, setTab } = useSwitchProjectTab();
+  const { taskView, setTaskView } = useSwitchProjectTaskview();
   const { open } = useCreateTaskModal();
 
   const translatedTaskViews = useMemo(
@@ -46,17 +47,14 @@ export function TaskTabSwitcher() {
       })),
     []
   );
-  const handleSelect = (tab: EProjectTab) => {
-    setTab(tab);
-  };
 
   return (
     <div>
       <div className="flex items-center gap-x-4 flex-wrap gap-y-2">
         <LineTabs<EProjectTab>
           tabs={translatedTaskViews}
-          selectedTab={currentTab}
-          onSelect={handleSelect}
+          selectedTab={taskView}
+          onTabChange={setTaskView}
           fullWidth={isMobile}
         />
         {isMobile ? (

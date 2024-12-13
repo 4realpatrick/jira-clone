@@ -6,8 +6,8 @@ export enum EProjectTab {
   CALENDAR = "calendar",
 }
 
-export function useSwitchProjectTab() {
-  const [currentTab, setTab] = useQueryState(
+export function useSwitchProjectTaskview() {
+  const [taskView, setTaskView] = useQueryState(
     "tab",
     parseAsStringEnum<EProjectTab>(Object.values(EProjectTab))
       .withDefault(EProjectTab.TABLE)
@@ -15,7 +15,7 @@ export function useSwitchProjectTab() {
   );
 
   return {
-    currentTab,
-    setTab,
+    taskView,
+    setTaskView,
   };
 }
