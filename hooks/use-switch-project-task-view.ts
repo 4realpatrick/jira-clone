@@ -8,7 +8,7 @@ export enum EProjectTab {
 
 export function useSwitchProjectTaskview() {
   const [taskView, setTaskView] = useQueryState(
-    "tab",
+    "task-view",
     parseAsStringEnum<EProjectTab>(Object.values(EProjectTab))
       .withDefault(EProjectTab.TABLE)
       .withOptions({ clearOnDefault: false })
