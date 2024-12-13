@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { TransitionLink } from "@/components/common/link";
-import { TaskTabSwitcher } from "@/components/system/task-tab-switcher";
+import { TaskTabSwitcher } from "@/components/system/task-view-switcher";
 
 export default async function ProjectPage({
   params,
