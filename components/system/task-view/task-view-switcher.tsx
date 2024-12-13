@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { Plus } from "lucide-react";
-
 import { LineTabs } from "@/components/syntax/tabs/line-tabs";
 import { Button } from "@/components/ui/button";
 import { TextRevealButton } from "@/components/syntax/button/text-reveal";
@@ -14,6 +13,7 @@ import {
 } from "@/hooks/use-switch-project-task-view";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
+import { DataFilters } from "./data-filters";
 
 const TaskViews = [
   {
@@ -49,7 +49,7 @@ export function TaskTabSwitcher() {
   );
 
   return (
-    <div>
+    <div className="space-y-2">
       <div className="flex items-center gap-x-4 flex-wrap gap-y-2">
         <LineTabs<EProjectTab>
           tabs={translatedTaskViews}
@@ -71,7 +71,7 @@ export function TaskTabSwitcher() {
           </TextRevealButton>
         )}
       </div>
-      filter
+      <DataFilters />
       <DottedSeparator className="mt-2 md:mt-4" />
       content
     </div>
