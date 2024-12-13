@@ -1,6 +1,5 @@
 import { AppSidebar } from "@/components/system/sidebar";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { Separator } from "@/components/ui/separator";
+import { SidebarInset } from "@/components/ui/sidebar";
 import { CreateWorkspaceModal } from "@/components/system/create-workspace-modal";
 import { CreateProjectModal } from "@/components/system/create-project-modal";
 import { CreateTaskModal } from "@/components/system/create-task-modal";
