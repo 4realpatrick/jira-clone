@@ -160,6 +160,9 @@
         "zh": "中文(zh)",
         "en": "英文(en)"
       }
+    },
+    "multi_select": {
+      "selected": "{num} 个已选"
     }
   },
   "common": {
@@ -188,6 +191,12 @@
     "refute": "拒绝",
     "confirm": "确认",
     "edit": "编辑",
+    "clear": "清除",
+    "task_status": "任务状态",
+    "task_assignee": "负责人",
+    "empty": "空",
+    "due_date": "截止日期",
+    "task_due_date_pick_rule": "This will filter out tasks that are earlier than the selected date",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -201,6 +210,13 @@
       "system": "跟随系统",
       "light": "明亮模式",
       "dark": "夜间模式"
+    },
+    "task_statuses": {
+      "BACKLOG": "积压",
+      "TODO": "待办",
+      "IN_PROGRESS": "进行中",
+      "IN_REVIEW": "审查中",
+      "DONE": "已完成"
     }
   },
   "validation": {

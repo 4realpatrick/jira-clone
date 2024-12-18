@@ -12,8 +12,11 @@ import {
   useSwitchProjectTaskview,
 } from "@/hooks/use-switch-project-task-view";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+import { useDataFilter } from "@/hooks/use-data-filter";
 import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
-import { DataFilters } from "./data-filters";
+import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
+import { DataFilters } from "./data-filter";
 
 const TaskViews = [
   {
@@ -36,8 +39,19 @@ const TaskViews = [
 export function TaskTabSwitcher() {
   const t = useTranslations();
   const isMobile = useIsMobile();
+  const workspaceId = useWorkspaceId();
+  const statuses = useDataFilter((state) => state.statuses);
+  const assigneeId = useDataFilter((state) => state.assigneeId);
+  const dueDate = useDataFilter((state) => state.dueDate);
   const { taskView, setTaskView } = useSwitchProjectTaskview();
   const { open } = useCreateTaskModal();
+
+  const { data: tasks, isFetching } = useGetTasks({
+    workspaceId,
+    statuses,
+    assigneeId,
+    dueDate,
+  });
 
   const translatedTaskViews = useMemo(
     () =>
@@ -47,10 +61,9 @@ export function TaskTabSwitcher() {
       })),
     []
   );
-
   return (
     <div className="space-y-2">
-      <div className="flex items-center gap-x-4 flex-wrap gap-y-2">
+      <div className="flex items-center gap-x-4 flex-wrap gap-y-2 flex-col md:flex-row">
         <LineTabs<EProjectTab>
           tabs={translatedTaskViews}
           selectedTab={taskView}
@@ -72,8 +85,6 @@ export function TaskTabSwitcher() {
         )}
       </div>
       <DataFilters />
-      <DottedSeparator className="mt-2 md:mt-4" />
-      content
     </div>
   );
 }

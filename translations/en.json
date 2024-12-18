@@ -142,7 +142,7 @@
           "thirty": "In a month",
           "preset": "Preset"
         },
-        "stutus": {
+        "status": {
           "BACKLOG": "Backlog",
           "TODO": "To do",
           "IN_PROGRESS": "In progress",
@@ -160,6 +160,9 @@
         "zh": "Simplified Chinese(zh)",
         "en": "English(en)"
       }
+    },
+    "multi_select": {
+      "selected": "{num} Selected"
     }
   },
   "common": {
@@ -187,6 +190,12 @@
     "refute": "Refute",
     "confirm": "Confirm",
     "edit": "Edit",
+    "clear": "Clear",
+    "task_status": "Task status",
+    "task_assignee": "Assignee",
+    "empty": "Empty",
+    "due_date": "Due date",
+    "task_due_date_pick_rule": "Pick a due date for current task",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -200,6 +209,13 @@
       "system": "Follow the system",
       "light": "Light mode",
       "dark": "Dark mode"
+    },
+    "task_statuses": {
+      "BACKLOG": "Backlog",
+      "TODO": "To do",
+      "IN_PROGRESS": "In progress",
+      "IN_REVIEW": "In review",
+      "DONE": "Done"
     }
   },
   "validation": {

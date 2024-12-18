@@ -27,7 +27,11 @@ const app = new Hono()
         workspaceId: z.string(),
         projectId: z.string().nullish(),
         assigneeId: z.string().nullish(),
-        status: z.nativeEnum(ETaskStatus).nullish(),
+        statuses: z
+          .nativeEnum(ETaskStatus)
+          .array()
+          .nullish()
+          .or(z.nativeEnum(ETaskStatus).nullish()),
         search: z.string().nullish(),
         dueDate: z.string().nullish(),
       })
@@ -37,8 +41,9 @@ const app = new Hono()
       const databases = c.get("databases");
       const user = c.get("user");
 
-      const { workspaceId, projectId, assigneeId, status, search, dueDate } =
+      const { workspaceId, projectId, assigneeId, statuses, search, dueDate } =
         c.req.valid("query");
+      console.log("dueDate:", dueDate);
 
       const member = await getMember({
         databases,
@@ -57,9 +62,9 @@ const app = new Hono()
         console.log("projectId:", projectId);
         query.push(Query.equal("projectId", projectId));
       }
-      if (status) {
-        console.log("status:", status);
-        query.push(Query.equal("status", status));
+      if (statuses) {
+        console.log("status:", statuses);
+        query.push(Query.equal("status", statuses));
       }
       if (assigneeId) {
         console.log("assigneeId:", assigneeId);
@@ -67,12 +72,13 @@ const app = new Hono()
       }
       if (dueDate) {
         console.log("dueDate:", dueDate);
-        query.push(Query.equal("dueDate", dueDate));
+        query.push(Query.lessThan("dueDate", dueDate));
       }
       if (search) {
         console.log("search:", search);
         query.push(Query.search("name", search));
       }
+
       const tasks = await databases.listDocuments<TTask>(
         DATABASE_ID,
         TASK_ID,
