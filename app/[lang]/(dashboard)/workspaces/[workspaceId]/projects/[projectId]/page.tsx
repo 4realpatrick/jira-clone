@@ -50,7 +50,7 @@ export default async function ProjectPage({
     },
   ];
   return (
-    <div className="pb-4">
+    <div className="pb-4 h-full">
       <InnerHeader breadcrumbs={breadcrumbs} />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-2">

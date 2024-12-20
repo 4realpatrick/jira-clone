@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function RippleLoader() {
+export function RippleLoader() {
   const rippleVariants = {
     start: {
       opacity: 1,

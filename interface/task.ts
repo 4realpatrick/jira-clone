@@ -6,7 +6,7 @@ export type TTask = Models.Document & {
   workspaceId: string;
   projectId: string;
   assigneeId: string;
-  dueDate: Date;
+  dueDate: string;
   status: ETaskStatus;
   description?: string;
   position: number;

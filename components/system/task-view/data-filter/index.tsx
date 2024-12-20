@@ -10,6 +10,7 @@ import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { ETaskStatus } from "@/interface/status";
 import { StatusIcons } from "../../create-task-form";
 import { AssigneeFilter } from "./assignee-filter";
+import { Input } from "@/components/ui/input";
 
 interface IDataFiltersProps {
   showProjectFilter?: boolean;
@@ -21,6 +22,8 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
   const selectedStatuses = useDataFilter((state) => state.statuses);
   const assigneeId = useDataFilter((state) => state.assigneeId);
   const dueDate = useDataFilter((state) => state.dueDate);
+  const search = useDataFilter((state) => state.search);
+  const setSearch = useDataFilter((state) => state.setSearch);
   const setStatuses = useDataFilter((state) => state.setStatuses);
   const setAssigneeId = useDataFilter((state) => state.setAssigneeId);
   const setDueDate = useDataFilter((state) => state.setDueDate);
@@ -52,6 +55,11 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-center">
+        <Input
+          className="w-full lg:w-auto"
+          defaultValue={search}
+          onBlur={(e) => setSearch(e.target.value)}
+        />
         <MultiSelectFilter<ETaskStatus>
           options={statuses}
           defaultValue={selectedStatuses}

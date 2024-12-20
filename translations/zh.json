@@ -149,6 +149,26 @@
           "IN_REVIEW": "审查中",
           "DONE": "已完成"
         }
+      },
+      "table": {
+        "view": "视图",
+        "view_switcher_label": "切换视图",
+        "columns": {
+          "task": "任务名称",
+          "description": "任务描述",
+          "no_description": "暂无描述",
+          "status": "任务状态",
+          "dueDate": "截止日期",
+          "assignee": "负责人",
+          "tags": "标签",
+          "$createdAt": "创建时间",
+          "$updatedAt": "最后更新时间"
+        },
+        "pagination": {
+          "num_of_select": "{total} 条中已选 <strong>{num}</strong> 条",
+          "rows_per_page": "每页显示",
+          "num_of_index": "第 {num} 页"
+        }
       }
     }
   },
@@ -196,7 +216,10 @@
     "task_assignee": "负责人",
     "empty": "空",
     "due_date": "截止日期",
-    "task_due_date_pick_rule": "This will filter out tasks that are earlier than the selected date",
+    "task_due_date_pick_rule": "该选项会筛选出早于选择的日期的任务",
+    "asc": "升序",
+    "desc": "降序",
+    "hide": "隐藏",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",

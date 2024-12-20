@@ -87,11 +87,11 @@ export const MultiSelectFilter = <T,>({
                 className="shrink-0 bg-border w-[1px] mx-2 h-4 hidden lg:block"
                 data-orientation="vertical"
               />
-              <Badge className="rounded-sm font-normal lg:hidden">
+              {/* <Badge className="rounded-sm font-normal lg:hidden">
                 {state.length}
-              </Badge>
-              <div className="hidden space-x-1 lg:flex">
-                {state.length > 2 ? (
+              </Badge> */}
+              <div className="space-x-1 flex">
+                {state.length > 3 ? (
                   <Badge className="rounded-sm px-1 font-normal">
                     {t(`components.multi_select.selected`, {
                       num: state.length,

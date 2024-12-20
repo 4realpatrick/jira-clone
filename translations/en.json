@@ -149,6 +149,26 @@
           "IN_REVIEW": "In review",
           "DONE": "Done"
         }
+      },
+      "table": {
+        "view": "View",
+        "view_switcher_label": "Change the view",
+        "columns": {
+          "task": "Task name",
+          "description": "Task description",
+          "no_description": "No description",
+          "status": "Status",
+          "dueDate": "Due date",
+          "assignee": "Assignee",
+          "tags": "Tags",
+          "$createdAt": "Created at",
+          "$updatedAt": "Updated at"
+        },
+        "pagination": {
+          "num_of_select": "<strong>{num}</strong> of {total} row(s) selected.",
+          "rows_per_page": "Rows per page",
+          "num_of_index": "Page {num} of {total}"
+        }
       }
     }
   },
@@ -171,6 +191,7 @@
     "username_placeholder": "Enter your username",
     "workspace_placeholder": "Enter workspace name",
     "workspace_description_placeholder": "Simply describe your workspace",
+    "project_placeholder": "Enter project name",
     "task_placeholder": "Enter task name",
     "task_description_placeholder": "Simply describe your task",
     "task_due_date_placeholder": "Pick a due date",
@@ -195,7 +216,10 @@
     "task_assignee": "Assignee",
     "empty": "Empty",
     "due_date": "Due date",
-    "task_due_date_pick_rule": "Pick a due date for current task",
+    "task_due_date_pick_rule": "This will filter out tasks that are earlier than the selected date",
+    "asc": "Asc",
+    "desc": "Desc",
+    "hide": "Hide",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",

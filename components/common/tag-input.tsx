@@ -5,6 +5,7 @@ interface IKeywordsInputProps {
   keywords: string[];
   placeholder?: string;
   id?: string;
+  disabled?: boolean;
   onKeywordsChange: (keywords: string[]) => void;
 }
 
@@ -12,6 +13,7 @@ export const KeywordsInput: React.FC<IKeywordsInputProps> = ({
   keywords,
   placeholder = "Type keyword and press Enter...",
   id,
+  disabled,
   onKeywordsChange,
 }) => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -85,7 +87,7 @@ export const KeywordsInput: React.FC<IKeywordsInputProps> = ({
         ))}
         <input
           type="text"
-          className="my-1 flex-1 text-sm outline-none"
+          className="my-1 flex-1 text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
           value={inputValue}
           id={id}
           placeholder={placeholder}
@@ -93,6 +95,7 @@ export const KeywordsInput: React.FC<IKeywordsInputProps> = ({
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
           onBlur={handleBlur}
+          disabled={disabled}
         />
       </div>
     </div>

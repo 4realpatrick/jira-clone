@@ -112,9 +112,6 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
     },
   });
 
-  const handleSelectPresetDate = (value: string) => {
-    form.setValue("dueDate", addDays(new Date(), parseInt(value)));
-  };
   const onSumbit = (values: TCreateTaskSchema) => {
     createTask(
       {
@@ -188,15 +185,16 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                     <FormLabel>
                       {t("pages.tasks.form.labels.due_date")}
                     </FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
+                    <FormControl>
+                      <Popover>
+                        <PopoverTrigger asChild>
                           <Button
-                            variant={"outline"}
+                            variant="outline"
                             className={cn(
                               "pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
+                            disabled={isPending}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -207,46 +205,22 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                           </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent
-                        className="flex w-auto flex-col space-y-2 p-2"
-                        align="start"
-                      >
-                        <Select onValueChange={handleSelectPresetDate}>
-                          <SelectTrigger>
-                            <SelectValue
-                              placeholder={t("pages.tasks.form.date.preset")}
-                            />
-                          </SelectTrigger>
-                          <SelectContent position="popper">
-                            <SelectItem value="0">
-                              {t("pages.tasks.form.date.zero")}
-                            </SelectItem>
-                            <SelectItem value="1">
-                              {t("pages.tasks.form.date.one")}
-                            </SelectItem>
-                            <SelectItem value="3">
-                              {t("pages.tasks.form.date.three")}
-                            </SelectItem>
-                            <SelectItem value="7">
-                              {t("pages.tasks.form.date.seven")}
-                            </SelectItem>
-                            <SelectItem value="30">
-                              {t("pages.tasks.form.date.thirty")}
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          locale={datePickerLocale}
-                          disabled={(date) => addDays(date, 1) < new Date()}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          className="flex w-auto flex-col space-y-2 p-2 z-[100] pointer-events-auto"
+                          align="start"
+                        >
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            locale={datePickerLocale}
+                            disabled={(date) => addDays(date, 1) < new Date()}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -262,6 +236,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                     <Select
                       defaultValue={field.value}
                       onValueChange={field.onChange}
+                      disabled={isPending}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -271,7 +246,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                         </SelectTrigger>
                       </FormControl>
                       <FormMessage />
-                      <SelectContent>
+                      <SelectContent className="pointer-events-auto">
                         {memberOptions.map((member) => (
                           <SelectItem value={member.id} key={member.id}>
                             <div className="flex items-center gap-2">
@@ -296,6 +271,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                     <FormLabel>{t("pages.tasks.form.labels.status")}</FormLabel>
                     <Select
                       defaultValue={field.value}
+                      disabled={isPending}
                       onValueChange={field.onChange}
                     >
                       <FormControl>
@@ -306,7 +282,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                         </SelectTrigger>
                       </FormControl>
                       <FormMessage />
-                      <SelectContent>
+                      <SelectContent className="pointer-events-auto">
                         {Object.values(ETaskStatus).map((status) => (
                           <SelectItem value={status} key={status}>
                             <div className="flex items-center gap-x-2">
@@ -330,6 +306,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                     </FormLabel>
                     <Select
                       defaultValue={field.value}
+                      disabled={isPending}
                       onValueChange={field.onChange}
                     >
                       <FormControl>
@@ -340,7 +317,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                         </SelectTrigger>
                       </FormControl>
                       <FormMessage />
-                      <SelectContent>
+                      <SelectContent className="pointer-events-auto">
                         {projectOptions.map((project) => (
                           <SelectItem value={project.id} key={project.id}>
                             <div className="flex items-center gap-2">
@@ -370,8 +347,9 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                       <KeywordsInput
                         id="tags"
                         placeholder={t("common.task_tags_placeholder")}
-                        onKeywordsChange={field.onChange}
+                        disabled={isPending}
                         keywords={field.value || []}
+                        onKeywordsChange={field.onChange}
                       />
                     </FormControl>
                   </FormItem>
