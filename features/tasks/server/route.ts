@@ -43,7 +43,6 @@ const app = new Hono()
 
       const { workspaceId, projectId, assigneeId, statuses, search, dueDate } =
         c.req.valid("query");
-      console.log("dueDate:", dueDate);
 
       const member = await getMember({
         databases,
@@ -133,6 +132,54 @@ const app = new Hono()
       });
     }
   )
+  .get("/:taskId", sessionMiddleware, async (c) => {
+    const { users } = await createAdminClient();
+    const databases = c.get("databases");
+    const currentUser = c.get("user");
+    const { taskId } = c.req.param();
+
+    const task = await databases.getDocument<TTask>(
+      DATABASE_ID,
+      TASK_ID,
+      taskId
+    );
+    const currentMember = await getMember({
+      databases,
+      workspaceId: task.workspaceId,
+      userId: currentUser.$id,
+    });
+    if (!currentMember) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    const project = await databases.getDocument<TProject>(
+      DATABASE_ID,
+      PROJECT_ID,
+      task.projectId
+    );
+
+    const member = await databases.getDocument<TMember>(
+      DATABASE_ID,
+      MEMBERS_ID,
+      task.assigneeId
+    );
+
+    const user = await users.get(member.userId);
+
+    const assignee = {
+      ...member,
+      name: user.name,
+      email: user.email,
+    };
+
+    return c.json({
+      data: {
+        ...task,
+        project,
+        assignee,
+      },
+    });
+  })
   .post(
     "/",
     sessionMiddleware,
@@ -191,6 +238,83 @@ const app = new Hono()
           description,
           tags,
           position: newPosition,
+        }
+      );
+
+      return c.json({ data: task });
+    }
+  )
+  .delete("/:taskId", sessionMiddleware, async (c) => {
+    const user = c.get("user");
+    const databases = c.get("databases");
+    const { taskId } = c.req.param();
+
+    const task = await databases.getDocument<TTask>(
+      DATABASE_ID,
+      TASK_ID,
+      taskId
+    );
+    const member = await getMember({
+      databases,
+      workspaceId: task.workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    await databases.deleteDocument(DATABASE_ID, TASK_ID, taskId);
+
+    return c.json({ data: { $id: task.$id } });
+  })
+  .patch(
+    "/:taskId",
+    sessionMiddleware,
+    zValidator("json", getCreateTaskSchema().partial()),
+    async (c) => {
+      const user = c.get("user");
+      const databases = c.get("databases");
+      const {
+        name,
+        status,
+        projectId,
+        dueDate,
+        assigneeId,
+        description,
+        tags,
+      } = await c.req.valid("json");
+
+      const { taskId } = c.req.param();
+
+      const exsitingTask = await databases.getDocument<TTask>(
+        DATABASE_ID,
+        TASK_ID,
+        taskId
+      );
+
+      const member = await getMember({
+        databases,
+        workspaceId: exsitingTask.workspaceId,
+        userId: user.$id,
+      });
+
+      if (!member) {
+        return c.json({ error: "Unauthorized" }, 401);
+      }
+
+      const task = await databases.updateDocument<TTask>(
+        DATABASE_ID,
+        TASK_ID,
+        taskId,
+        {
+          name,
+          status,
+          projectId,
+          dueDate,
+          assigneeId,
+          description,
+          tags,
         }
       );
 

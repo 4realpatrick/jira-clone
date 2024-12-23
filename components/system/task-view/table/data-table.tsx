@@ -54,12 +54,14 @@ export function DataTable<TData, TValue>({
       },
     },
   });
-  if (isLoiadng)
+  if (isLoiadng) {
     return (
       <div className="h-[70vh] flex items-center justify-center">
         <RippleLoader />
       </div>
     );
+  }
+
   return (
     <div className="space-y-2">
       <div className="w-full flex justify-end">

@@ -98,6 +98,12 @@
       }
     },
     "projects": {
+      "nav": {
+        "view": "查看项目",
+        "edit": "编辑项目",
+        "share": "分享项目地址",
+        "copy_tip": "复制成功"
+      },
       "form": {
         "title": "创建新项目",
         "label": "项目名称",
@@ -168,6 +174,13 @@
           "num_of_select": "{total} 条中已选 <strong>{num}</strong> 条",
           "rows_per_page": "每页显示",
           "num_of_index": "第 {num} 页"
+        },
+        "actions": {
+          "label": "操作",
+          "view": "查看",
+          "edit": "编辑",
+          "share": "分享",
+          "delete": "删除"
         }
       }
     }
@@ -220,6 +233,7 @@
     "asc": "升序",
     "desc": "降序",
     "hide": "隐藏",
+    "copy_success": "复制成功",
     "theme_colors": {
       "blue": "蓝宝石",
       "green": "苹果绿",
@@ -274,7 +288,9 @@
       "creating_project": "项目创建中...",
       "updating_project": "项目更新中...",
       "deleting_project": "项目删除中...",
-      "creating_task": "任务创建中..."
+      "creating_task": "任务创建中...",
+      "deleting_task": "任务删除中...",
+      "updating_task": "任务更新中..."
     },
     "success": {
       "login": "登录成功",
@@ -290,7 +306,9 @@
       "project_created": "项目 `{name}` 创建成功",
       "project_updated": "项目 `{name}` 更新成功",
       "project_deleted": "项目删除成功",
-      "task_created": "任务 `{name}` 创建成功"
+      "task_created": "任务 `{name}` 创建成功",
+      "task_deleted": "任务删除成功",
+      "task_updated": "任务更新成功"
     },
     "error": {
       "login": "登录失败, 请检查您的邮箱和密码",
@@ -312,7 +330,9 @@
       "project_created": "创建项目失败",
       "project_updated": "更新项目失败",
       "project_deleted": "项目删除失败",
-      "task_created": "创建任务失败"
+      "task_created": "创建任务失败",
+      "task_deleted": "任务删除失败",
+      "task_updated": "任务更新失败"
     }
   },
   "nav": {

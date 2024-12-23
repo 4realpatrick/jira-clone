@@ -43,7 +43,6 @@ export const useDataFilter = create<IDataFilterState & IDataFilterActions>()(
       },
       setDueDate(dueDate) {
         set((state) => {
-          console.log("dueDate:", dueDate);
           state.dueDate = dueDate;
         });
       },

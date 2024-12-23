@@ -98,6 +98,12 @@
       }
     },
     "projects": {
+      "nav": {
+        "view": "View project",
+        "edit": "Edit project",
+        "share": "Share project",
+        "copy_tip": "Project link copied!"
+      },
       "form": {
         "title": "Create a new project",
         "label": "Project name",
@@ -168,6 +174,13 @@
           "num_of_select": "<strong>{num}</strong> of {total} row(s) selected.",
           "rows_per_page": "Rows per page",
           "num_of_index": "Page {num} of {total}"
+        },
+        "actions": {
+          "label": "Actions",
+          "view": "View",
+          "edit": "Edit",
+          "share": "Share",
+          "delete": "Delete"
         }
       }
     }
@@ -220,6 +233,7 @@
     "asc": "Asc",
     "desc": "Desc",
     "hide": "Hide",
+    "copy_success": "Copied to clipboard",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",
@@ -274,7 +288,9 @@
       "creating_project": "Creating project...",
       "updating_project": "Updating project...",
       "deleting_project": "Deleting project...",
-      "creating_task": "Creating task..."
+      "creating_task": "Creating task...",
+      "deleting_task": "Deleting task...",
+      "updating_task": "Updating task..."
     },
     "success": {
       "login": "Login success",
@@ -290,7 +306,9 @@
       "project_created": "Project `{name}` created!",
       "project_updated": "Project `{name}` updated!",
       "project_deleted": "Project deleted!",
-      "task_created": "Task `{name}` created!"
+      "task_created": "Task `{name}` created!",
+      "task_deleted": "Task deleted!",
+      "task_updated": "Task updated!"
     },
     "error": {
       "login": "Login failed, please check your email and password",
@@ -312,7 +330,9 @@
       "project_created": "Project create failed!",
       "project_updated": "Project update failed!",
       "project_deleted": "Project delete failed!",
-      "task_created": "Task create failed!"
+      "task_created": "Task create failed!",
+      "task_deleted": "Task delete failed!",
+      "task_updated": "Task update failed!"
     }
   },
   "nav": {

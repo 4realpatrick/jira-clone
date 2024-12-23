@@ -6,7 +6,6 @@ interface ITabItem<T> {
   key: string;
   value: T;
   label: string;
-  content: React.ReactNode;
 }
 
 interface TabProps<T> extends ITabItem<T> {

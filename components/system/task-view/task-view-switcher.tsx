@@ -18,7 +18,7 @@ import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
 import { DataFilters } from "./data-filter";
 import { DataTable } from "./table/data-table";
-import { columns } from "./table/column";
+import { useColumns } from "./table/use-column";
 
 const TaskViews = [
   {
@@ -46,6 +46,7 @@ export function TaskTabSwitcher() {
   const assigneeId = useDataFilter((state) => state.assigneeId);
   const dueDate = useDataFilter((state) => state.dueDate);
   const search = useDataFilter((state) => state.search);
+  const columns = useColumns();
   const { taskView, setTaskView } = useSwitchProjectTaskview();
   const { open } = useCreateTaskModal();
 
@@ -92,7 +93,7 @@ export function TaskTabSwitcher() {
       {taskView === EProjectTab.TABLE && (
         <DataTable
           data={tasks?.documents || []}
-          columns={columns()}
+          columns={columns}
           isLoiadng={isFetching}
         />
       )}
