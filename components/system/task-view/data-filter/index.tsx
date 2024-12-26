@@ -32,8 +32,6 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
     workspaceId,
   });
 
-  const isLoading = isFetchingMembers;
-
   const memberOptions =
     members?.documents.map((project) => ({
       value: project.$id,
