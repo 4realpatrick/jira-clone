@@ -336,6 +336,7 @@
     }
   },
   "nav": {
+    "nav": "Nav",
     "home": "Workspace",
     "setting": "Setting",
     "general": "General",

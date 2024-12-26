@@ -24,7 +24,6 @@ export function KanbanHeader({
         </div>
       </div>
       <Button
-        variant="outline"
         size="icon"
         className="size-5"
         onClick={() => open({ status: column })}

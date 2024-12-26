@@ -11,6 +11,8 @@ import { getCurrent } from "@/features/auth/queries";
 import { getProjectById } from "@/features/projects/queries";
 import { Locale } from "@/i18n/interface";
 import { redirect } from "@/i18n/routing";
+import { TextRevealButton } from "@/components/syntax/button/text-reveal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default async function ProjectPage({
   params,
@@ -61,14 +63,13 @@ export default async function ProjectPage({
           <p>{initialValues.name}</p>
         </div>
         <div>
-          <Button size="sm" asChild>
-            <TransitionLink
-              href={`/workspaces/${initialValues.workspaceId}/projects/${projectId}/setting`}
-            >
-              <Pencil className="size-4" />
+          <TransitionLink
+            href={`/workspaces/${initialValues.workspaceId}/projects/${projectId}/setting`}
+          >
+            <TextRevealButton icon={<Pencil className="size-4" />}>
               {t("common.edit")}
-            </TransitionLink>
-          </Button>
+            </TextRevealButton>
+          </TransitionLink>
         </div>
       </div>
       <DottedSeparator className="my-4" />

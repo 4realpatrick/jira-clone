@@ -72,7 +72,7 @@ export function NavMain() {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{t("nav")}</SidebarGroupLabel>
       <SidebarMenu>
         {navData.map((item) => (
           <Collapsible key={item.key} asChild className="group/collapsible">
