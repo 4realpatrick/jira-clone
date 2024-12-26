@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export const RippleWaveLoader = () => {
+export const RippleWaveLoader = ({ waveCount = 7 }: { waveCount?: number }) => {
   return (
     <div className="flex items-center justify-center space-x-1">
-      {[...Array(7)].map((_, index) => (
+      {[...Array(waveCount)].map((_, index) => (
         <motion.div
           key={index}
           className="h-8 w-2 rounded-full bg-primary"

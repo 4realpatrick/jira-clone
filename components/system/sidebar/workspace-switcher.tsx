@@ -32,7 +32,7 @@ export function WorkspaceSwitcher() {
   const t = useTranslations("pages.workspace.sidebar.workspace_switcher");
   const router = useRouter();
   const workspaceId = useWorkspaceId();
-  const { isMobile } = useSidebar();
+  const { isMobile, open: isSidebarOpen } = useSidebar();
 
   const { data, isFetching } = useGetWorkspace();
   const { open } = useCreateWorkspaceModal();
@@ -52,7 +52,7 @@ export function WorkspaceSwitcher() {
         <DropdownMenu>
           {isFetching ? (
             <div className="mt-3">
-              <RippleWaveLoader />
+              <RippleWaveLoader waveCount={isSidebarOpen ? 7 : 3} />
             </div>
           ) : (
             <DropdownMenuTrigger asChild>
