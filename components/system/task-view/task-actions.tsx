@@ -23,12 +23,12 @@ export function TaskActions({
 }) {
   const { workspaceId, $id: taskId } = task;
   const t = useTranslations();
-
   const router = useRouter();
 
   const { mutate: deleteTask, isPending: isDeletingTask } = useDeleteTask();
 
   const detailLink = `/workspaces/${workspaceId}/tasks/${taskId}`;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>

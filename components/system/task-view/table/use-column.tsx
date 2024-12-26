@@ -77,7 +77,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
         const tags = row.original.tags ?? [];
         const id = row.original.$id;
         return (
-          <div className="flex items-center gap-x-1 text-xs">
+          <div className="flex items-center gap-1 text-xs flex-wrap">
             {tags.length > 0
               ? tags.map((tag, index) => (
                   <Badge key={id + index} className="shrink-0">
@@ -223,6 +223,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
         );
       },
       enableHiding: false,
+      enableResizing: false,
     },
   ];
 };

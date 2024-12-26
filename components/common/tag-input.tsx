@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface IKeywordsInputProps {
   keywords: string[];
@@ -79,7 +80,10 @@ export const KeywordsInput: React.FC<IKeywordsInputProps> = ({
           <button
             key={index}
             onClick={() => removeKeyword(index)}
-            className="m-1 flex items-center rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground"
+            className={cn(
+              "m-1 flex items-center rounded-full bg-primary px-2 py-1 text-xs text-primary-foreground",
+              disabled && "opacity-50 pointer-events-none"
+            )}
           >
             {keyword}
             <X size={14} className="ml-2 cursor-pointer" />

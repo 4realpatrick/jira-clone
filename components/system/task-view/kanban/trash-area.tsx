@@ -13,10 +13,10 @@ export const TrashArea = () => {
         >
           <div
             className={cn(
-              "grid h-20 w-full shrink-0 place-content-center rounded border text-3xl",
+              "grid h-20 w-full shrink-0 place-content-center rounded border text-3xl transition-colors",
               snapshot.isDraggingOver
                 ? "border-destructive bg-destructive/20 text-destructive"
-                : "bg-muted text-neutral-500"
+                : "bg-muted text-muted-foreground"
             )}
           >
             <Trash2

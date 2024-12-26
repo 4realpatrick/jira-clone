@@ -21,6 +21,7 @@ import {
 import { RippleLoader } from "@/components/syntax/loader/ripple";
 import { DataTablePagination } from "./pagination";
 import { DataTableViewSwitcher } from "./view-switcher";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +39,8 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data,
     columns,
+    enableColumnResizing: true,
+    columnResizeMode: "onChange",
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -74,13 +77,29 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="pl-4 w-fit">
+                    <TableHead
+                      key={header.id}
+                      className="pl-4 w-fit relative"
+                      style={{
+                        width: header.getSize(),
+                      }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                      {header.column.getCanResize() && (
+                        <div
+                          onMouseDown={header.getResizeHandler()}
+                          onTouchStart={header.getResizeHandler()}
+                          className={cn(
+                            "absolute right-0 top-0 h-full w-[5px] bg-primary cursor-col-resize select-none touch-none opacity-0 hover:opacity-100",
+                            header.column.getIsResizing() && "opacity-100"
+                          )}
+                        ></div>
+                      )}
                     </TableHead>
                   );
                 })}
@@ -95,7 +114,11 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="pl-4 w-fit">
+                    <TableCell
+                      key={cell.id}
+                      className="pl-4 w-fit"
+                      style={{ width: cell.column.getSize() }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
