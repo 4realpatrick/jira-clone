@@ -1,41 +1,20 @@
 "use client";
 
 import { compareAsc, format } from "date-fns";
-import { zhCN, enUS } from "date-fns/locale";
-import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  TriangleAlert,
-  MoreHorizontal,
-  Eye,
-  Pencil,
-  Share2,
-  Trash2,
-} from "lucide-react";
+import { TriangleAlert, MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { TTask } from "@/interface/task";
 import { ETaskStatus } from "@/interface/status";
-import { cn } from "@/lib/utils";
+import { cn, getDateLocale } from "@/lib/utils";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Locale } from "@/i18n/interface";
 import { MemberAvatar } from "../../member-list/avatar";
 import { DataTableColumnHeader } from "./header";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { useRouter } from "@/i18n/routing";
-
-const localeObj = {
-  en: enUS,
-  zh: zhCN,
-} as const;
+import { TaskActions } from "../task-actions";
 
 const statusOrder = {
   [ETaskStatus.BACKLOG]: 8,
@@ -163,7 +142,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
           >
             {isOverdue && <TriangleAlert className="text-destructive size-4" />}
             {format(dueDate, "PPPP", {
-              locale: localeObj[locale],
+              locale: getDateLocale(locale),
             })}
           </span>
         );
@@ -204,7 +183,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
         return (
           <span className="text-xs">
             {format($createdAt, "PPPP", {
-              locale: localeObj[locale],
+              locale: getDateLocale(locale),
             })}
           </span>
         );
@@ -225,7 +204,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
         return (
           <span className="text-xs">
             {format($updatedAt, "PPPP", {
-              locale: localeObj[locale],
+              locale: getDateLocale(locale),
             })}
           </span>
         );
@@ -234,55 +213,13 @@ export const useColumns = (): ColumnDef<TTask>[] => {
     {
       id: "actions",
       cell: ({ row }) => {
-        const { workspaceId, $id: taskId } = row.original;
-        const detailLink = `/workspaces/${workspaceId}/tasks/${taskId}`;
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="size-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>{t("actions.label")}</DropdownMenuLabel>
-              <DropdownMenuItem
-                className="flex items-center gap-2"
-                disabled={isDeletingTask}
-                onClick={() => router.push(detailLink)}
-              >
-                <Eye />
-                {t("actions.view")}
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="flex items-center gap-2"
-                disabled={isDeletingTask}
-              >
-                <Pencil />
-                {t("actions.edit")}
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="flex items-center gap-2"
-                disabled={isDeletingTask}
-                onClick={() => {
-                  navigator.clipboard.writeText(`${location.origin}detailLink`);
-                  toast.success(ct("copy_success"));
-                }}
-              >
-                <Share2 />
-                {t("actions.share")}
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                className="flex items-center gap-2 text-destructive"
-                disabled={isDeletingTask}
-                onClick={() => deleteTask({ param: { taskId: taskId } })}
-              >
-                <Trash2 />
-                {t("actions.delete")}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <TaskActions task={row.original}>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="size-4" />
+            </Button>
+          </TaskActions>
         );
       },
       enableHiding: false,

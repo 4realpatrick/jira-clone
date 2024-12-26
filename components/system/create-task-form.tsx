@@ -1,9 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { zhCN, enUS } from "date-fns/locale";
 import { addDays, format } from "date-fns";
 import {
   History,
@@ -48,9 +46,10 @@ import {
 import { KeywordsInput } from "@/components/common/tag-input";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useProjectId } from "@/hooks/use-project-id";
+import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
 import { useCreateTask } from "@/features/tasks/api/use-create-task";
 import { getCreateTaskSchema, TCreateTaskSchema } from "@/lib/schema";
-import { cn } from "@/lib/utils";
+import { cn, getDateLocale } from "@/lib/utils";
 import { Locale } from "@/i18n/interface";
 import { MemberAvatar } from "./member-list/avatar";
 import { ETaskStatus } from "@/interface/status";
@@ -88,15 +87,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
   const projectId = useProjectId();
   const locale = useLocale() as Locale;
   const { mutate: createTask, isPending } = useCreateTask();
-
-  const datePickerLocale = useMemo(() => {
-    const obj = {
-      zh: zhCN,
-      en: enUS,
-    };
-
-    return obj[locale];
-  }, [locale]);
+  const { initialTask } = useCreateTaskModal();
 
   const form = useForm<TCreateTaskSchema>({
     resolver: zodResolver(
@@ -109,6 +100,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
       description: "",
       status: ETaskStatus.TODO,
       tags: [],
+      ...initialTask,
     },
   });
 
@@ -214,7 +206,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                             mode="single"
                             selected={field.value}
                             onSelect={field.onChange}
-                            locale={datePickerLocale}
+                            locale={getDateLocale(locale)}
                             disabled={(date) => addDays(date, 1) < new Date()}
                             initialFocus
                           />
@@ -287,7 +279,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
                           <SelectItem value={status} key={status}>
                             <div className="flex items-center gap-x-2">
                               {StatusIcons[status]}
-                              {t(`pages.tasks.form.status.${status}`)}
+                              {t(`pages.tasks.status.${status}`)}
                             </div>
                           </SelectItem>
                         ))}

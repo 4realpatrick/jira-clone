@@ -1,5 +1,7 @@
+import { Locale } from "@/i18n/interface";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { zhCN, enUS } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,4 +20,12 @@ export function generateInviteCode(length: number = 6) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
+}
+
+export function getDateLocale(locale: Locale) {
+  const obj = {
+    zh: zhCN,
+    en: enUS,
+  };
+  return obj[locale];
 }

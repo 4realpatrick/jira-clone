@@ -1,8 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { CalendarIcon } from "lucide-react";
-import { useMemo } from "react";
 import { addDays, format } from "date-fns";
-import { zhCN, enUS } from "date-fns/locale";
 import {
   Popover,
   PopoverContent,
@@ -19,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Locale } from "@/i18n/interface";
+import { getDateLocale } from "@/lib/utils";
 
 interface IDatePickerProps {
   value?: Date;
@@ -32,14 +31,6 @@ export function DatePicker({
   onDateChange,
 }: IDatePickerProps) {
   const locale = useLocale() as Locale;
-  const datePickerLocale = useMemo(() => {
-    const obj = {
-      zh: zhCN,
-      en: enUS,
-    };
-
-    return obj[locale];
-  }, [locale]);
   const t = useTranslations();
   const handleSelectPreset = (value: string) => {
     onDateChange(addDays(new Date(), parseInt(value)));
@@ -99,7 +90,7 @@ export function DatePicker({
           mode="single"
           selected={value}
           onSelect={(date) => onDateChange(date as Date)}
-          locale={datePickerLocale}
+          locale={getDateLocale(locale)}
           initialFocus
         />
         {value && (
