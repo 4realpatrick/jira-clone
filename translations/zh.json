@@ -147,13 +147,6 @@
           "seven": "一周",
           "thirty": "一个月",
           "preset": "预设"
-        },
-        "status": {
-          "BACKLOG": "积压",
-          "TODO": "待办",
-          "IN_PROGRESS": "进行中",
-          "IN_REVIEW": "审查中",
-          "DONE": "已完成"
         }
       },
       "table": {
@@ -182,6 +175,13 @@
           "share": "分享",
           "delete": "删除"
         }
+      },
+      "status": {
+        "BACKLOG": "积压",
+        "TODO": "待办",
+        "IN_PROGRESS": "进行中",
+        "IN_REVIEW": "审查中",
+        "DONE": "已完成"
       }
     }
   },

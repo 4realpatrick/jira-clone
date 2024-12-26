@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Plus } from "lucide-react";
 import { LineTabs } from "@/components/syntax/tabs/line-tabs";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,8 @@ import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
 import { DataFilters } from "./data-filter";
 import { DataTable } from "./table/data-table";
 import { useColumns } from "./table/use-column";
+import { Kanban, TUpdatesPayload } from "./kanban";
+import { useBulkUpdateTask } from "@/features/tasks/api/use-bulk-update-tasks";
 
 const TaskViews = [
   {
@@ -49,15 +51,14 @@ export function TaskTabSwitcher() {
   const columns = useColumns();
   const { taskView, setTaskView } = useSwitchProjectTaskview();
   const { open } = useCreateTaskModal();
-
-  const { data: tasks, isFetching } = useGetTasks({
+  const { mutate: bulkUpdateTask } = useBulkUpdateTask();
+  const { data, isFetching } = useGetTasks({
     workspaceId,
     statuses,
     assigneeId,
     dueDate,
     // search,
   });
-
   const translatedTaskViews = useMemo(
     () =>
       TaskViews.map((view) => ({
@@ -66,6 +67,14 @@ export function TaskTabSwitcher() {
       })),
     []
   );
+
+  const handleKanbanChange = useCallback(
+    (tasks: TUpdatesPayload[]) => {
+      bulkUpdateTask({ json: { tasks } });
+    },
+    [bulkUpdateTask]
+  );
+
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-x-4 flex-wrap gap-y-2 flex-col md:flex-row">
@@ -77,14 +86,17 @@ export function TaskTabSwitcher() {
         />
         {isMobile ? (
           <>
-            <Button size="sm" className="h-7 w-full" onClick={open}>
+            <Button size="sm" className="h-7 w-full" onClick={() => open()}>
               <Plus />
               {t("pages.projects.detail.new")}
             </Button>
             <DottedSeparator />
           </>
         ) : (
-          <TextRevealButton icon={<Plus className="size-4" />} onClick={open}>
+          <TextRevealButton
+            icon={<Plus className="size-4" />}
+            onClick={() => open()}
+          >
             {t("pages.projects.detail.new")}
           </TextRevealButton>
         )}
@@ -92,10 +104,13 @@ export function TaskTabSwitcher() {
       <DataFilters />
       {taskView === EProjectTab.TABLE && (
         <DataTable
-          data={tasks?.documents || []}
+          data={data?.documents || []}
           columns={columns}
           isLoiadng={isFetching}
         />
+      )}
+      {taskView === EProjectTab.KANBAN && (
+        <Kanban data={data?.documents || []} onChange={handleKanbanChange} />
       )}
     </div>
   );

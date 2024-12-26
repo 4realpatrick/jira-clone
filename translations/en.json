@@ -147,13 +147,6 @@
           "seven": "In a week",
           "thirty": "In a month",
           "preset": "Preset"
-        },
-        "status": {
-          "BACKLOG": "Backlog",
-          "TODO": "To do",
-          "IN_PROGRESS": "In progress",
-          "IN_REVIEW": "In review",
-          "DONE": "Done"
         }
       },
       "table": {
@@ -182,6 +175,13 @@
           "share": "Share",
           "delete": "Delete"
         }
+      },
+      "status": {
+        "BACKLOG": "Backlog",
+        "TODO": "To do",
+        "IN_PROGRESS": "In progress",
+        "IN_REVIEW": "In review",
+        "DONE": "Done"
       }
     }
   },

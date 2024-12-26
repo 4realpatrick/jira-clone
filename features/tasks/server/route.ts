@@ -77,7 +77,7 @@ const app = new Hono()
         console.log("search:", search);
         query.push(Query.search("name", search));
       }
-
+      query.push(Query.orderDesc("$updatedAt"));
       const tasks = await databases.listDocuments<TTask>(
         DATABASE_ID,
         TASK_ID,
@@ -98,7 +98,6 @@ const app = new Hono()
         MEMBERS_ID,
         assigneeIds.length > 0 ? [Query.contains("$id", assigneeIds)] : []
       );
-
       const assignees = await Promise.all(
         members.documents.map(async (member) => {
           const user = await users.get(member.userId);
@@ -113,10 +112,10 @@ const app = new Hono()
       const populatedTasks = tasks.documents.map((task) => {
         const project = projects.documents.find(
           (project) => project.$id === task.projectId
-        );
+        )!;
         const assignee = assignees.find(
           (member) => member.$id === task.assigneeId
-        );
+        )!;
         return {
           ...task,
           project,
@@ -319,6 +318,64 @@ const app = new Hono()
       );
 
       return c.json({ data: task });
+    }
+  )
+  .post(
+    "/bulk-update",
+    sessionMiddleware,
+    zValidator(
+      "json",
+      z.object({
+        tasks: z.array(
+          z.object({
+            $id: z.string(),
+            status: z.nativeEnum(ETaskStatus),
+            position: z.number().int().positive().min(1000).max(1_000_000),
+          })
+        ),
+      })
+    ),
+    async (c) => {
+      const databases = c.get("databases");
+      const user = c.get("user");
+      const { tasks } = await c.req.valid("json");
+      const tasksToUpdate = await databases.listDocuments<TTask>(
+        DATABASE_ID,
+        TASK_ID,
+        [
+          Query.contains(
+            "$id",
+            tasks.map((task) => task.$id)
+          ),
+        ]
+      );
+      const workspaceIds = new Set(
+        tasksToUpdate.documents.map((task) => task.workspaceId)
+      );
+
+      if (workspaceIds.size !== 1) {
+        return c.json({ error: "All tasks must belong to the same workspace" });
+      }
+      const workspaceId = workspaceIds.values().next().value!;
+
+      const member = await getMember({
+        databases,
+        workspaceId,
+        userId: user.$id,
+      });
+      if (!member) {
+        return c.json({ error: "User is not a member of the workspace" });
+      }
+      const updateTasks = await Promise.all(
+        tasks.map(async (task) => {
+          const { $id, status, position } = task;
+          return databases.updateDocument<TTask>(DATABASE_ID, TASK_ID, $id, {
+            status,
+            position,
+          });
+        })
+      );
+      return c.json({ data: updateTasks });
     }
   );
 

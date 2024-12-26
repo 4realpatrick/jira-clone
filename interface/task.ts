@@ -1,5 +1,7 @@
 import { type Models } from "node-appwrite";
 import { ETaskStatus } from "./status";
+import { TProject } from "./project";
+import { TMember } from "./member";
 
 export type TTask = Models.Document & {
   name: string;
@@ -11,4 +13,9 @@ export type TTask = Models.Document & {
   description?: string;
   position: number;
   tags?: string[];
+};
+
+export type TPopulatedTask = TTask & {
+  project: TProject;
+  assignee: TMember;
 };
