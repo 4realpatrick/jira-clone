@@ -19,9 +19,11 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Link } from "@/i18n/routing";
 import { NAV_DATA } from "@/constant/nav-data";
+import { TransitionLink } from "@/components/common/link";
 
 const getParamFromStr = (str: string, params: Params) => {
   let result = "";
@@ -46,6 +48,7 @@ const getParamFromStr = (str: string, params: Params) => {
 export function NavMain() {
   const params = useParams();
   const t = useTranslations("nav");
+  const { open } = useSidebar();
   const navData = useMemo(() => {
     return NAV_DATA.map((item) => {
       let newItem = { ...item };
@@ -74,7 +77,14 @@ export function NavMain() {
         {navData.map((item) => (
           <Collapsible key={item.key} asChild className="group/collapsible">
             <SidebarMenuItem>
-              {!!item.items ? (
+              {!!!item.items || !open ? (
+                <TransitionLink href={item.url!}>
+                  <SidebarMenuButton tooltip={t(`${item.key}`)}>
+                    {item.icon && <item.icon />}
+                    <span>{t(`${item.key}`)}</span>
+                  </SidebarMenuButton>
+                </TransitionLink>
+              ) : (
                 <>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={t(`${item.key}`)}>
@@ -100,13 +110,6 @@ export function NavMain() {
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </>
-              ) : (
-                <Link href={item.url!}>
-                  <SidebarMenuButton tooltip={t(`${item.key}`)}>
-                    {item.icon && <item.icon />}
-                    <span>{t(`${item.key}`)}</span>
-                  </SidebarMenuButton>
-                </Link>
               )}
             </SidebarMenuItem>
           </Collapsible>

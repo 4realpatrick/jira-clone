@@ -31,6 +31,7 @@ export const NAV_DATA: TNavItem[] = [
   {
     key: "setting",
     icon: Settings2,
+    url: "/workspaces/{workspaceId}/setting",
     items: [
       {
         key: "general",
