@@ -16,11 +16,12 @@ import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useDataFilter } from "@/hooks/use-data-filter";
 import { useCreateTaskModal } from "@/hooks/use-create-task-modal";
 import { useGetTasks } from "@/features/tasks/api/use-get-tasks";
+import { useBulkUpdateTask } from "@/features/tasks/api/use-bulk-update-tasks";
+import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { DataFilters } from "./data-filter";
 import { DataTable } from "./table/data-table";
 import { useColumns } from "./table/use-column";
 import { Kanban, TUpdatesPayload } from "./kanban";
-import { useBulkUpdateTask } from "@/features/tasks/api/use-bulk-update-tasks";
 
 const TaskViews = [
   {
@@ -52,6 +53,7 @@ export function TaskTabSwitcher() {
   const { taskView, setTaskView } = useSwitchProjectTaskview();
   const { open } = useCreateTaskModal();
   const { mutate: bulkUpdateTask } = useBulkUpdateTask();
+  const { mutate: deleteTask } = useDeleteTask(false);
   const { data, isFetching } = useGetTasks({
     workspaceId,
     statuses,
@@ -74,9 +76,14 @@ export function TaskTabSwitcher() {
     },
     [bulkUpdateTask]
   );
-
+  const handleDeleteTask = useCallback(
+    (taskId: string) => {
+      deleteTask({ param: { taskId } });
+    },
+    [deleteTask]
+  );
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 flex-1 flex flex-col">
       <div className="flex items-center gap-x-4 flex-wrap gap-y-2 flex-col md:flex-row">
         <LineTabs<EProjectTab>
           tabs={translatedTaskViews}
@@ -110,7 +117,11 @@ export function TaskTabSwitcher() {
         />
       )}
       {taskView === EProjectTab.KANBAN && (
-        <Kanban data={data?.documents || []} onChange={handleKanbanChange} />
+        <Kanban
+          data={data?.documents || []}
+          onChange={handleKanbanChange}
+          onDelete={handleDeleteTask}
+        />
       )}
     </div>
   );

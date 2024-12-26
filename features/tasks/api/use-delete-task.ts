@@ -12,14 +12,16 @@ type RequestType = InferRequestType<
   (typeof client)["api"]["tasks"][":taskId"]["$delete"]
 >;
 
-export const useDeleteTask = () => {
+export const useDeleteTask = (showToast: boolean = true) => {
   const tt = useTranslations("toast");
   const queryClient = useQueryClient();
   let loadingId: string | number = "";
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param }) => {
-      loadingId = toast.loading(tt("loading.deleting_task"));
+      if (showToast) {
+        loadingId = toast.loading(tt("loading.deleting_task"));
+      }
       const response = await client["api"]["tasks"][":taskId"]["$delete"]({
         param,
       });
@@ -29,7 +31,9 @@ export const useDeleteTask = () => {
       return await response.json();
     },
     onSuccess({ data }) {
-      toast.success(tt("success.task_deleted"));
+      if (showToast) {
+        toast.success(tt("success.task_deleted"));
+      }
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({ queryKey: ["task", data.$id] });
     },
@@ -37,7 +41,7 @@ export const useDeleteTask = () => {
       toast.error(tt("error.task_deleted"));
     },
     onSettled() {
-      toast.dismiss(loadingId);
+      loadingId && toast.dismiss(loadingId);
     },
   });
 

@@ -32,7 +32,7 @@ const Tab = <T,>({
         selected ? "text-primary" : " hover:text-primary"
       )}
     >
-      <div className={cn("relative z-10", fullWidth && "w-full")}>{label}</div>
+      <div className={cn("relative", fullWidth && "w-full")}>{label}</div>
       {selected && (
         <motion.div
           className="absolute left-0 top-0 flex size-full h-full w-full items-end justify-center"

@@ -1,13 +1,14 @@
 "use client";
+import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { TPopulatedTask } from "@/interface/task";
 import { ETaskStatus } from "@/interface/status";
 import { KanbanColumn } from "./column";
-import { useCallback, useEffect, useState } from "react";
+import { TrashArea } from "./trash-area";
 
 const columns: ETaskStatus[] = [...Object.values(ETaskStatus).map((i) => i)];
 
-type TData = {
+export type TData = {
   [key in ETaskStatus]: TPopulatedTask[];
 };
 export type TUpdatesPayload = {
@@ -19,9 +20,11 @@ export type TUpdatesPayload = {
 export function Kanban({
   data,
   onChange,
+  onDelete,
 }: {
   data: TPopulatedTask[];
   onChange: (payload: TUpdatesPayload[]) => void;
+  onDelete: (taskId: string) => void;
 }) {
   const [tasks, setTasks] = useState<TData>({
     [ETaskStatus.BACKLOG]: [],
@@ -38,6 +41,19 @@ export function Kanban({
       const destinationStatus = destination.droppableId as ETaskStatus;
 
       let updatesPayload: TUpdatesPayload[] = [];
+      if (destination.droppableId === "delete") {
+        const deleteTaskId = tasks[sourceStatus][source.index].$id;
+        setTasks((prev) => {
+          return {
+            ...prev,
+            [sourceStatus]: prev[sourceStatus].filter(
+              (_, index) => index !== source.index
+            ),
+          };
+        });
+        onDelete(deleteTaskId);
+        return;
+      }
       setTasks((prev) => {
         const newTasks = { ...prev };
         const sourceColumn = [...newTasks[sourceStatus]];
@@ -100,7 +116,7 @@ export function Kanban({
       });
       onChange(updatesPayload);
     },
-    [onChange]
+    [onChange, tasks]
   );
   useEffect(() => {
     const newTasks: TData = {
@@ -120,13 +136,16 @@ export function Kanban({
   }, [data]);
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex overflow-x-auto">
-        {columns.map((column) => {
-          return (
-            <KanbanColumn column={column} data={tasks[column]} key={column} />
-          );
-        })}
-      </div>
+      <>
+        <div className="flex overflow-x-auto flex-1">
+          {columns.map((column) => {
+            return (
+              <KanbanColumn column={column} data={tasks[column]} key={column} />
+            );
+          })}
+        </div>
+        <TrashArea />
+      </>
     </DragDropContext>
   );
 }
