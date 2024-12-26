@@ -3,7 +3,6 @@ import { Pencil } from "lucide-react";
 import { notFound } from "next/navigation";
 import { InnerHeader, TBreadcrumbItem } from "@/components/system/inner-header";
 import { ProjectAvatar } from "@/components/system/sidebar/projects/avatar";
-import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { TransitionLink } from "@/components/common/link";
 import { TaskTabSwitcher } from "@/components/system/task-view/task-view-switcher";
@@ -12,7 +11,6 @@ import { getProjectById } from "@/features/projects/queries";
 import { Locale } from "@/i18n/interface";
 import { redirect } from "@/i18n/routing";
 import { TextRevealButton } from "@/components/syntax/button/text-reveal";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export default async function ProjectPage({
   params,
@@ -62,7 +60,7 @@ export default async function ProjectPage({
           />
           <p>{initialValues.name}</p>
         </div>
-        <div>
+        <div className="lg:sticky lg:right-2">
           <TransitionLink
             href={`/workspaces/${initialValues.workspaceId}/projects/${projectId}/setting`}
           >

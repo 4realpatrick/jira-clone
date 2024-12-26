@@ -15,7 +15,7 @@ export function KanbanHeader({
 }) {
   const { open } = useCreateTaskModal();
   return (
-    <div className="px-2 py-1.5 flex items-center justify-between border-b">
+    <div className="px-3.5 py-3 flex items-center justify-between sticky top-0 z-10 bg-muted">
       <div className="flex items-center gap-x-1.5">
         {StatusIcons[column]}
         <h2 className="text-sm font-medium">{title}</h2>

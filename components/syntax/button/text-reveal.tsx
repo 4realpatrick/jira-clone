@@ -3,7 +3,7 @@ import { LucideIcon } from "lucide-react";
 export const TextRevealButton = (
   props: Pick<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "children" | "onClick"
+    "children" | "onClick" | "className"
   > & {
     icon: React.ReactNode;
   }

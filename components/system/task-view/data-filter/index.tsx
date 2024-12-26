@@ -11,6 +11,10 @@ import { ETaskStatus } from "@/interface/status";
 import { StatusIcons } from "../../create-task-form";
 import { AssigneeFilter } from "./assignee-filter";
 import { Input } from "@/components/ui/input";
+import {
+  EProjectTab,
+  useSwitchProjectTaskview,
+} from "@/hooks/use-switch-project-task-view";
 
 interface IDataFiltersProps {
   showProjectFilter?: boolean;
@@ -27,7 +31,7 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
   const setStatuses = useDataFilter((state) => state.setStatuses);
   const setAssigneeId = useDataFilter((state) => state.setAssigneeId);
   const setDueDate = useDataFilter((state) => state.setDueDate);
-
+  const { taskView } = useSwitchProjectTaskview();
   const { data: members, isFetching: isFetchingMembers } = useGetMembers({
     workspaceId,
   });
@@ -58,13 +62,15 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
           defaultValue={search}
           onBlur={(e) => setSearch(e.target.value)}
         />
-        <MultiSelectFilter<ETaskStatus>
-          options={statuses}
-          defaultValue={selectedStatuses}
-          onSelectChange={setStatuses}
-          title={t("common.task_status")}
-          onlyChangeOnOpenChange
-        />
+        {taskView !== EProjectTab.KANBAN && (
+          <MultiSelectFilter<ETaskStatus>
+            options={statuses}
+            defaultValue={selectedStatuses}
+            onSelectChange={setStatuses}
+            title={t("common.task_status")}
+            onlyChangeOnOpenChange
+          />
+        )}
         <AssigneeFilter
           selectedMember={selectedMember}
           title={t("common.task_assignee")}

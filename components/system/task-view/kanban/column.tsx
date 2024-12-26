@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
-import { KanbanHeader } from "./header";
-import { ETaskStatus } from "@/interface/status";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
+import { ETaskStatus } from "@/interface/status";
 import { TPopulatedTask } from "@/interface/task";
 import { KanbanCard } from "./card";
+import { KanbanHeader } from "./header";
 
 export function KanbanColumn({
   column,
@@ -14,7 +14,7 @@ export function KanbanColumn({
 }) {
   const t = useTranslations("pages.tasks");
   return (
-    <div className="flex-1 bg-primary/10 p-1.5 rounded-md min-w-[200px] [&:not(:last-child)&:not(:first-child)]:mx-2">
+    <div className="flex-1 max-h-[60vh] overflow-y-auto bg-primary/15 rounded-md min-w-[280px] [&:not(:last-child)&:not(:first-child)]:mx-2">
       <KanbanHeader
         column={column}
         title={t(`status.${column}`)}
@@ -25,7 +25,7 @@ export function KanbanColumn({
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="min-h-[200px] py-2"
+            className="min-h-[200px] py-2 px-1.5"
           >
             {data.map((task, index) => (
               <Draggable key={task.$id} draggableId={task.$id} index={index}>

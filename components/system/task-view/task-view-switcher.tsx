@@ -100,12 +100,14 @@ export function TaskTabSwitcher() {
             <DottedSeparator />
           </>
         ) : (
-          <TextRevealButton
-            icon={<Plus className="size-4" />}
-            onClick={() => open()}
-          >
-            {t("pages.projects.detail.new")}
-          </TextRevealButton>
+          <div className="sticky right-2">
+            <TextRevealButton
+              icon={<Plus className="size-4" />}
+              onClick={() => open()}
+            >
+              {t("pages.projects.detail.new")}
+            </TextRevealButton>
+          </div>
         )}
       </div>
       <DataFilters />

@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar collapsible="icon" {...props} className="z-20">
       <SidebarHeader>
         <WorkspaceSwitcher />
       </SidebarHeader>
