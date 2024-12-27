@@ -22,6 +22,7 @@ import { DataFilters } from "./data-filter";
 import { DataTable } from "./table/data-table";
 import { useColumns } from "./table/use-column";
 import { Kanban, TUpdatesPayload } from "./kanban";
+import { DataCalendar } from "./calendar";
 
 const TaskViews = [
   {
@@ -54,7 +55,7 @@ export function TaskTabSwitcher() {
   const { open } = useCreateTaskModal();
   const { mutate: bulkUpdateTask } = useBulkUpdateTask();
   const { mutate: deleteTask } = useDeleteTask(false);
-  const { data, isFetching } = useGetTasks({
+  const { data, isFetching, isPending } = useGetTasks({
     workspaceId,
     statuses,
     assigneeId,
@@ -123,7 +124,11 @@ export function TaskTabSwitcher() {
           data={data?.documents || []}
           onChange={handleKanbanChange}
           onDelete={handleDeleteTask}
+          isPending={isPending}
         />
+      )}
+      {taskView === EProjectTab.CALENDAR && (
+        <DataCalendar data={data?.documents || []} isPending={isPending} />
       )}
     </div>
   );

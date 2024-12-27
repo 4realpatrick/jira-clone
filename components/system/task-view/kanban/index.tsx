@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { TPopulatedTask } from "@/interface/task";
 import { ETaskStatus } from "@/interface/status";
+import { RippleLoader } from "@/components/syntax/loader/ripple";
 import { KanbanColumn } from "./column";
 import { TrashArea } from "./trash-area";
 
@@ -19,10 +20,12 @@ export type TUpdatesPayload = {
 
 export function Kanban({
   data,
+  isPending,
   onChange,
   onDelete,
 }: {
   data: TPopulatedTask[];
+  isPending: boolean;
   onChange: (payload: TUpdatesPayload[]) => void;
   onDelete: (taskId: string) => void;
 }) {
@@ -134,6 +137,14 @@ export function Kanban({
     });
     setTasks(newTasks);
   }, [data]);
+
+  if (isPending) {
+    return (
+      <div className="h-[70vh] flex items-center justify-center">
+        <RippleLoader />
+      </div>
+    );
+  }
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <>
