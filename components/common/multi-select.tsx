@@ -1,6 +1,6 @@
 "use client";
 import { Check, ListCheck } from "lucide-react";
-import { Key, ReactNode, useState } from "react";
+import { Key, ReactNode, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 // Cmp
 import { Button } from "@/components/ui/button";
@@ -44,7 +44,7 @@ export const MultiSelectFilter = <T,>({
   onlyChangeOnOpenChange = false,
   onSelectChange,
 }: IMultiSelectFilterProps<T>) => {
-  const [selectedState, setSelectedState] = useState<T[]>(defaultValue);
+  const [selectedState, setSelectedState] = useState<T[]>([]);
   const t = useTranslations();
 
   const handleAdd = (value: T) => {
@@ -65,6 +65,9 @@ export const MultiSelectFilter = <T,>({
       onSelectChange(selectedState);
     }
   };
+  useEffect(() => {
+    onlyChangeOnOpenChange && setSelectedState(defaultValue);
+  }, [onlyChangeOnOpenChange, defaultValue]);
 
   const state = onlyChangeOnOpenChange ? selectedState : defaultValue;
 
