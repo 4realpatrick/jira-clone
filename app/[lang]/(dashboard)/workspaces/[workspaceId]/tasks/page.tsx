@@ -31,7 +31,7 @@ export default async function TasksPage({
   return (
     <div className="pb-4 h-full flex flex-col">
       <InnerHeader breadcrumbs={breadcrumbs} />
-      <DottedSeparator className="my-4" />
+      <DottedSeparator className="mb-4" />
       <TaskTabSwitcher />
     </div>
   );
