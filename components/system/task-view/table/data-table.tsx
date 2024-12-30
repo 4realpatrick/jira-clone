@@ -67,7 +67,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-2">
-      <div className="w-full flex justify-end">
+      <div className="w-full flex justify-start">
         <DataTableViewSwitcher table={table} />
       </div>
       <div className="rounded-md border">

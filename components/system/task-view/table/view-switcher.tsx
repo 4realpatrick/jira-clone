@@ -33,7 +33,7 @@ export function DataTableViewSwitcher<TData>({
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="ml-auto border-dashed text-xs font-normal"
+          className="border-dashed text-xs font-normal"
           size="sm"
         >
           <GanttChart className="size-4" />
