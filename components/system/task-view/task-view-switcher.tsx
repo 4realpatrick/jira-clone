@@ -59,6 +59,7 @@ export function TaskTabSwitcher({
   const search = useDataFilter((state) => state.search);
   const columns = useColumns();
   const { taskView, setTaskView } = useSwitchProjectTaskview();
+  const setStatuses = useDataFilter((state) => state.setStatuses);
   const { open } = useCreateTaskModal();
   const { mutate: bulkUpdateTask } = useBulkUpdateTask();
   const { mutate: deleteTask } = useDeleteTask(false);
@@ -91,13 +92,22 @@ export function TaskTabSwitcher({
     },
     [deleteTask]
   );
+  const handleTaskViewChange = useCallback(
+    (view: EProjectTab) => {
+      if (view === EProjectTab.KANBAN) {
+        setStatuses([]);
+      }
+      setTaskView(view);
+    },
+    [setTaskView]
+  );
   return (
     <div className="space-y-2 flex-1 flex flex-col">
       <div className="flex items-center gap-x-4 flex-wrap gap-y-2 flex-col md:flex-row">
         <LineTabs<EProjectTab>
           tabs={translatedTaskViews}
           selectedTab={taskView}
-          onTabChange={setTaskView}
+          onTabChange={handleTaskViewChange}
           fullWidth={isMobile}
         />
         {isMobile ? (
