@@ -46,9 +46,8 @@ export function DatePicker({
           <div className="flex items-center gap-x-2 justify-between lg:justify-center w-full text-xs font-normal">
             <div className="flex items-center gap-x-2">
               <CalendarIcon className="size-4" />
-              <span>{t("common.due_date")}</span>
+              {!!!value && <span>{t("common.due_date")}</span>}
             </div>
-
             {value && (
               <Badge className="rounded-sm font-normal">
                 {format(value, "PPP")}
