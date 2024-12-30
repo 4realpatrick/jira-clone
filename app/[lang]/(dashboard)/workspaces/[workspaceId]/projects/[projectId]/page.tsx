@@ -71,7 +71,7 @@ export default async function ProjectPage({
         </div>
       </div>
       <DottedSeparator className="my-4" />
-      <TaskTabSwitcher />
+      <TaskTabSwitcher hideProjectFilter />
     </div>
   );
 }

@@ -42,12 +42,19 @@ const TaskViews = [
   },
 ] as const;
 
-export function TaskTabSwitcher() {
+export function TaskTabSwitcher({
+  initialValue = {},
+  hideProjectFilter = false,
+}: {
+  initialValue?: Partial<Parameters<typeof useGetTasks>[0]>;
+  hideProjectFilter?: boolean;
+}) {
   const t = useTranslations();
   const isMobile = useIsMobile();
   const workspaceId = useWorkspaceId();
   const statuses = useDataFilter((state) => state.statuses);
   const assigneeId = useDataFilter((state) => state.assigneeId);
+  const projectId = useDataFilter((state) => state.projectId);
   const dueDate = useDataFilter((state) => state.dueDate);
   const search = useDataFilter((state) => state.search);
   const columns = useColumns();
@@ -60,6 +67,7 @@ export function TaskTabSwitcher() {
     statuses,
     assigneeId,
     dueDate,
+    projectId,
     // search,
   });
   const translatedTaskViews = useMemo(
@@ -111,7 +119,7 @@ export function TaskTabSwitcher() {
           </div>
         )}
       </div>
-      <DataFilters />
+      <DataFilters hideProjectFilter={hideProjectFilter} />
       {taskView === EProjectTab.TABLE && (
         <DataTable
           data={data?.documents || []}

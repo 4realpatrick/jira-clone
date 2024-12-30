@@ -8,6 +8,7 @@ interface IDataFilterState {
   statuses: ETaskStatus[];
   assigneeId?: string | null;
   dueDate?: string | null;
+  projectId?: string | null;
 }
 
 interface IDataFilterActions {
@@ -15,6 +16,7 @@ interface IDataFilterActions {
   setStatuses: (statuses: ETaskStatus[]) => void;
   setAssigneeId: (assigneeId?: string) => void;
   setDueDate: (dueDate?: string) => void;
+  setProjectId: (projectId?: string) => void;
 }
 
 const defaultState: IDataFilterState = {
@@ -46,7 +48,18 @@ export const useDataFilter = create<IDataFilterState & IDataFilterActions>()(
           state.dueDate = dueDate;
         });
       },
+      setProjectId(projectId) {
+        set((state) => {
+          state.projectId = projectId;
+        });
+      },
     })),
-    { name: "jira-clone-data-filter" }
+    {
+      name: "jira-clone-data-filter",
+      partialize: (state) =>
+        Object.fromEntries(
+          Object.entries(state).filter(([key]) => !["projectId"].includes(key))
+        ),
+    }
   )
 );

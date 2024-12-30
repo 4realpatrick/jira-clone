@@ -227,6 +227,7 @@
     "clear": "清除",
     "task_status": "任务状态",
     "task_assignee": "负责人",
+    "task_project": "项目",
     "empty": "空",
     "due_date": "截止日期",
     "task_due_date_pick_rule": "该选项会筛选出早于选择的日期的任务",
@@ -345,6 +346,7 @@
     "invite": "邀请成员",
     "member": "成员",
     "projects": "项目",
+    "tasks": "我的任务",
     "new_project": "新建项目"
   }
 }

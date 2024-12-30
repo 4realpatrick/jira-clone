@@ -227,6 +227,7 @@
     "clear": "Clear",
     "task_status": "Task status",
     "task_assignee": "Assignee",
+    "task_project": "Project",
     "empty": "Empty",
     "due_date": "Due date",
     "task_due_date_pick_rule": "This will filter out tasks that are earlier than the selected date",
@@ -345,6 +346,7 @@
     "invite": "Invite members",
     "member": "Members",
     "projects": "Projects",
+    "tasks": "My tasks",
     "new_project": "New project"
   }
 }

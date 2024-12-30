@@ -7,6 +7,7 @@ import {
   TriangleAlert,
   Users,
   User,
+  AlarmClockCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,6 +28,11 @@ export const NAV_DATA: TNavItem[] = [
     key: "member",
     icon: Users,
     url: "/workspaces/{workspaceId}/members",
+  },
+  {
+    key: "tasks",
+    icon: AlarmClockCheck,
+    url: "/workspaces/{workspaceId}/tasks",
   },
   {
     key: "setting",

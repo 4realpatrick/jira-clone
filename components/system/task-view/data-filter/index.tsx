@@ -4,35 +4,42 @@ import { DottedSeparator } from "@/components/common/dotted-separator";
 import { MultiSelectFilter } from "@/components/common/multi-select";
 import { DatePicker } from "@/components/common/date-picker";
 import { Hint } from "@/components/common/hint";
+import { Input } from "@/components/ui/input";
 import { useGetMembers } from "@/features/members/api/use-get-members";
+import { useGetProjects } from "@/features/projects/api/use-get-projects";
 import { useDataFilter } from "@/hooks/use-data-filter";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { ETaskStatus } from "@/interface/status";
-import { StatusIcons } from "../../create-task-form";
-import { AssigneeFilter } from "./assignee-filter";
-import { Input } from "@/components/ui/input";
 import {
   EProjectTab,
   useSwitchProjectTaskview,
 } from "@/hooks/use-switch-project-task-view";
+import { ETaskStatus } from "@/interface/status";
+import { StatusIcons } from "../../create-task-form";
+import { AssigneeFilter } from "./assignee-filter";
+import { ProjectFilter } from "./project-filter";
 
 interface IDataFiltersProps {
-  showProjectFilter?: boolean;
+  hideProjectFilter?: boolean;
 }
 
-export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
+export function DataFilters({ hideProjectFilter }: IDataFiltersProps) {
   const t = useTranslations();
   const workspaceId = useWorkspaceId();
   const selectedStatuses = useDataFilter((state) => state.statuses);
   const assigneeId = useDataFilter((state) => state.assigneeId);
   const dueDate = useDataFilter((state) => state.dueDate);
   const search = useDataFilter((state) => state.search);
+  const projectId = useDataFilter((state) => state.projectId);
   const setSearch = useDataFilter((state) => state.setSearch);
   const setStatuses = useDataFilter((state) => state.setStatuses);
   const setAssigneeId = useDataFilter((state) => state.setAssigneeId);
   const setDueDate = useDataFilter((state) => state.setDueDate);
+  const setProjectId = useDataFilter((state) => state.setProjectId);
   const { taskView } = useSwitchProjectTaskview();
   const { data: members, isFetching: isFetchingMembers } = useGetMembers({
+    workspaceId,
+  });
+  const { data: projects, isFetching: isFetchingProjects } = useGetProjects({
     workspaceId,
   });
 
@@ -41,7 +48,12 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
       value: project.$id,
       label: project.name,
     })) || [];
-
+  const projectOptions =
+    projects?.documents.map((project) => ({
+      id: project.$id,
+      label: project.name,
+      imageUrl: project.imageUrl,
+    })) || [];
   const statuses = Object.values(ETaskStatus).map((status) => ({
     value: status,
     label: t(`common.task_statuses.${status}`),
@@ -50,6 +62,9 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
 
   const selectedMember = memberOptions.find(
     (member) => member.value === assigneeId
+  );
+  const selectedProject = projectOptions.find(
+    (project) => project.id === projectId
   );
   const handleAssigneeChange = (value: string) => {
     setAssigneeId(value === "all" ? "" : value);
@@ -78,6 +93,15 @@ export function DataFilters({ showProjectFilter }: IDataFiltersProps) {
           members={memberOptions}
           onAssigneeChange={handleAssigneeChange}
         />
+        {!hideProjectFilter && (
+          <ProjectFilter
+            selectedProject={selectedProject}
+            title={t("common.task_project")}
+            clearText={t("common.clear")}
+            projects={projectOptions}
+            onProjectChange={setProjectId}
+          />
+        )}
         <DatePicker
           value={dueDate ? new Date(dueDate) : undefined}
           onDateChange={(date) => {
