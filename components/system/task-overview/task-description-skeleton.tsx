@@ -27,7 +27,7 @@ export function TaskDescriptionSkeleton() {
               )}
             >
               <div className="flex flex-row items-center gap-3">
-                <div className="text-sm sm:text-lg animate-pulse w-full h-20 bg-primary rounded-lg"></div>
+                <div className="text-sm sm:text-lg animate-pulse w-full h-[224px] bg-primary rounded-lg"></div>
               </div>
             </div>
           </div>
