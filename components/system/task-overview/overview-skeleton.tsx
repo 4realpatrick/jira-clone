@@ -18,7 +18,7 @@ export function TaskOverviewSkeleton() {
         <DottedSeparator className="my-4" />
         <div className="flex flex-col gap-y-4">
           <div className="flex flex-col items-center gap-4">
-            {[...new Array(5)].map((_, index) => (
+            {[...new Array(6)].map((_, index) => (
               <div
                 className={cn(
                   "relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl",

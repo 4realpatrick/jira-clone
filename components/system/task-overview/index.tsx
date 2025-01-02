@@ -1,19 +1,23 @@
 import { Pencil } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { format } from "date-fns";
 import { TPopulatedTask } from "@/interface/task";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/common/dotted-separator";
 import { TaskDueDate } from "@/components/common/task-due-date";
 import { Badge } from "@/components/ui/badge";
 import { useEditTaskModal } from "@/hooks/use-edit-task-modal";
+import { Locale } from "@/i18n/interface";
 import { OverviewProperty } from "./overview-property";
 import { MemberAvatar } from "../member-list/avatar";
+import { getDateLocale } from "@/lib/utils";
 
 interface ITaskOverviewProps {
   task: TPopulatedTask;
 }
 export function TaskOverview({ task }: ITaskOverviewProps) {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
   const { open } = useEditTaskModal();
 
   return (
@@ -46,6 +50,20 @@ export function TaskOverview({ task }: ITaskOverviewProps) {
             {task.tags?.map((tag, index) => (
               <Badge key={task.$id + index}>{tag}</Badge>
             ))}
+          </OverviewProperty>
+          <OverviewProperty label={t("pages.tasks.table.columns.$createdAt")}>
+            <span className="text-muted-foreground text-sm">
+              {format(task.$createdAt, "PPPP", {
+                locale: getDateLocale(locale),
+              })}
+            </span>
+          </OverviewProperty>
+          <OverviewProperty label={t("pages.tasks.table.columns.$updatedAt")}>
+            <span className="text-muted-foreground text-sm">
+              {format(task.$updatedAt, "PPPP", {
+                locale: getDateLocale(locale),
+              })}
+            </span>
           </OverviewProperty>
         </div>
       </div>
