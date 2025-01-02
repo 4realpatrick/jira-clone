@@ -10,15 +10,11 @@ import { Locale } from "@/i18n/interface";
 import { TaskActions } from "../task-actions";
 import { MemberAvatar } from "../../member-list/avatar";
 import { Badge } from "@/components/ui/badge";
+import { TaskDueDate } from "@/components/common/task-due-date";
 
 export function KanbanCard({ task }: { task: TPopulatedTask }) {
   const { dueDate, name, assignee, description, tags = [] } = task;
   const locale = useLocale() as Locale;
-  const isOverDue = useMemo(() => {
-    const today = new Date();
-    const endDate = new Date(dueDate);
-    return compareAsc(endDate, today) < 0;
-  }, [dueDate]);
 
   return (
     <div className="bg-muted p-2.5 mb-1.5 rounded shadow space-y-2 text-muted-foreground">
@@ -38,18 +34,7 @@ export function KanbanCard({ task }: { task: TPopulatedTask }) {
       )}
       <DottedSeparator />
       <div className="flex items-center gap-x-2">
-        {isOverDue ? (
-          <TriangleAlert
-            className={cn("size-4", isOverDue && "text-destructive")}
-          />
-        ) : (
-          <Clock className="size-4" />
-        )}
-        <span className={cn("text-xs", isOverDue && "text-destructive")}>
-          {format(dueDate, "PP", {
-            locale: getDateLocale(locale),
-          })}
-        </span>
+        <TaskDueDate dueDate={dueDate} />
       </div>
       <div className="flex items-center gap-x-1.5 justify-end">
         <Hint descrption={assignee.name} sideOffset={5}>

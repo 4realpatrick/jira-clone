@@ -1,13 +1,13 @@
 "use client";
 
-import { compareAsc, format } from "date-fns";
+import { format } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
-import { TriangleAlert, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { TTask } from "@/interface/task";
 import { ETaskStatus } from "@/interface/status";
-import { cn, getDateLocale } from "@/lib/utils";
+import { getDateLocale } from "@/lib/utils";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Locale } from "@/i18n/interface";
 import { MemberAvatar } from "../../member-list/avatar";
@@ -15,6 +15,7 @@ import { DataTableColumnHeader } from "./header";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { useRouter } from "@/i18n/routing";
 import { TaskActions } from "../task-actions";
+import { TaskDueDate } from "@/components/common/task-due-date";
 
 const statusOrder = {
   [ETaskStatus.BACKLOG]: 8,
@@ -130,22 +131,7 @@ export const useColumns = (): ColumnDef<TTask>[] => {
       },
       cell({ row }) {
         const dueDate = row.original.dueDate;
-        const today = new Date();
-        const endDate = new Date(dueDate);
-        const isOverdue = compareAsc(endDate, today) < 0;
-        return (
-          <span
-            className={cn(
-              "text-sm flex items-center gap-x-2",
-              isOverdue ? "text-destructive" : "text-muted-foreground"
-            )}
-          >
-            {isOverdue && <TriangleAlert className="text-destructive size-4" />}
-            {format(dueDate, "PPPP", {
-              locale: getDateLocale(locale),
-            })}
-          </span>
-        );
+        return <TaskDueDate dueDate={dueDate} />;
       },
     },
     {

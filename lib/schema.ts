@@ -230,3 +230,9 @@ export const getCreateTaskSchema = (
 };
 
 export type TCreateTaskSchema = z.infer<ReturnType<typeof getCreateTaskSchema>>;
+
+export const getEditTaskSchema = (
+  t?: (key: Messages, object?: TranslationValues | undefined) => string
+) => getCreateTaskSchema(t).partial();
+
+export type TEditTaskSchema = z.infer<ReturnType<typeof getEditTaskSchema>>;

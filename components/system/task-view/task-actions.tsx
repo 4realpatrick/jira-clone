@@ -13,6 +13,7 @@ import { Eye, Pencil, Share2, Trash2 } from "lucide-react";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { useRouter } from "@/i18n/routing";
 import { toast } from "sonner";
+import { useEditTaskModal } from "@/hooks/use-edit-task-modal";
 
 export function TaskActions({
   children,
@@ -26,7 +27,7 @@ export function TaskActions({
   const router = useRouter();
 
   const { mutate: deleteTask, isPending: isDeletingTask } = useDeleteTask();
-
+  const { setTaskId } = useEditTaskModal();
   const detailLink = `/workspaces/${workspaceId}/tasks/${taskId}`;
 
   return (
@@ -47,6 +48,7 @@ export function TaskActions({
         <DropdownMenuItem
           className="flex items-center gap-2"
           disabled={isDeletingTask}
+          onClick={() => setTaskId(task.$id)}
         >
           <Pencil />
           {t("pages.tasks.table.actions.edit")}

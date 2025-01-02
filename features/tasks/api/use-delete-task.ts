@@ -41,7 +41,9 @@ export const useDeleteTask = (showToast: boolean = true) => {
       toast.error(tt("error.task_deleted"));
     },
     onSettled() {
-      loadingId && toast.dismiss(loadingId);
+      if (showToast) {
+        toast.dismiss(loadingId);
+      }
     },
   });
 

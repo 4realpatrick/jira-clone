@@ -14,7 +14,7 @@ import { ETaskStatus } from "@/interface/status";
 import { TTask } from "@/interface/task";
 import { createAdminClient } from "@/lib/apprwite";
 import { getMember } from "@/lib/get-member";
-import { getCreateTaskSchema } from "@/lib/schema";
+import { getCreateTaskSchema, getEditTaskSchema } from "@/lib/schema";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 const app = new Hono()
@@ -132,9 +132,9 @@ const app = new Hono()
     }
   )
   .get("/:taskId", sessionMiddleware, async (c) => {
-    const { users } = await createAdminClient();
-    const databases = c.get("databases");
     const currentUser = c.get("user");
+    const databases = c.get("databases");
+    const { users } = await createAdminClient();
     const { taskId } = c.req.param();
 
     const task = await databases.getDocument<TTask>(
@@ -270,7 +270,7 @@ const app = new Hono()
   .patch(
     "/:taskId",
     sessionMiddleware,
-    zValidator("json", getCreateTaskSchema().partial()),
+    zValidator("json", getEditTaskSchema()),
     async (c) => {
       const user = c.get("user");
       const databases = c.get("databases");
