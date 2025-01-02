@@ -11,7 +11,6 @@ export default async function TasksPage({
 }) {
   const { lang } = await params;
   const user = await getCurrent();
-  const t = await getTranslations();
 
   if (!user) {
     redirect({

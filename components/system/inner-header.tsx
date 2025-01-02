@@ -11,7 +11,7 @@ import { TransitionLink } from "../common/link";
 import { Fragment } from "react";
 interface IBreadcrumb {
   breadcrumbs: {
-    name: string;
+    name: string | JSX.Element;
     href?: string;
   }[];
   showMenuTrigger?: boolean;
@@ -42,7 +42,7 @@ export const InnerHeader: React.FC<IBreadcrumb> = ({
           {breadcrumbs.map(({ name, href }, index) => {
             const isLast = index === breadcrumbs.length - 1;
             return (
-              <Fragment key={name}>
+              <Fragment key={index}>
                 <BreadcrumbItem>
                   {href ? (
                     <TransitionLink href={href} className="hover:text-primary">

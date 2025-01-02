@@ -228,6 +228,7 @@
     "task_status": "Task status",
     "task_assignee": "Assignee",
     "task_project": "Project",
+    "task_description": "Task description",
     "empty": "Empty",
     "due_date": "Due date",
     "task_due_date_pick_rule": "This will filter out tasks that are earlier than the selected date",
@@ -235,6 +236,10 @@
     "desc": "Desc",
     "hide": "Hide",
     "copy_success": "Copied to clipboard",
+    "overview": "Overview",
+    "no_description": "No description",
+    "save": "Save",
+    "saving": "Saving",
     "theme_colors": {
       "blue": "Blue",
       "green": "Green",

@@ -46,11 +46,7 @@ import {
 import { KeywordsInput } from "@/components/common/tag-input";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useProjectId } from "@/hooks/use-project-id";
-import {
-  getEditTaskSchema,
-  TCreateTaskSchema,
-  TEditTaskSchema,
-} from "@/lib/schema";
+import { getEditTaskSchema, TEditTaskSchema } from "@/lib/schema";
 import { cn, getDateLocale } from "@/lib/utils";
 import { Locale } from "@/i18n/interface";
 import { MemberAvatar } from "./member-list/avatar";
@@ -131,7 +127,7 @@ export const EditTaskForm: React.FC<IEditTaskFormProps> = ({
     <Card className="w-full h-full border-none">
       <CardHeader className="flex p-7 sticky top-0 bg-background border-b">
         <CardTitle className="text-xl font-bold">
-          {t("pages.tasks.form.title")}
+          {initialValues.name}
         </CardTitle>
       </CardHeader>
       <Form {...form}>
