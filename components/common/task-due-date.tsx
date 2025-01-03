@@ -20,9 +20,9 @@ export function TaskDueDate({ dueDate }: { dueDate: string }) {
       )}
     >
       {isOverDue ? (
-        <TriangleAlert className="text-destructive size-4" />
+        <TriangleAlert className="text-destructive size-4 shrink-0" />
       ) : (
-        <Clock className="size-4" />
+        <Clock className="size-4 shrink-0" />
       )}
       {format(dueDate, "PPPP", {
         locale: getDateLocale(locale),
