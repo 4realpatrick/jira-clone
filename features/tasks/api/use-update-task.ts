@@ -3,7 +3,6 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { client } from "@/lib/rpc";
-import { useRouter } from "@/i18n/routing";
 
 type ResponseType = InferResponseType<
   (typeof client)["api"]["tasks"][":taskId"]["$patch"],
@@ -15,7 +14,6 @@ type RequestType = InferRequestType<
 
 export const useUpdateTask = () => {
   const tt = useTranslations("toast");
-  const router = useRouter();
   const queryClient = useQueryClient();
   let loadingId: string | number = "";
 
@@ -33,7 +31,6 @@ export const useUpdateTask = () => {
     },
     onSuccess({ data: task }) {
       toast.success(tt("success.task_updated", { name: task.name }));
-      router.refresh();
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({ queryKey: ["task", task.$id] });
     },
