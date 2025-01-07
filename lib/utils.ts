@@ -2,6 +2,7 @@ import { Locale } from "@/i18n/interface";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { zhCN, enUS } from "date-fns/locale";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,4 +29,18 @@ export function getDateLocale(locale: Locale) {
     en: enUS,
   };
   return obj[locale];
+}
+
+export function getFormattedTime({
+  str,
+  formatStr,
+  locale,
+}: {
+  str: Date | string;
+  formatStr: string;
+  locale: Locale;
+}) {
+  return format(str, formatStr, {
+    locale: getDateLocale(locale),
+  });
 }

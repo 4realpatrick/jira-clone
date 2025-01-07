@@ -237,6 +237,7 @@ const app = new Hono()
           description,
           tags,
           position: newPosition,
+          updateRecords: [],
         }
       );
 
@@ -282,6 +283,7 @@ const app = new Hono()
         assigneeId,
         description,
         tags,
+        updateRecordDetail = [],
       } = await c.req.valid("json");
 
       const { taskId } = c.req.param();
@@ -314,6 +316,13 @@ const app = new Hono()
           assigneeId,
           description,
           tags,
+          updateRecords: [
+            ...exsitingTask.updateRecords,
+            {
+              user: user.name,
+              updateRecordDetail,
+            },
+          ],
         }
       );
 

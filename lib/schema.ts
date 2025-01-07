@@ -226,6 +226,13 @@ export const getCreateTaskSchema = (
       .min(1, { message: getValidationMessage("task_assignee_required", t) }),
     description: z.string().trim().optional(),
     tags: z.string().array().optional(),
+    updateRecordDetail: z
+      .object({
+        field: z.string(),
+        old: z.string(),
+        new: z.string(),
+      })
+      .array(),
   });
 };
 

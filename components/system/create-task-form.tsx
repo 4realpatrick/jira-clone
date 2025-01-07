@@ -100,6 +100,7 @@ export const CreateTaskForm: React.FC<ICreateTaskFormProps> = ({
       description: "",
       status: ETaskStatus.TODO,
       tags: [],
+      updateRecordDetail: [],
       ...initialTask,
     },
   });

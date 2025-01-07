@@ -44,16 +44,14 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { KeywordsInput } from "@/components/common/tag-input";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useProjectId } from "@/hooks/use-project-id";
 import { getEditTaskSchema, TEditTaskSchema } from "@/lib/schema";
 import { cn, getDateLocale } from "@/lib/utils";
+import { checkFileds, getUpdateRecord } from "@/lib/get-update-record";
 import { Locale } from "@/i18n/interface";
 import { MemberAvatar } from "./member-list/avatar";
 import { ETaskStatus } from "@/interface/status";
 import { ProjectAvatar } from "./sidebar/projects/avatar";
 import { useUpdateTask } from "@/features/tasks/api/use-update-task";
-import { useTaskId } from "@/hooks/use-task-id";
 import { TTask } from "@/interface/task";
 
 interface IEditTaskFormProps {
@@ -86,29 +84,47 @@ export const EditTaskForm: React.FC<IEditTaskFormProps> = ({
 }) => {
   const validT = useTranslations("validation");
   const t = useTranslations();
-  const workspaceId = useWorkspaceId();
-  const projectId = useProjectId();
-  const taskId = useTaskId();
   const locale = useLocale() as Locale;
   const { mutate: updateTask, isPending } = useUpdateTask();
 
   const form = useForm<TEditTaskSchema>({
     resolver: zodResolver(
-      getEditTaskSchema(validT).omit({ workspaceId: true, description: true })
+      getEditTaskSchema(validT).omit({
+        workspaceId: true,
+        description: true,
+      })
     ),
     defaultValues: {
       ...initialValues,
       dueDate: initialValues.dueDate
         ? new Date(initialValues.dueDate)
         : undefined,
+      updateRecordDetail: [],
     },
   });
 
   const onSumbit = (values: TEditTaskSchema) => {
+    const updateRecordDetail: TEditTaskSchema["updateRecordDetail"] = [];
+    checkFileds.forEach((field) => {
+      const updateReocrd = getUpdateRecord({
+        field,
+        projectOptions,
+        memberOptions,
+        oldValue: initialValues[field],
+        newValue: form.getValues(field),
+      });
+      if (updateReocrd) {
+        updateRecordDetail.push({
+          ...updateReocrd,
+        });
+      }
+    });
     updateTask(
       {
         json: {
           ...values,
+          updateRecordDetail,
+          description: form.getValues("description"),
         },
         param: {
           taskId: initialValues.$id,

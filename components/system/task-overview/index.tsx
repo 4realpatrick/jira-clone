@@ -10,7 +10,7 @@ import { useEditTaskModal } from "@/hooks/use-edit-task-modal";
 import { Locale } from "@/i18n/interface";
 import { OverviewProperty } from "./overview-property";
 import { MemberAvatar } from "../member-list/avatar";
-import { getDateLocale } from "@/lib/utils";
+import { getDateLocale, getFormattedTime } from "@/lib/utils";
 
 interface ITaskOverviewProps {
   task: TPopulatedTask;
@@ -60,8 +60,10 @@ export function TaskOverview({ task }: ITaskOverviewProps) {
           </OverviewProperty>
           <OverviewProperty label={t("pages.tasks.table.columns.$updatedAt")}>
             <span className="text-muted-foreground text-sm">
-              {format(task.$updatedAt, "PPPP", {
-                locale: getDateLocale(locale),
+              {getFormattedTime({
+                str: task.$updatedAt,
+                formatStr: "PPpp",
+                locale,
               })}
             </span>
           </OverviewProperty>

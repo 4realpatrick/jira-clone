@@ -8,12 +8,14 @@ import { TaskOverview } from "@/components/system/task-overview";
 import { TaskOverviewSkeleton } from "@/components/system/task-overview/overview-skeleton";
 import { TaskDescription } from "@/components/system/task-overview/task-description";
 import { TaskDescriptionSkeleton } from "@/components/system/task-overview/task-description-skeleton";
+import { TaskUpdateRecords } from "@/components/system/task-overview/task-update-records";
 import { Button } from "@/components/ui/button";
 import { useDeleteTask } from "@/features/tasks/api/use-delete-task";
 import { useGetTask } from "@/features/tasks/api/use-get-task";
 import { useTaskId } from "@/hooks/use-task-id";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useRouter } from "@/i18n/routing";
+import { TaskUpdateRecordsSkeleton } from "@/components/system/task-overview/task-update-records-skeleton";
 
 export function TaskClient() {
   const t = useTranslations();
@@ -64,11 +66,13 @@ export function TaskClient() {
           <>
             <TaskOverviewSkeleton />
             <TaskDescriptionSkeleton />
+            <TaskUpdateRecordsSkeleton />
           </>
         ) : (
           <>
             <TaskOverview task={data} />
             <TaskDescription task={data} />
+            <TaskUpdateRecords updateRecords={data.updateRecords} />
           </>
         )}
       </div>
