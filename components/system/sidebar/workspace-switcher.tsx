@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Hint } from "@/components/common/hint";
 import { RippleWaveLoader } from "@/components/syntax/loader/ripple-wave";
-import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspaces";
+import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useRouter } from "@/i18n/routing";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { useCreateWorkspaceModal } from "@/hooks/use-create-workspace-modal";
@@ -34,7 +34,7 @@ export function WorkspaceSwitcher() {
   const workspaceId = useWorkspaceId();
   const { isMobile, open: isSidebarOpen } = useSidebar();
 
-  const { data, isFetching } = useGetWorkspace();
+  const { data, isFetching } = useGetWorkspaces();
   const { open } = useCreateWorkspaceModal();
 
   const handleWorkspaceChange = (workspaceId: string) => {

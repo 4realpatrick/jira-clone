@@ -8,6 +8,7 @@ import { getWorkspaceById } from "@/features/workspaces/queries";
 import { redirect } from "@/i18n/routing";
 import { InviteMember } from "@/components/system/setting/invite-member";
 import { Locale } from "@/i18n/interface";
+import { WorkspaceSettingClient } from "./client";
 
 export default async function WorkspaceSettingPage({
   params,
@@ -34,32 +35,9 @@ export default async function WorkspaceSettingPage({
     return null;
   }
 
-  const breadcrumbs: TBreadcrumbItem[] = [
-    {
-      name: t("home"),
-    },
-    {
-      name: initialValues.name,
-      href: `/workspaces/${workspaceId}`,
-    },
-    {
-      name: t("setting"),
-    },
-  ];
-
   return (
     <div className="pb-4">
-      <InnerHeader breadcrumbs={breadcrumbs} />
-      <div className="space-y-4 md:space-y-6">
-        <EditWorkspaceForm initialValues={initialValues} />
-        <InviteMember
-          workspaceId={workspaceId}
-          locale={lang}
-          inviteCode={initialValues.inviteCode}
-        />
-        <PreferenceSetting />
-        <DangerZone workspaceId={workspaceId} />
-      </div>
+      <WorkspaceSettingClient />
     </div>
   );
 }

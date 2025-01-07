@@ -1,7 +1,7 @@
 import { client } from "@/lib/rpc";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetWorkspace = () => {
+export const useGetWorkspaces = () => {
   const query = useQuery({
     queryKey: ["workspaces"],
     queryFn: async () => {
