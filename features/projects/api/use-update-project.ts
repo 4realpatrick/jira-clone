@@ -3,7 +3,6 @@ import { InferRequestType, InferResponseType } from "hono";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { client } from "@/lib/rpc";
-import { useRouter } from "@/i18n/routing";
 
 type ResponseType = InferResponseType<
   (typeof client)["api"]["projects"][":projectId"]["$patch"],
@@ -16,7 +15,6 @@ type RequestType = InferRequestType<
 export const useUpdateProject = () => {
   const tt = useTranslations("toast");
   const queryClient = useQueryClient();
-  const router = useRouter();
   let loadingId: string | number = "";
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
@@ -37,7 +35,6 @@ export const useUpdateProject = () => {
     },
     onSuccess({ data: project }) {
       toast.success(tt("success.project_updated", { name: project.name }));
-      router.refresh();
       queryClient.invalidateQueries({ queryKey: ["projects"] });
       queryClient.invalidateQueries({ queryKey: ["project", project.$id] });
     },
