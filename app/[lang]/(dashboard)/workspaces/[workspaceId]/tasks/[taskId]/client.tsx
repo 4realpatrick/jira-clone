@@ -72,7 +72,9 @@ export function TaskClient() {
           <>
             <TaskOverview task={data} />
             <TaskDescription task={data} />
-            <TaskUpdateRecords updateRecords={data.updateRecords} />
+            {data.updateRecords.length > 0 && (
+              <TaskUpdateRecords updateRecords={data.updateRecords} />
+            )}
           </>
         )}
       </div>
