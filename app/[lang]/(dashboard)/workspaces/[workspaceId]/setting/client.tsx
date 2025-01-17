@@ -1,5 +1,6 @@
 "use client";
 import { useLocale, useTranslations } from "next-intl";
+import { Loader2 } from "lucide-react";
 import { useMemo } from "react";
 import { EditWorkspaceForm } from "@/components/system/edit-workspace-form";
 import { InnerHeader, TBreadcrumbItem } from "@/components/system/inner-header";
@@ -16,21 +17,23 @@ export function WorkspaceSettingClient() {
   const t = useTranslations("nav");
   const { data: initialValues, isFetching } = useGetWorkspace({ workspaceId });
   const breadcrumbs: TBreadcrumbItem[] = useMemo(() => {
-    return initialValues
-      ? [
-          {
-            name: t("home"),
-          },
-          {
-            name: initialValues.name,
-            href: `/workspaces/${workspaceId}`,
-          },
-          {
-            name: t("setting"),
-          },
-        ]
-      : [];
-  }, []);
+    return [
+      {
+        name: t("home"),
+      },
+      {
+        name: initialValues ? (
+          initialValues.name
+        ) : (
+          <Loader2 className="size-4 animate-spin" />
+        ),
+        href: `/workspaces/${workspaceId}`,
+      },
+      {
+        name: t("setting"),
+      },
+    ];
+  }, [t]);
   // TODO add loading state
   if (!initialValues || isFetching) return null;
   return (

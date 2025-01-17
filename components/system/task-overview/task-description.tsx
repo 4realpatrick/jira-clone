@@ -14,14 +14,21 @@ export function TaskDescription({ task }: { task: TPopulatedTask }) {
   const { mutate: updateTask, isPending } = useUpdateTask();
 
   const handleSave = () => {
-    updateTask({
-      json: {
-        description: value,
+    updateTask(
+      {
+        json: {
+          description: value,
+        },
+        param: {
+          taskId: task.$id,
+        },
       },
-      param: {
-        taskId: task.$id,
-      },
-    });
+      {
+        onSuccess() {
+          setIsEditing(false);
+        },
+      }
+    );
   };
   return (
     <div className="p-4 border rounded-lg">
