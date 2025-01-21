@@ -360,5 +360,10 @@
     "projects": "Projects",
     "tasks": "My tasks",
     "new_project": "New project"
-  }
+  },
+  "total_tasks": "Total tasks",
+  "assigned_tasks": "Assigned tasks",
+  "completed_tasks": "Completed tasks",
+  "incompleted_tasks": "Incompleted tasks",
+  "overdue_tasks": "Overdue tasks"
 }

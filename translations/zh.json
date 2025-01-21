@@ -360,5 +360,10 @@
     "projects": "项目",
     "tasks": "我的任务",
     "new_project": "新建项目"
-  }
+  },
+  "total_tasks": "总任务量",
+  "assigned_tasks": "分配的任务",
+  "completed_tasks": "已完成",
+  "incompleted_tasks": "未完成",
+  "overdue_tasks": "超期任务"
 }
